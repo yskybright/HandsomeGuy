@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,45 +7,44 @@ using UnityEngine.UI;
 
 public class UIBase : MonoBehaviour
 {
-    private Dictionary<Type, UnityEngine.Object[]> _componentDictionary = new Dictionary<Type, UnityEngine.Object[]>();
-    protected void Bind<T>() where T : UnityEngine.Object
+    protected Dictionary<Type, UnityEngine.Object[]> _objects = new();
+
+    private bool _initialized;
+    protected virtual void OnEnable()
     {
-        //필터 해줄 타입 추가
-        if (typeof(T) != typeof(Button) && typeof(T) != typeof(TextMeshProUGUI) && typeof(T) != typeof(Image) && typeof(T) != typeof(GameObject)) return;
-
-
-        if (typeof(T) == typeof(GameObject))
-        {
-            Transform[] transforms = Util.FindChilds<Transform>(transform, true);
-            GameObject[] gameObjects = new GameObject[transforms.Length];
-            for (int i = 0; i < transforms.Length; i++)
-            {
-                gameObjects[i] = transforms[i].gameObject;
-            }
-
-            _componentDictionary.Add(typeof(GameObject), gameObjects);
-            return;
-        }
-
-        T[] objects = Util.FindChilds<T>(transform, true);
-
-        _componentDictionary.Add(typeof(T), objects);
+        Init();
     }
 
-    protected T Get<T>(string name) where T : UnityEngine.Object
+    public virtual bool Init()
     {
-        UnityEngine.Object[] objects = null;
-        if (_componentDictionary.TryGetValue(typeof(T), out objects) == false) return null;
+        if (_initialized) return false;
 
-        foreach (UnityEngine.Object obj in objects)
-        {
-            if (obj.name == name) return obj as T;
-        }
-
-        return null;
+        _initialized = true;
+        return true;
     }
 
-    protected void AddUIEvent(GameObject go, Action<PointerEventData> action, Define.UIEvent uIEvent)
+    private void Bind<T>(Type type) where T : UnityEngine.Object
+    {
+        string[] names = Enum.GetNames(type);
+        UnityEngine.Object[] objects = new UnityEngine.Object[names.Length];
+
+        for (int i = 0; i < names.Length; i++)
+        {
+            objects[i] = typeof(T) == typeof(GameObject) ? Util.FindChild(gameObject, names[i]) : Util.FindChild<T>(gameObject, names[i]);
+
+            if (objects[i] == null)
+                Debug.Log($"Failed to bind({names[i]})");
+        }
+
+        _objects.Add(typeof(T), objects);
+    }
+
+    protected void BindButton(Type type) => Bind<Button>(type);
+    //protected void BindObject(Type type) => Bind<GameObject>(type);
+    //protected void BindText(Type type) => Bind<TextMeshProUGUI>(type);
+    //protected void BindImage(Type type) => Bind<Image>(type);
+
+    protected void AddUIEvent(GameObject go, Action<PointerEventData> action = null, Define.UIEvent uIEvent = Define.UIEvent.Click)
     {
         UIEventHandler uiEventHandler = Util.GetOrAddComponent<UIEventHandler>(go);
 
@@ -57,15 +55,20 @@ public class UIBase : MonoBehaviour
                 uiEventHandler.ClickAction -= action;
                 uiEventHandler.ClickAction += action;
                 break;
-            case Define.UIEvent.Drag:
-                uiEventHandler.DragAction -= action;
-                uiEventHandler.DragAction += action;
-                break;
+                //case Define.UIEvent.Drag:
+                //    uiEventHandler.DragAction -= action;
+                //    uiEventHandler.DragAction += action;
+                //    break;
         }
     }
 
-    protected TextMeshProUGUI GetText(string name) { return Get<TextMeshProUGUI>(name); }
-    protected Button GetButton(string name) { return Get<Button>(name); }
-    protected Image GetImage(string name) { return Get<Image>(name); }
-    protected GameObject GetGameObject(string name) { return Get<GameObject>(name); }
+    private T Get<T>(int index) where T : UnityEngine.Object
+    {
+        if (!_objects.TryGetValue(typeof(T), out UnityEngine.Object[] objs)) return null;
+        return objs[index] as T;
+    }
+    protected GameObject GetObject(int index) => Get<GameObject>(index);
+    protected TextMeshProUGUI GetText(int index) => Get<TextMeshProUGUI>(index);
+    protected Button GetButton(int index) => Get<Button>(index);
+    protected Image GetImage(int index) => Get<Image>(index);
 }
