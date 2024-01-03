@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,5 +50,28 @@ public class UIManager
 
         //Main.ResourceManager.Destroy(uIPopup.gameObject.name);
         uIPopup = null;
+    }
+    public void Appear(GameObject go)
+    {
+        go.SetActive(true);
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(go.transform.DOScale(1.1f, 0.2f));
+        seq.Append(go.transform.DOScale(1f, 0.1f));
+
+        seq.Play();
+    }
+    public void Hide(GameObject go)
+    {
+        Sequence seq = DOTween.Sequence();
+
+        go.transform.localScale = Vector3.one * 0.2f;
+
+        seq.Append(go.transform.DOScale(1.1f, 0.1f));
+        seq.Append(go.transform.DOScale(0.1f, 0.2f));
+
+        seq.Play().OnComplete(() => {
+            go.SetActive(false);
+        });
     }
 }
