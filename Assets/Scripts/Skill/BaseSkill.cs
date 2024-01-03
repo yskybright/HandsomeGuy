@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class BaseSkill : MonoBehaviour
 {
-    private void Start()
+    protected virtual void Start()
     {
         
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         
     }

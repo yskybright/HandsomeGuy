@@ -1,16 +1,25 @@
+using Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataManager : MonoBehaviour
+
+public interface ILoader<Key, Value>
 {
-    private void Start()
+    Dictionary<Key, Value> MakeDict();
+}
+public class DataManager
+{
+    public Dictionary<string, Data.Skill> SkillDict { get; private set; } = new Dictionary<string, Data.Skill>();
+
+    public void Init()
     {
-        
+        SkillDict = LoadJson<Data.SkillData, string, Skill>("skillData").MakeDict();
     }
 
-    private void Update()
+    Loader LoadJson<Loader, K, V>(string address) where Loader : ILoader<K, V>
     {
-        
+        TextAsset textAsset = Main.ResourceManager.GetResource<TextAsset>(address);
+        return JsonUtility.FromJson<Loader>(textAsset.text);
     }
 }

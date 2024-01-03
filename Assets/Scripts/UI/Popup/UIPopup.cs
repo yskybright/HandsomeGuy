@@ -6,6 +6,6 @@ public class UIPopup : UIBase
 {
     public virtual void Init()
     {
-        //Managers.UIManager.SetCanvas(gameObject, true);
+        Main.UIManager.SetCanvas(gameObject, true);
     }
 }
