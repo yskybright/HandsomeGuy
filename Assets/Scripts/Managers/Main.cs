@@ -13,9 +13,11 @@ public class Main : MonoBehaviour
 
     private ResourceManager _resourceManager = new ResourceManager();
     private UIManager _uiManager = new UIManager();
+    private DataManager _dataManager = new DataManager();
 
     public static UIManager UIManager { get { return Instance._uiManager; } }
     public static ResourceManager ResourceManager { get { return Instance._resourceManager; } }
+    public static DataManager DataManager { get { return Instance._dataManager; } }
 
     private void Start()
     {
