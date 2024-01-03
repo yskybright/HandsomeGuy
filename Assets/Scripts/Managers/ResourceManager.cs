@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +25,7 @@ public class ResourceManager
         }
 
         // ToDo: 풀링 오브젝트면 처리해줄 로직 작성 
+        if (instantiateInWorld) return Main.PoolManager.Pop(go);
 
         return UnityEngine.Object.Instantiate(go, parent, instantiateInWorld);
     }
@@ -34,6 +35,7 @@ public class ResourceManager
         if (obj == null) return;
 
         // ToDo : 풀링 오브젝트 처리
+        if (Main.PoolManager.Push(obj)) return;
 
         UnityEngine.Object.Destroy(obj);
     }
