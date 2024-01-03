@@ -11,9 +11,11 @@ public class Main : MonoBehaviour
         get { Init(); return s_instance; }
     }
 
+    private ResourceManager _resourceManager = new ResourceManager();
     private UIManager _uiManager = new UIManager();
 
     public static UIManager UIManager { get { return Instance._uiManager; } }
+    public static ResourceManager ResourceManager { get { return Instance._resourceManager; } }
 
     private void Start()
     {
@@ -23,7 +25,7 @@ public class Main : MonoBehaviour
 
     private void Update()
     {
-        //_inputManager.OnUpdate();
+
     }
 
     private static void Init()
