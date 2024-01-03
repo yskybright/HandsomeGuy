@@ -10,6 +10,7 @@ public class ResourceManager
 {
     private Dictionary<string, UnityEngine.Object> resources = new Dictionary<string, UnityEngine.Object>();
     private Dictionary<string, AsyncOperationHandle> resourcesHandle = new Dictionary<string, AsyncOperationHandle>();
+    private Dictionary<string, IList<IResourceLocation>> resourcesLabelHandle = new Dictionary<string, IList<IResourceLocation>>();
 
 
     public GameObject Instantiate(string key, Transform parent = null, bool instantiateInWorld = false)
@@ -50,6 +51,16 @@ public class ResourceManager
         resources.Remove(key);
         resourcesHandle.Remove(key);
     }
+    //라벨 메모리 해제
+    public void ReleaseAllAsset(string key)
+    {
+        if (resourcesLabelHandle.TryGetValue(key, out IList<IResourceLocation> operationHandle) == false) return;
+        foreach (IResourceLocation handle in operationHandle)
+        {
+            ReleaseAsset(handle.PrimaryKey);
+        }
+        resourcesLabelHandle.Remove(key);
+    }
 
     //단일 로드
     public void LoadAsync<T>(string key, Action<T> callback = null) where T : UnityEngine.Object
@@ -88,6 +99,7 @@ public class ResourceManager
             asyncOperation.Completed += obj =>
             {
                 resources.Add(key, obj.Result);
+                resourcesHandle.Add(key, obj);
                 callback?.Invoke(obj.Result as T);
             };
         }
@@ -115,6 +127,7 @@ public class ResourceManager
         operation.Completed += (AsyncOperationHandle<IList<IResourceLocation>> obj) => {
             int loadCount = 0;
             int totalCount = obj.Result.Count;
+            resourcesLabelHandle.Add(label, obj.Result);
             foreach (IResourceLocation location in obj.Result)
             {
                 LoadAsync<T>(location.PrimaryKey, obj => {
@@ -130,6 +143,7 @@ public class ResourceManager
     {
         AsyncOperationHandle<IList<IResourceLocation>> operation = Addressables.LoadResourceLocationsAsync(label, typeof(GameObject));
         operation.Completed += (AsyncOperationHandle<IList<IResourceLocation>> obj) => {
+            resourcesLabelHandle.Add(label, obj.Result);
             foreach (IResourceLocation location in obj.Result)
             {
                 InstantiateAssetAsync(location.PrimaryKey, parent, instantiateInWorld);
