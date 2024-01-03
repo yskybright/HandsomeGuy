@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +22,8 @@ public class ResourceManager
             return null;
         }
 
-        // ToDo: Ç®¸µ ¿ÀºêÁ§Æ®¸é Ã³¸®ÇØÁÙ ·ÎÁ÷ ÀÛ¼º 
+        // ToDo: í’€ë§ ì˜¤ë¸Œì íŠ¸ë©´ ì²˜ë¦¬í•´ì¤„ ë¡œì§ ì‘ì„± 
+        if (instantiateInWorld) return Main.PoolManager.Pop(go);
 
         return UnityEngine.Object.Instantiate(go, parent, instantiateInWorld);
     }
@@ -31,19 +32,20 @@ public class ResourceManager
     {
         if (obj == null) return;
 
-        // ToDo : Ç®¸µ ¿ÀºêÁ§Æ® Ã³¸®
+        // ToDo : í’€ë§ ì˜¤ë¸Œì íŠ¸ ì²˜ë¦¬
+        if (Main.PoolManager.Push(obj)) return;
 
         UnityEngine.Object.Destroy(obj);
     }
 
-    //resources(µñ¼Å³Ê¸®)¿¡¼­ °ª ¹İÈ¯
+    //resources(ë”•ì…”ë„ˆë¦¬)ì—ì„œ ê°’ ë°˜í™˜
     public T GetResource<T>(string key) where T : UnityEngine.Object
     {
         if (!resources.TryGetValue(key, out UnityEngine.Object resource)) return null;
         return resource as T;
     }
 
-    //¸Ş¸ğ¸® ÇØÁ¦
+    //ë©”ëª¨ë¦¬ í•´ì œ
     public void ReleaseAsset(string key)
     {
         if (resourcesHandle.TryGetValue(key, out AsyncOperationHandle operationHandle) == false) return;
@@ -51,7 +53,7 @@ public class ResourceManager
         resources.Remove(key);
         resourcesHandle.Remove(key);
     }
-    //¶óº§ ¸Ş¸ğ¸® ÇØÁ¦
+    //ë¼ë²¨ ë©”ëª¨ë¦¬ í•´ì œ
     public void ReleaseAllAsset(string key)
     {
         if (resourcesLabelHandle.TryGetValue(key, out IList<IResourceLocation> operationHandle) == false) return;
@@ -62,7 +64,7 @@ public class ResourceManager
         resourcesLabelHandle.Remove(key);
     }
 
-    //´ÜÀÏ ·Îµå
+    //ë‹¨ì¼ ë¡œë“œ
     public void LoadAsync<T>(string key, Action<T> callback = null) where T : UnityEngine.Object
     {
         if (resources.TryGetValue(key, out UnityEngine.Object resource))
@@ -77,7 +79,7 @@ public class ResourceManager
 
         if (key.Contains(".sprite"))
             loadKey = $"{key}[{key.Replace(".sprite", "")}]";
-        // ¸®¼Ò½º ºñµ¿±â ·Îµå ½ÃÀÛ
+        // ë¦¬ì†ŒìŠ¤ ë¹„ë™ê¸° ë¡œë“œ ì‹œì‘
         if (key.Contains(".sprite"))
         {
             AsyncOperationHandle<Sprite> asyncOperation = Addressables.LoadAssetAsync<Sprite>(loadKey);
@@ -104,7 +106,7 @@ public class ResourceManager
             };
         }
     }
-    //´ÜÀÏ ·Îµå && ÀÎ½ºÅÏ½Ã
+    //ë‹¨ì¼ ë¡œë“œ && ì¸ìŠ¤í„´ì‹œ
     public void InstantiateAssetAsync(string key, Transform parent = null, bool instantiateInWorld = false)
     {
         if (resources.TryGetValue(key, out UnityEngine.Object resource))
@@ -120,7 +122,7 @@ public class ResourceManager
         };
     }
 
-    //¶óº§ ·Îµå
+    //ë¼ë²¨ ë¡œë“œ
     public void LoadAllAsync<T>(string label, Action<string, int, int> callback) where T : UnityEngine.Object
     {
         AsyncOperationHandle<IList<IResourceLocation>> operation = Addressables.LoadResourceLocationsAsync(label, typeof(T));
@@ -138,7 +140,7 @@ public class ResourceManager
         };
     }
 
-    //¶óº§ ·Îµå && ÀÎ½ºÅÏ½Ã
+    //ë¼ë²¨ ë¡œë“œ && ì¸ìŠ¤í„´ì‹œ
     public void InstantialteAllAsync(string label,Transform parent = null, bool instantiateInWorld = false)
     {
         AsyncOperationHandle<IList<IResourceLocation>> operation = Addressables.LoadResourceLocationsAsync(label, typeof(GameObject));
@@ -156,7 +158,7 @@ public class ResourceManager
         handle.Completed += operationHandle =>
         {
             IList<T> resultList = operationHandle.Result;
-            // ¸®½ºÆ®ÀÇ °¢ ¾ÆÀÌÅÛÀ» _resources¿¡ Ãß°¡ÇÕ´Ï´Ù.  
+            // ë¦¬ìŠ¤íŠ¸ì˜ ê° ì•„ì´í…œì„ _resourcesì— ì¶”ê°€í•©ë‹ˆë‹¤.  
 
             for (int i = 0; i < resultList.Count; i++)
             {
