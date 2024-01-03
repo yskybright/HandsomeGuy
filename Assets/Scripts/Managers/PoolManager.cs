@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -28,7 +28,7 @@ public class Pool
     }
 
     /// <summary>
-    /// Ç®¿¡¼­ ¿ÀºêÁ§Æ®¸¦ °¡Á®¿È. ¾øÀ¸¸é »õ ¿ÀºêÁ§Æ® »ı¼º
+    /// í’€ì—ì„œ ì˜¤ë¸Œì íŠ¸ë¥¼ ê°€ì ¸ì˜´. ì—†ìœ¼ë©´ ìƒˆ ì˜¤ë¸Œì íŠ¸ ìƒì„±
     /// </summary>
     /// <returns></returns>
     public GameObject Pop()
@@ -37,7 +37,7 @@ public class Pool
     }
 
     /// <summary>
-    /// ¿ÀºêÁ§Æ®¸¦ Ç®¿¡ ¹İÈ¯ ÈÄ ºñÈ°¼ºÈ­
+    /// ì˜¤ë¸Œì íŠ¸ë¥¼ í’€ì— ë°˜í™˜ í›„ ë¹„í™œì„±í™”
     /// </summary>
     /// <param name="obj"></param>
     public void Push(GameObject obj)
@@ -53,7 +53,7 @@ public class Pool
     #region Callbacks
 
     /// <summary>
-    /// »õ·Î¿î ¿ÀºêÁ§Æ® ÀÎ½ºÅÏ½º¸¦ ¸¸µë
+    /// ìƒˆë¡œìš´ ì˜¤ë¸Œì íŠ¸ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ë§Œë“¬
     /// </summary>
     /// <returns></returns>
     private GameObject OnCreate()
@@ -64,7 +64,7 @@ public class Pool
         return obj;
     }
     /// <summary>
-    /// Ç®¿¡¼­ ¿ÀºêÁ§Æ®¸¦ °¡Á®¿È
+    /// í’€ì—ì„œ ì˜¤ë¸Œì íŠ¸ë¥¼ ê°€ì ¸ì˜´
     /// </summary>
     /// <param name="obj"></param>
     private void OnGet(GameObject obj)
@@ -72,7 +72,7 @@ public class Pool
         obj.SetActive(true);
     }
     /// <summary>
-    /// ¿ÀºêÁ§Æ®¸¦ Ç®¿¡ ¹İÈ¯
+    /// ì˜¤ë¸Œì íŠ¸ë¥¼ í’€ì— ë°˜í™˜
     /// </summary>
     /// <param name="obj"></param>
     private void OnRelease(GameObject obj)
@@ -80,7 +80,7 @@ public class Pool
         obj.SetActive(false);
     }
     /// <summary>
-    /// ¿ÀºêÁ§Æ® »èÁ¦
+    /// ì˜¤ë¸Œì íŠ¸ ì‚­ì œ
     /// </summary>
     /// <param name="obj"></param>
     private void OnDestroy(GameObject obj)
@@ -97,7 +97,7 @@ public class PoolManager
     private Dictionary<string, Pool> pools = new();
 
     /// <summary>
-    /// Ç®¿¡ ¿ÀºêÁ§Æ®°¡ ÀÖ´Ù¸é °¡Á®¿À°í ¾ø´Ù¸é ÇÏ³ª »ı¼º
+    /// í’€ì— ì˜¤ë¸Œì íŠ¸ê°€ ìˆë‹¤ë©´ ê°€ì ¸ì˜¤ê³  ì—†ë‹¤ë©´ í•˜ë‚˜ ìƒì„±
     /// </summary>
     public GameObject Pop(GameObject prefab)
     {
@@ -108,7 +108,7 @@ public class PoolManager
 
 
     /// <summary>
-    /// Ç®ÀÌ ÀÖ´ÂÁö È®ÀÎ ÈÄ Ç®¿¡ ¿ÀºêÁ§Æ®¸¦ µ¹·ÁÁÜ
+    /// í’€ì´ ìˆëŠ”ì§€ í™•ì¸ í›„ í’€ì— ì˜¤ë¸Œì íŠ¸ë¥¼ ëŒë ¤ì¤Œ
     /// </summary>
     public bool Push(GameObject obj)
     {
@@ -119,7 +119,7 @@ public class PoolManager
         return true;
     }
     /// <summary>
-    /// »õ·Î¿î Ç®À» »ı¼ºÇÏ°í Dictionary¿¡ Ãß°¡
+    /// ìƒˆë¡œìš´ í’€ì„ ìƒì„±í•˜ê³  Dictionaryì— ì¶”ê°€
     /// </summary>
     private void CreatePool(GameObject prefab)
     {

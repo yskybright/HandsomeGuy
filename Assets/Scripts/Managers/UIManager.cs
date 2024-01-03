@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ public class UIManager
         }
 
         //GameObject go = Main.ResourceManager.Load<GameObject>(name);
-        //ÀÓ½Ã ¿ÀºêÁ§Æ®(¿¡·¯ ¹æÁö)
+        //ì„ì‹œ ì˜¤ë¸Œì íŠ¸(ì—ëŸ¬ ë°©ì§€)
         GameObject go = new GameObject(name);
         T popupComponent = Util.GetOrAddComponent<T>(go);
         _popupList.Add(popupComponent);
