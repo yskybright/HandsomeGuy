@@ -1,10 +1,21 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    #region Properties
+
+    // TODO Date 받아야됨
+    public int hp;
+    public int currentHp;
+    public float speed;
+    public int damage;
+    private SpriteRenderer _enemySpriteRenderer;
+
+    #endregion
+
     #region Fileds
 
     private Transform target;

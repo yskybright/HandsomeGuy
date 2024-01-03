@@ -8,6 +8,8 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 
 public class ResourceManager
 {
+    public bool Loaded { get; set; }
+
     private Dictionary<string, UnityEngine.Object> resources = new Dictionary<string, UnityEngine.Object>();
     private Dictionary<string, AsyncOperationHandle> resourcesHandle = new Dictionary<string, AsyncOperationHandle>();
     private Dictionary<string, IList<IResourceLocation>> resourcesLabelHandle = new Dictionary<string, IList<IResourceLocation>>();
@@ -138,6 +140,7 @@ public class ResourceManager
                 });
             }
         };
+        Loaded = true;
     }
 
     //라벨 로드 && 인스턴시
