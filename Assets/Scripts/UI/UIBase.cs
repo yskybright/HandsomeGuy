@@ -23,14 +23,14 @@ public class UIBase : MonoBehaviour
         return true;
     }
 
-    private void Bind<T>(Type type) where T : UnityEngine.Object
+    private void Bind<T>(Type type, bool recursive = false) where T : UnityEngine.Object
     {
         string[] names = Enum.GetNames(type);
         UnityEngine.Object[] objects = new UnityEngine.Object[names.Length];
 
         for (int i = 0; i < names.Length; i++)
         {
-            objects[i] = typeof(T) == typeof(GameObject) ? Util.FindChild(gameObject, names[i]) : Util.FindChild<T>(gameObject, names[i]);
+            objects[i] = typeof(T) == typeof(GameObject) ? Util.FindChild(gameObject, names[i], recursive) : Util.FindChild<T>(gameObject, names[i], recursive);
 
             if (objects[i] == null)
                 Debug.Log($"Failed to bind({names[i]})");
@@ -39,9 +39,9 @@ public class UIBase : MonoBehaviour
         _objects.Add(typeof(T), objects);
     }
 
-    protected void BindButton(Type type) => Bind<Button>(type);
-    protected void BindImage(Type type) => Bind<Image>(type);
-    //protected void BindObject(Type type) => Bind<GameObject>(type);
+    protected void BindButton(Type type, bool recursive = false) => Bind<Button>(type, recursive);
+    protected void BindImage(Type type, bool recursive = false) => Bind<Image>(type, recursive);
+    protected void BindObject(Type type, bool recursive = false) => Bind<GameObject>(type, recursive);
     //protected void BindText(Type type) => Bind<TextMeshProUGUI>(type);
 
     protected void AddUIEvent(GameObject go, Action<PointerEventData> action = null, Define.UIEvent uIEvent = Define.UIEvent.Click)

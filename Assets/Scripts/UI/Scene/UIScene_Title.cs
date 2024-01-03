@@ -5,6 +5,10 @@ using UnityEngine.EventSystems;
 
 public class UIScene_Title : UIScene
 {
+    private enum Scales
+    {
+        TitleScale,
+    }
     private enum Buttons
     {
         StartButton,
@@ -25,8 +29,9 @@ public class UIScene_Title : UIScene
     {
         if (!base.Init()) return false;
 
-        BindButton(typeof(Buttons));
-        BindImage(typeof(Images));
+        BindButton(typeof(Buttons),true);
+        BindImage(typeof(Images),true);
+        BindObject(typeof(Scales));
 
         AddUIEvent(GetButton((int)Buttons.StartButton).gameObject, OnButtonStart);
         AddUIEvent(GetButton((int)Buttons.ExitButton).gameObject, OnButtonExit);
@@ -35,16 +40,22 @@ public class UIScene_Title : UIScene
     }
     private void OnButtonStart(PointerEventData data)
     {
-        print("Ω√¿€πˆ∆∞ ≈¨∏Øµ ");
-        Main.UIManager.Hide(GetButton((int)Buttons.StartButton).gameObject);
-        Main.UIManager.Hide(GetButton((int)Buttons.ExitButton).gameObject);
-        Main.UIManager.Hide(GetImage((int)Images.TitleLogo).gameObject);
+        print("ÏãúÏûëÎ≤ÑÌäº ÌÅ¥Î¶≠Îê®");
+
+        Main.UIManager.Hide(GetObject((int)Scales.TitleScale).gameObject);
+        StartCoroutine(CoDelay());
         //Main.UIManager.CloseAllPopupUI();
         //Main.SceneManager.LoadScene("MainScene");
     }
     private void OnButtonExit(PointerEventData data)
     {
-        print("≥™∞°±‚πˆ∆∞ ≈¨∏Øµ ");
+        print("ÎÇòÍ∞ÄÍ∏∞Î≤ÑÌäº ÌÅ¥Î¶≠Îê®");
         Application.Quit();
+    }
+    IEnumerator CoDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        Main.UIManager.ShowPopupUI<UIPopup_Nickname>();
+
     }
 }

@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
 
         FindTarget();
 
-        // ÀÏÁ¤ ½Ã°£¸¶´Ù °¡Àå °¡±î¿î ÇÃ·¹ÀÌ¾î¸¦ Ã£¾Æ°¨
+        // ì¼ì • ì‹œê°„ë§ˆë‹¤ ê°€ì¥ ê°€ê¹Œìš´ í”Œë ˆì´ì–´ë¥¼ ì°¾ì•„ê°
         StartCoroutine(UpdateTarget(5.0f));
     }
 
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    ///  ÇÃ·¹ÀÌ¾î°¡ ¿©·¯¸íÀÏ¶§ °¡Àå °¡±î¿î ÇÃ·¹ÀÌ¾î¸¦ Å¸°ÙÆÃ
+    ///  í”Œë ˆì´ì–´ê°€ ì—¬ëŸ¬ëª…ì¼ë•Œ ê°€ì¥ ê°€ê¹Œìš´ í”Œë ˆì´ì–´ë¥¼ íƒ€ê²ŸíŒ…
     /// </summary>
     private void FindTarget()
     {

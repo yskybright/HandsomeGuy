@@ -7,7 +7,17 @@ public class UIManager
 {
     private int _order;
     private List<UIPopup> _popupList = new List<UIPopup>();
-
+    UIScene _sceneUI = null;
+    public GameObject Root
+    {
+        get
+        {
+            GameObject root = GameObject.Find("@UI_Root");
+            if (root == null)
+                root = new GameObject { name = "@UI_Root" };
+            return root;
+        }
+    }
     public void SetCanvas(GameObject go, bool sort = true)
     {
         Canvas canvas = Util.GetOrAddComponent<Canvas>(go);
@@ -32,11 +42,13 @@ public class UIManager
             name = typeof(T).Name;
         }
 
-        //GameObject go = Main.ResourceManager.Load<GameObject>(name);
-        //임시 오브젝트(에러 방지)
-        GameObject go = new GameObject(name);
+        GameObject go = Main.ResourceManager.Instantiate($"{name}.prefab");
+
         T popupComponent = Util.GetOrAddComponent<T>(go);
         _popupList.Add(popupComponent);
+        go.transform.SetParent(Root.transform);
+
+        Appear(Util.FindChild(go, "PopupNicknameScale"));
 
         return popupComponent;
     }
@@ -51,24 +63,34 @@ public class UIManager
         //Main.ResourceManager.Destroy(uIPopup.gameObject.name);
         uIPopup = null;
     }
+    public T ShowSceneUI<T>(string name = null) where T : UIScene
+    {
+        if (string.IsNullOrEmpty(name))
+            name = typeof(T).Name;
+
+        GameObject go = Main.ResourceManager.Instantiate($"{name}.prefab");
+        T sceneUI = Util.GetOrAddComponent<T>(go);
+        _sceneUI = sceneUI;
+
+        go.transform.SetParent(Root.transform);
+        return sceneUI;
+    }
     public void Appear(GameObject go)
     {
-        go.SetActive(true);
+        //go.SetActive(true);
         Sequence seq = DOTween.Sequence();
-
-        seq.Append(go.transform.DOScale(1.1f, 0.2f));
-        seq.Append(go.transform.DOScale(1f, 0.1f));
+        seq.Append(go.GetComponent<RectTransform>().DOScale(1.1f, 0.2f));
+        seq.Append(go.GetComponent<RectTransform>().DOScale(1f, 0.1f));
 
         seq.Play();
     }
     public void Hide(GameObject go)
     {
         Sequence seq = DOTween.Sequence();
-
         go.transform.localScale = Vector3.one * 0.2f;
 
-        seq.Append(go.transform.DOScale(1.1f, 0.1f));
-        seq.Append(go.transform.DOScale(0.1f, 0.2f));
+        seq.Append(go.GetComponent<RectTransform>().DOScale(1.1f, 0.1f));
+        seq.Append(go.GetComponent<RectTransform>().DOScale(0.1f, 0.2f));
 
         seq.Play().OnComplete(() => {
             go.SetActive(false);
