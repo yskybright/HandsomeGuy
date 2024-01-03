@@ -5,10 +5,14 @@ using UnityEngine.EventSystems;
 
 public class UIScene_Title : UIScene
 {
-    enum Buttons
+    private enum Buttons
     {
         StartButton,
         ExitButton
+    }
+    private enum Images
+    {
+        TitleLogo
     }
 
 
@@ -22,6 +26,7 @@ public class UIScene_Title : UIScene
         if (!base.Init()) return false;
 
         BindButton(typeof(Buttons));
+        BindImage(typeof(Images));
 
         AddUIEvent(GetButton((int)Buttons.StartButton).gameObject, OnButtonStart);
         AddUIEvent(GetButton((int)Buttons.ExitButton).gameObject, OnButtonExit);
@@ -31,6 +36,9 @@ public class UIScene_Title : UIScene
     private void OnButtonStart(PointerEventData data)
     {
         print("시작버튼 클릭됨");
+        Main.UIManager.Hide(GetButton((int)Buttons.StartButton).gameObject);
+        Main.UIManager.Hide(GetButton((int)Buttons.ExitButton).gameObject);
+        Main.UIManager.Hide(GetImage((int)Images.TitleLogo).gameObject);
         //Main.UIManager.CloseAllPopupUI();
         //Main.SceneManager.LoadScene("MainScene");
     }

@@ -40,9 +40,9 @@ public class UIBase : MonoBehaviour
     }
 
     protected void BindButton(Type type) => Bind<Button>(type);
+    protected void BindImage(Type type) => Bind<Image>(type);
     //protected void BindObject(Type type) => Bind<GameObject>(type);
     //protected void BindText(Type type) => Bind<TextMeshProUGUI>(type);
-    //protected void BindImage(Type type) => Bind<Image>(type);
 
     protected void AddUIEvent(GameObject go, Action<PointerEventData> action = null, Define.UIEvent uIEvent = Define.UIEvent.Click)
     {
