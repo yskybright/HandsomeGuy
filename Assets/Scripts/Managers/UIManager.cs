@@ -48,7 +48,6 @@ public class UIManager
         _popupList.Add(popupComponent);
         go.transform.SetParent(Root.transform);
 
-        Appear(Util.FindChild(go, "PopupNicknameScale"));
 
         return popupComponent;
     }
