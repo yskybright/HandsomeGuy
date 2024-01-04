@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
@@ -16,11 +17,13 @@ public class Main : MonoBehaviour
     private PoolManager _poolManager = new PoolManager();
     private ObjectManager _objectManager = new ObjectManager();
     private DataManager _dataManager = new DataManager();
+    private SceneManagerEx _sceneManagerEx = new SceneManagerEx();
     public static UIManager UIManager { get { return Instance._uiManager; } }
     public static ResourceManager ResourceManager { get { return Instance._resourceManager; } }
     public static PoolManager PoolManager { get { return Instance._poolManager; } }
     public static ObjectManager ObjectManager { get { return Instance._objectManager;} }
     public static DataManager DataManager { get { return Instance._dataManager;} }
+    public static SceneManagerEx SceneManagerEx { get { return Instance._sceneManagerEx; } }
 
     private void Start()
     {
