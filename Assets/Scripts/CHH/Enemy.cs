@@ -7,7 +7,8 @@ public class Enemy : MonoBehaviour
 {
     #region Properties
 
-    // TODO Date 받아야됨
+    public EnemyData Data;
+    public string key;
     public int hp;
     public int currentHp;
     public float speed;
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent _agent;
 
     #endregion
+
 
 
     private void Start()
