@@ -35,6 +35,8 @@ public class TopDownShooting : MonoBehaviour
 
     private void CreateProjectile()
     {
-        Instantiate(testPrefab, projectileSpawnPosition.position, Quaternion.identity);
+        GameObject projectile = Main.PoolManager.Pop(testPrefab);
+        projectile.transform.position = projectileSpawnPosition.position;
+        projectile.transform.rotation = Quaternion.identity;
     }
 }

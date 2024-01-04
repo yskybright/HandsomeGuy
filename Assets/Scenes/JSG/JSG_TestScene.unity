@@ -172,7 +172,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &1510438
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpawnPosition: {fileID: 282624462}
-  testPrefab: {fileID: 4212999537647898443, guid: ddb9ba9f6896ac14188557e1808cec4b, type: 3}
+  testPrefab: {fileID: 4988288483012070121, guid: 881204222cb180447927192da8b02862, type: 3}
 --- !u!1 &130099726
 GameObject:
   m_ObjectHideFlags: 0
