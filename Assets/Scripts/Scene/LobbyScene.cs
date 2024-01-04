@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class LobbyScene : BaseScene
 {
-    protected override void Clear()
+    public override void Clear()
     {
     }
-    // Update is called once per frame
-    void Update()
+    protected override bool Initialize()
     {
-        
+        if (!base.Initialize()) return false;
+
+        //UI = Main.UIManager.ShowSceneUI<UIScene_Title>();
+
+        return true;
     }
 }

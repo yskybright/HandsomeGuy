@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 8536165709156182600}
   - component: {fileID: 8756724072295710096}
   m_Layer: 5
-  m_Name: UIPopup_SelectColor
+  m_Name: UIPopup_SelectCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
