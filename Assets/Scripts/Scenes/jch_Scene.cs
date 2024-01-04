@@ -5,14 +5,11 @@ using UnityEngine;
 public class TestScene : BaseScene
 {
     public GameObject _playerPrefab;
-    //public override void Clear()
-    //{
-    //    //리소스 해제
-    //}
 
     protected override bool Initialize()
     {
         if (!base.Initialize()) return false;
+        SceneType = Define.Scene.Game;
         test();
         Instantiate(_playerPrefab, null);
 
@@ -25,14 +22,13 @@ public class TestScene : BaseScene
         {
             if (count >= totalCount)
             {
-                Debug.Log("hjd");
                 Main.DataManager.Initialize();
             }
         });
     }
 
-    protected override void Clear()
+    public override void Clear()
     {
-        
+        Debug.Log("Clear TestScene");
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TitleScene : BaseScene
 {
-    protected override void Clear()
+    public override void Clear()
     {
         
     }

@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public abstract class BaseScene : MonoBehaviour
 {
+    public Define.Scene SceneType { get; protected set; } = Define.Scene.Unknown;
     public UIScene UI { get; protected set; }
 
     private bool _Initialized = false;
@@ -33,7 +34,7 @@ public abstract class BaseScene : MonoBehaviour
 
     }
 
-    protected abstract void Clear();
+    public abstract void Clear();
 
     protected virtual bool Initialize()
     {
