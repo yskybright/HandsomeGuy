@@ -33,6 +33,6 @@ public class PlayerInputController : TopDownCharacterController
 
     public void OnInteraction(InputValue value)
     {
-
+        CallInteratcionEvent();
     }
 }

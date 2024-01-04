@@ -1,0 +1,11 @@
+{
+  "Players": [
+    {
+      "id": "1",
+      "hp": 100.0,
+      "moveSpeed": 10.0,
+      "damage": 10.0,
+      "attackSpeed": 10.0
+    }
+  ]
+}
