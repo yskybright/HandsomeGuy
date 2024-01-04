@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class TopDownInteraction : MonoBehaviour
 {
@@ -19,10 +20,21 @@ public class TopDownInteraction : MonoBehaviour
 
     private void OnInteraction()
     {
-        if(item is IInteraction interaction)
+        if (item is IInteraction interaction)
         {
             interaction.Interaction();
         }
+    }
+}
+        // 아이템을 줍는 상호작용이라면
+        //if (... ) {
+        //    아이템교체(해당아이템);
+        //}
+        // 아이템을 사용하는 상호작용이라면
+        //else if (... ) {
+        //            if (item is IInteraction interaction) interaction.Interaction();
+        //        }
+        //    }
         // 플레이어가 아이템을 들고 있을거지? 그러면 그거를 가져와서 동작할 수 있게끔?
 
         // 인터페이스 하나 만들어서, 각 아이템에서 해당 상호작용을 해주는 로직
@@ -30,5 +42,8 @@ public class TopDownInteraction : MonoBehaviour
         // 인터페이스를 받아서, ㄱ오버라이딩 할  수 있도록
 
         // 플레이어가 뭘 가지고 있는지 해야됨.
-    }
-}
+
+    //public void 아이템교체(ItemObject item)
+    //{
+    //    _item = item;
+    //}

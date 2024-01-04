@@ -46,7 +46,7 @@ public class DataTransformer : EditorWindow
 
     private static void ParsePlayerData(string fileName)
     {
-        PlayerDataLoader loader = new();
+        PlayerData loader = new();
 
         string[] lines = File.ReadAllText($"{Application.dataPath}/@Resources/Data/CsvData/{fileName}Data.csv").Split("\n");
 
@@ -55,14 +55,11 @@ public class DataTransformer : EditorWindow
             string[] row = lines[y].Replace("\r", "").Split(',');
             if (row.Length == 0 || string.IsNullOrEmpty(row[0])) continue;
 
-            loader.Players.Add(new()
-            {
-                id = row[0],
-                hp = ConvertValue<float>(row[1]),
-                moveSpeed = ConvertValue<float>(row[2]),
-                damage = ConvertValue<float>(row[3]),
-                attackSpeed = ConvertValue<float>(row[4]),
-            });
+            loader.id = row[0];
+            loader.hp = ConvertValue<float>(row[1]);
+            loader.moveSpeed = ConvertValue<float>(row[2]);
+            loader.damage = ConvertValue<float>(row[3]);
+            loader.attackSpeed = ConvertValue<float>(row[4]);
         }
 
         string jsonStr = JsonConvert.SerializeObject(loader, Formatting.Indented);

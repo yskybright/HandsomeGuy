@@ -6,21 +6,20 @@ using UnityEngine;
 public class ObjectManager
 {
     public List<Projectile> Projectiles { get; private set; } = new();
-
+    public PlayerData Player { get; private set; } = new();
     public T Spawn<T>(string key, Vector2 position) where T : MonoBehaviour
     {
         System.Type type = typeof(T);
 
-        //if (type == typeof(Player))
-        //{
-        //    GameObject obj = Main.Resource.Instantiate("Player.prefab");
-        //    obj.transform.position = position;
+        if (type == typeof(PlayerData))
+        {
+            GameObject obj = Main.ResourceManager.Instantiate("Player.prefab");
+            obj.transform.position = position;
 
-        //    Player = obj.GetOrAddComponent<Player>();
-        //    Player.SetInfo(key);
+            Player = obj.GetOrAddComponent<PlayerData>();
 
-        //    return Player as T;
-        //}
+            return Player as T;
+        }
         //else if (type == typeof(Enemy))
         //{
         //    CreatureData data = Main.Data.Creatures[key];
