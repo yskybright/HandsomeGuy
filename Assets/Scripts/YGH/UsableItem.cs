@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public abstract class UsableItems : ItemData
+public class UsableItem : MonoBehaviour
 {
+    public UsableItemData UsableData;
+
+
 
 
     //// Class UsableItems;
@@ -15,7 +18,7 @@ public abstract class UsableItems : ItemData
 
     //2. Grenade
     //   AttackDamage = 10, position = player.position + 5
-        
+
     //3. Dash
     //   player.position += 10
 
@@ -25,5 +28,5 @@ public abstract class UsableItems : ItemData
     //5. GoldenKey
     //   (locked door) bool = false 
 
-     
+
 }

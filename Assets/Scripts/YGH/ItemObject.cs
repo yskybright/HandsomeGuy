@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ItemObject : MonoBehaviour
+public abstract class ItemObject : ItemData
 {
     public ItemData item;
 
@@ -12,8 +12,6 @@ public abstract class ItemObject : MonoBehaviour
     // 주웠을 때 파괴
     [SerializeField] private bool destroyOnPickup = true;
 
-    ItemData.WeaponItems weaponItems;
-    ItemData.UsableItems usableItems;
 
     protected abstract void Supplies(GameObject receiver);
 
@@ -35,7 +33,7 @@ public abstract class ItemObject : MonoBehaviour
             {
                 // 소비 아이템 칸에 아이템 등록
             }
-            Destroy(gameObject);
+            // Destroy();
         }
     }
 
