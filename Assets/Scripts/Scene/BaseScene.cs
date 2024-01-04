@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BaseScene : MonoBehaviour
+public abstract class BaseScene : MonoBehaviour
 {
+    public Define.Scene SceneType { get; protected set; } = Define.Scene.Unknown;
     public UIScene UI { get; protected set; }
 
     private bool _Initialized = false;
@@ -12,6 +13,7 @@ public class BaseScene : MonoBehaviour
     {
         if (Main.ResourceManager.Loaded)
         {
+            
             //Main.Data.Initialize();
             //Main.Game.Initialize();
             Initialize();
@@ -31,6 +33,8 @@ public class BaseScene : MonoBehaviour
         }
 
     }
+
+    public abstract void Clear();
 
     protected virtual bool Initialize()
     {
