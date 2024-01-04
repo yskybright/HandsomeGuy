@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BaseScene : MonoBehaviour
+public abstract class BaseScene : MonoBehaviour
 {
     public UIScene UI { get; protected set; }
 
@@ -12,6 +12,7 @@ public class BaseScene : MonoBehaviour
     {
         if (Main.ResourceManager.Loaded)
         {
+            
             //Main.Data.Initialize();
             //Main.Game.Initialize();
             Initialize();
@@ -31,6 +32,8 @@ public class BaseScene : MonoBehaviour
         }
 
     }
+
+    protected abstract void Clear();
 
     protected virtual bool Initialize()
     {

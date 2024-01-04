@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class TitleScene : BaseScene
 {
+    protected override void Clear()
+    {
+        
+    }
+
     protected override bool Initialize()
     {
         if (!base.Initialize()) return false;
