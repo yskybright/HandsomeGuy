@@ -17,8 +17,8 @@ public class Define
     public enum Scene
     {
         Unknown,
-        Start,
-        Lobby,
+        StartScene,
+        LobbyScene,
         Loading,
         Game
     }

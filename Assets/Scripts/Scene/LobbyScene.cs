@@ -2,19 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleScene : BaseScene
+public class LobbyScene : BaseScene
 {
     public override void Clear()
     {
-        //Main.ResourceManager.Release
     }
-
     protected override bool Initialize()
     {
         if (!base.Initialize()) return false;
 
-        UI = Main.UIManager.ShowSceneUI<UIScene_Title>();
-
+        UI = Main.UIManager.ShowSceneUI<UIScene_Lobby>();
         return true;
     }
 }
