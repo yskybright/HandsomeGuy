@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIScene : MonoBehaviour
+public class UIScene : UIBase
 {
-    public virtual void Init()
+    public override bool Init()
     {
-        //Managers.UIManager.SetCanvas(gameObject, false);
+        if (!base.Init()) return false;
+
+        Main.UIManager.SetCanvas(gameObject, false);
+
+        return true;
     }
 }

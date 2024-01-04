@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class UIPopup : UIBase
 {
-    public virtual void Init()
+    public override bool Init()
     {
+        if (!base.Init()) return false;
+
         Main.UIManager.SetCanvas(gameObject, true);
+
+        return true;
     }
 }
