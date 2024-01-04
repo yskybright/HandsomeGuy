@@ -1,3 +1,4 @@
+using Data;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,9 +10,11 @@ using UnityEngine;
 public class DataManager
 {
     public Dictionary<string, EnemyData> Enemy = new();
+    public Dictionary<string, Data.Skill> SkillDict { get; private set; } = new Dictionary<string, Data.Skill>();
 
     public void Initialize()
     {
+        SkillDict = LoadJson<Data.SkillData, string, Data.Skill>("skillData").MakeDictionary();
         Enemy = LoadJson<EnemyDataLoader, string, EnemyData>("EnemyData").MakeDictionary();
     }
 
