@@ -1,0 +1,10 @@
+{
+  "Enemies": [
+    {
+      "key": "Slime",
+      "HP": 50.0,
+      "Speed": 3.0,
+      "Damage": 1.0
+    }
+  ]
+}

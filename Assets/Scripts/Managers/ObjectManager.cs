@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ObjectManager
 {
-    public List<Enemy> Enemies { get; private set; } = new();
+    public List<Projectile> Projectiles { get; private set; } = new();
 
     public T Spawn<T>(string key, Vector2 position) where T : MonoBehaviour
     {
@@ -36,18 +36,15 @@ public class ObjectManager
         return null;
     }
 
-    public void Despawn<T>(T obj) where T : MonoBehaviour
+    public void Despawn<T>(T obj) where T : Component
     {
-        System.Type type = typeof(T);
+        //if (!obj.gameObject.IsValid()) return;
+       
+        if (obj is Projectile projectile)
+        {
+            Projectiles.Remove(projectile);
+        }
 
-        //if (type == typeof(Player))
-        //{
-
-        //}
-        //else if (type == typeof(Enemy))
-        //{
-        //    Enemies.Remove(obj as Enemy);
-        //    Main.Resource.Destroy(obj.gameObject);
-        //}
+        Main.ResourceManager.Destroy(obj.gameObject);
     }
 }
