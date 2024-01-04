@@ -11,8 +11,7 @@ public class LobbyScene : BaseScene
     {
         if (!base.Initialize()) return false;
 
-        //UI = Main.UIManager.ShowSceneUI<UIScene_Title>();
-
+        UI = Main.UIManager.ShowSceneUI<UIScene_Lobby>();
         return true;
     }
 }

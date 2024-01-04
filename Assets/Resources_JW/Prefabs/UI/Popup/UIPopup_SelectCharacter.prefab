@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3513302885912831500}
   m_Layer: 5
-  m_Name: PopupSelectColorScale
+  m_Name: UIPopup_SelectCharacterScale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,11 +147,12 @@ RectTransform:
   m_GameObject: {fileID: 565038173721899798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1318611109627442094}
   - {fileID: 3935460514302992739}
+  - {fileID: 690218290488163439}
   - {fileID: 2697383486321249246}
   m_Father: {fileID: 8342400309011118345}
   m_RootOrder: -1
@@ -269,9 +270,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3513302885912831500}
-  - {fileID: 690218290488163439}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -375,7 +375,7 @@ RectTransform:
   - {fileID: 4093963673990663474}
   - {fileID: 6590979151864139341}
   - {fileID: 3636158422989472326}
-  m_Father: {fileID: 8342400309011118345}
+  m_Father: {fileID: 3513302885912831500}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

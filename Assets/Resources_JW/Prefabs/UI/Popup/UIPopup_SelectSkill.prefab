@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 1446258549756431634}
   - component: {fileID: 7946128599658299323}
   m_Layer: 5
-  m_Name: Skill_Icon
+  m_Name: Skill2_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,7 +471,7 @@ GameObject:
   - component: {fileID: 782433024151155008}
   - component: {fileID: 109081453027061380}
   m_Layer: 5
-  m_Name: Skill_name
+  m_Name: Skill3_Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -682,7 +682,7 @@ GameObject:
   - component: {fileID: 8378522109103787837}
   - component: {fileID: 161941396355668529}
   m_Layer: 5
-  m_Name: Skill_Icon
+  m_Name: Skill1_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -824,7 +824,7 @@ GameObject:
   - component: {fileID: 45065352807700432}
   - component: {fileID: 3445305682740662726}
   m_Layer: 5
-  m_Name: Skill_text
+  m_Name: Skill3_Desc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -959,7 +959,7 @@ GameObject:
   - component: {fileID: 4722878603868776007}
   - component: {fileID: 3626778240003177179}
   m_Layer: 5
-  m_Name: Skill_text
+  m_Name: Skiil1_Desc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1094,7 +1094,7 @@ GameObject:
   - component: {fileID: 8430641218069015473}
   - component: {fileID: 936120105249504328}
   m_Layer: 5
-  m_Name: Skill_Icon
+  m_Name: Skill3_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1170,7 +1170,7 @@ GameObject:
   - component: {fileID: 1413396172816395427}
   - component: {fileID: 8282581799097621831}
   m_Layer: 5
-  m_Name: Skill_text
+  m_Name: Skill2_Desc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1318,7 +1318,7 @@ RectTransform:
   m_GameObject: {fileID: 7025041293721103233}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 164428884630922894}
@@ -1344,7 +1344,7 @@ GameObject:
   - component: {fileID: 5657003026556414801}
   - component: {fileID: 561120284650010715}
   m_Layer: 5
-  m_Name: Skill_name
+  m_Name: Skill1_Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1479,7 +1479,7 @@ GameObject:
   - component: {fileID: 4766041875089965255}
   - component: {fileID: 4447500850822478707}
   m_Layer: 5
-  m_Name: Skill_name
+  m_Name: Skill2_Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1635,7 +1635,7 @@ RectTransform:
   m_Children:
   - {fileID: 4607400344703763164}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

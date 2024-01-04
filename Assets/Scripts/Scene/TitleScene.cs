@@ -6,7 +6,7 @@ public class TitleScene : BaseScene
 {
     public override void Clear()
     {
-        
+        //Main.ResourceManager.Release
     }
 
     protected override bool Initialize()
