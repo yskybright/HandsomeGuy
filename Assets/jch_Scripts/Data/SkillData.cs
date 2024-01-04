@@ -32,7 +32,6 @@ namespace Data{
 
             foreach (Skill skill in skills)
             {
-                Debug.Log(skill.skillName);
                 skillDict.Add(skill.skillName, skill);
             }
 
