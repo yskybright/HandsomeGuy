@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ItemObject : MonoBehaviour
+public abstract class ItemObject : MonoBehaviour, IInteraction
 {
     public ItemData item;
 
@@ -14,6 +14,11 @@ public abstract class ItemObject : MonoBehaviour
 
     ItemData.WeaponItems weaponItems;
     ItemData.UsableItems usableItems;
+
+    public virtual void Interaction()
+    {
+        
+    }
 
     protected abstract void Supplies(GameObject receiver);
 
@@ -39,4 +44,17 @@ public abstract class ItemObject : MonoBehaviour
         }
     }
 
+
 }
+
+//public class gun2 : ItemObject
+//{
+//    public override void Interaction()
+//    {
+//        base.Interaction();
+//        // 소총 상호작용 함수
+
+//        // 소총 능력치 반영
+//        // 갈아끼우는 작업
+//    }
+//}

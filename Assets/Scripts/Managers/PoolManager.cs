@@ -1,13 +1,13 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class Pool
 {
-    private GameObject prefab;
-    private IObjectPool<GameObject> pool;
-    private Transform root;
+    private GameObject prefab; // 복제될 프리팹 원본
+    private IObjectPool<GameObject> pool; // 유니티에서 제공해주는 인터페이스 사용
+    private Transform root; // 부모
     private Transform Root
     {
         get
