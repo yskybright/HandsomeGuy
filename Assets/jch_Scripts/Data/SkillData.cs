@@ -26,7 +26,7 @@ namespace Data{
     public class SkillData : ILoader<string, Skill>
     {
         public List<Skill> skills = new List<Skill>();
-        public Dictionary<string, Skill> MakeDict()
+        public Dictionary<string, Skill> MakeDictionary()
         {
             Dictionary<string, Skill> skillDict = new Dictionary<string, Skill>();
 

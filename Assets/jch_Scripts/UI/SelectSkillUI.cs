@@ -6,6 +6,17 @@ using UnityEngine.UI;
 
 public class ButtonController : UIPopup
 {
+    private enum Buttons
+    {
+        Skill1Button,
+        Skill2Button,
+        Skill3Button
+    }
+    private enum Images
+    {
+        TitleLogo
+    }
+
     private Dictionary<string, Type> selectSkillDict;
     private Button button1;
     private Button button2;
@@ -13,7 +24,7 @@ public class ButtonController : UIPopup
 
     public void Start()
     {
-        Bind<Button>();
+        BindButton(typeof(Buttons),true);
         selectSkillDict = new Dictionary<string, Type>
         {
             { "부활", typeof(AlarmGimmick) },
@@ -22,9 +33,9 @@ public class ButtonController : UIPopup
         };
 
 
-        button1 = GetButton("Skill1Button");
-        button2 = GetButton("Skill2Button");
-        button3 = GetButton("Skill3Button");
+        button1 = GetButton((int)Buttons.Skill1Button);
+        button2 = GetButton((int)Buttons.Skill2Button);
+        button3 = GetButton((int)Buttons.Skill3Button);
 
         button1.onClick.AddListener(() => SelectSkill(button1.gameObject));
         button2.onClick.AddListener(() => SelectSkill(button2.gameObject));

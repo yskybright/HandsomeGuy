@@ -11,19 +11,22 @@ public class TestScene : BaseScene
         {
             if (count >= totalCount)
             {
-                Main.DataManager.Init();
-                Init();
+                Main.DataManager.Initialize();
+                Initialize();
             }
         });
     }
-    public override void Clear()
-    {
-        //리소스 해제
-    }
+    //public override void Clear()
+    //{
+    //    //리소스 해제
+    //}
 
-    protected override void Init()
+    protected override bool Initialize()
     {
-        base.Init();
+        if (!base.Initialize()) return false;
+        base.Initialize();
         Instantiate(_playerPrefab, null);
+
+        return true;
     }
 }
