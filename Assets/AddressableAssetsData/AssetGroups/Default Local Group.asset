@@ -16,7 +16,13 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 594cdbafc8782cb43865671a8170651f
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 881204222cb180447927192da8b02862
+    m_Address: Projectile.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9cf467bac39a6ab4995e973c50c05635, type: 2}
   m_SchemaSet:

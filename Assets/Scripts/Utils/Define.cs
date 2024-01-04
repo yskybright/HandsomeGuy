@@ -14,4 +14,12 @@ public class Define
         Click,
         Press,
     }
+    public enum Scene
+    {
+        Unknown,
+        StartScene,
+        LobbyScene,
+        Loading,
+        Game
+    }
 }
