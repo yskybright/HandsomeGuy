@@ -18,7 +18,7 @@ public class Revival : BasePassive
     {
         if (player.hp <= 0 && revivalCount != 0)
         {
-            player.hp = Mathf.RoundToInt((player.maxhp / 100.0f) * skill.revivalHealthRatio);
+            player.hp = Mathf.RoundToInt((player.maxHp / 100.0f) * skill.revivalHealthRatio);
             revivalCount--;
         }
         Debug.Log(player.hp);

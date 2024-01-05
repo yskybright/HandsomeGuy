@@ -22,8 +22,6 @@ public abstract class BaseScene : MonoBehaviour
         {
             Main.ResourceManager.LoadAllAsync<UnityEngine.Object>("PreLoad", (key, count, totalCount) => {
                 //Debug.Log($"[GameScene] Load asset {key} ({count}/{totalCount})");
-                Debug.Log(count);
-                Debug.Log(totalCount);
                 if (count >= totalCount)
                 {
                     Main.ResourceManager.Loaded = true;

@@ -8,6 +8,6 @@ public class Haste : BasePassive
     {
         base.Init();
         Main.DataManager.SkillDict.TryGetValue("헤이스트", out skill);
-        player.speed = player.speed * (1 + skill.increamentMoveSpeedRatio / 100f);
+        player.moveSpeed = player.moveSpeed * (1 + skill.increamentMoveSpeedRatio / 100f);
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 [System.Serializable]
 public class BaseSkill : MonoBehaviour
 {
-    protected Player player;
+    protected PlayerData player;
     protected Data.Skill skill;
     private void Start()
     {
@@ -17,5 +17,12 @@ public class BaseSkill : MonoBehaviour
     protected virtual void Init()
     {
         player = Main.ObjectManager.Player;
+
+        Debug.Log(player.attackSpeed);
+        Debug.Log(player.damage);
+        Debug.Log(player.damageReduceRatio);
+        Debug.Log(player.hp);
+        Debug.Log(player.maxHp);
+        Debug.Log(player.killCount);
     }
 }
