@@ -35,20 +35,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f3c7937c5d4b555438d04a56a07c1ede
-    m_Address: UIScene_Lobby.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 68b0caaae1cef43409f0290a58fe6fd3
-    m_Address: UIPopup_SelectCharacter.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7480beb0606d8444b9a6acf3e442b486
-    m_Address: UIPopup_SelectSkill.prefab
+  - m_GUID: 95ceba5efaf70d14b9120fcce43cf6d0
+    m_Address: Player.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

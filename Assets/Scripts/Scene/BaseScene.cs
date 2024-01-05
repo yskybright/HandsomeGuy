@@ -14,18 +14,18 @@ public abstract class BaseScene : MonoBehaviour
         if (Main.ResourceManager.Loaded)
         {
             
-            //Main.Data.Initialize();
+            Main.DataManager.Initialize();
             //Main.Game.Initialize();
             Initialize();
         }
         else
         {
             Main.ResourceManager.LoadAllAsync<UnityEngine.Object>("PreLoad", (key, count, totalCount) => {
-                Debug.Log($"[GameScene] Load asset {key} ({count}/{totalCount})");
+                //Debug.Log($"[GameScene] Load asset {key} ({count}/{totalCount})");
                 if (count >= totalCount)
                 {
                     Main.ResourceManager.Loaded = true;
-                    //Main.Data.Initialize();
+                    Main.DataManager.Initialize();
                     //Main.Game.Initialize();
                     Initialize();
                 }

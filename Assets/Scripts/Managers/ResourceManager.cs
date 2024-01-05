@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +9,12 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 public class ResourceManager
 {
     public bool Loaded { get; set; }
-
     private Dictionary<string, UnityEngine.Object> resources = new Dictionary<string, UnityEngine.Object>();
     private Dictionary<string, AsyncOperationHandle> resourcesHandle = new Dictionary<string, AsyncOperationHandle>();
     private Dictionary<string, IList<IResourceLocation>> resourcesLabelHandle = new Dictionary<string, IList<IResourceLocation>>();
 
 
-    public GameObject Instantiate(string key, Transform parent = null, bool instantiateInWorld = false)
+    public GameObject Instantiate(string key, Transform parent = null, bool instantiateInWorld = false, bool pooling = false)
     {
         GameObject go = GetResource<GameObject>(key);
         if (go == null)
@@ -25,10 +24,11 @@ public class ResourceManager
         }
 
         // ToDo: 풀링 오브젝트면 처리해줄 로직 작성 
-        if (instantiateInWorld) return Main.PoolManager.Pop(go);
+        if (pooling) return Main.PoolManager.Pop(go);
 
         return UnityEngine.Object.Instantiate(go, parent, instantiateInWorld);
     }
+
 
     public void Destroy(GameObject obj)
     {
@@ -46,6 +46,7 @@ public class ResourceManager
         if (!resources.TryGetValue(key, out UnityEngine.Object resource)) return null;
         return resource as T;
     }
+
 
     //메모리 해제
     public void ReleaseAsset(string key)

@@ -29,6 +29,7 @@ public class UIPopup_SelectCharacter : UIPopup
     #region Fields
     private GameObject scaler;
     private GameObject okButton;
+    private string _characterType;
 
     #endregion
     void Start()
@@ -59,11 +60,14 @@ public class UIPopup_SelectCharacter : UIPopup
     private void OnButtonCharacter(PointerEventData data)
     {
         okButton.SetActive(true);
-        print(data.selectedObject);
+
+        _characterType = data.selectedObject.gameObject.name;
+        print(data.selectedObject.gameObject.name);
     }
 
     private void OnButtonOK(PointerEventData data)
     {
+        Main.GameManager.CharacterType = _characterType;
         StartCoroutine(CoButtonOK());
     }
     IEnumerator CoButtonOK()

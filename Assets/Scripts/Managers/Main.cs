@@ -25,7 +25,8 @@ public class Main : MonoBehaviour
     public static ObjectManager ObjectManager { get { return Instance._objectManager;} }
     public static DataManager DataManager { get { return Instance._dataManager;} }
     public static SceneManagerEx SceneManagerEx { get { return Instance._sceneManagerEx; } }
-    public static GameManager GameManager {  get { return Instance._gameManager; } }
+    public static GameManager GameManager => Instance?._gameManager;
+
     private void Start()
     {
         Init();

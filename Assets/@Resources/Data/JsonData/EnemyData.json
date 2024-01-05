@@ -1,10 +1,16 @@
 {
   "Enemies": [
     {
-      "key": "Slime",
-      "HP": 50.0,
+      "key": "Black",
+      "HP": 50,
       "Speed": 3.0,
-      "Damage": 1.0
+      "Damage": 1
+    },
+    {
+      "key": "Blue",
+      "HP": 50,
+      "Speed": 3.0,
+      "Damage": 1
     }
   ]
 }
