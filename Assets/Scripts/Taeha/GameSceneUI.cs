@@ -41,8 +41,8 @@ public class GameSceneUI : UIBase
         if (!base.Init()) return false;
 
         BindText(typeof(Texts), true);
-        brokenMachines = FindObjectsOfType<BrokenMachine>().Length;
-        UIset();
+
+        Main.GameManager.UISetEvent += UIset;
         Main.GameManager.RepairView += Repair;
         Main.GameManager.RepairCompleteEvent += RepairComplete;
         return true;
@@ -53,9 +53,10 @@ public class GameSceneUI : UIBase
         repairMachines++;
         UIset();
     }
-
+ 
     private void UIset()
     {
+        brokenMachines = FindObjectsOfType<BrokenMachine>().Length;
         GetText((int)Texts.MissionNum).text = $"{brokenMachines} / {repairMachines}";
     }
 

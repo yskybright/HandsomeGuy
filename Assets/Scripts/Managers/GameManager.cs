@@ -29,6 +29,7 @@ public class GameManager
 
     public event Action<bool, float> RepairView;
     public event Action RepairCompleteEvent;
+    public event Action UISetEvent;
     private float repairBar;
 
     public float RePairBar { get { return repairBar; } }
@@ -52,4 +53,8 @@ public class GameManager
         this.repairBar = repair;
     }
 
+    internal void UISet()
+    {
+        UISetEvent?.Invoke();
+    }
 }
