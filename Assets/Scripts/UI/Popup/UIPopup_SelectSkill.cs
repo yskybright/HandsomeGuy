@@ -1,8 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 using UnityEngine.EventSystems;
+using Data;
+using TMPro;
 
 public class UIPopup_SelectSkill : UIPopup
 {
@@ -37,6 +41,10 @@ public class UIPopup_SelectSkill : UIPopup
 
     #region Fields
     private GameObject scaler;
+    private int rand;
+    private List<TextMeshProUGUI> _skill = new List<TextMeshProUGUI>();
+    private List<TextMeshProUGUI> _desc = new List<TextMeshProUGUI>();
+    private List<int> selectedSkillIdx = new List<int>();
 
     #endregion
     void Start()
@@ -52,10 +60,35 @@ public class UIPopup_SelectSkill : UIPopup
         BindText(typeof(Texts), true);
         BindImage(typeof(Images), true);
 
+        //스킬명과 스킬설명 리스트로 받아두기
+        _skill.Add(GetText((int)Texts.Skill1_Name));
+        _skill.Add(GetText((int)Texts.Skill2_Name));
+        _skill.Add(GetText((int)Texts.Skill3_Name));
+        _desc.Add(GetText((int)Texts.Skill1_Desc));
+        _desc.Add(GetText((int)Texts.Skill2_Desc));
+        _desc.Add(GetText((int)Texts.Skill3_Desc));
+
+        //선택된 스킬이 3개가 될 때 까지 랜덤으로 인덱스 생성하여 받기 (중복X)
+        while (selectedSkillIdx.Count < 3)
+        {
+            rand = Random.Range(0, Main.DataManager.SkillDict.Count);
+            if(!selectedSkillIdx.Contains(rand))
+                selectedSkillIdx.Add(rand);
+        }
+
+        //스킬명과 스킬 설명 텍스트에 뽑힌 스킬정보 넣기
+        for(int i = 0; i < selectedSkillIdx.Count; i++)
+        {
+            _skill[i].text = Main.DataManager.SkillDict.ElementAt(selectedSkillIdx[i]).Key;
+            _desc[i].text = Main.DataManager.SkillDict.ElementAt(selectedSkillIdx[i]).Value.description;
+        }
+
         scaler = GetObject((int)Objects.PopupSelectSkillScale);
+
         AddUIEvent(GetButton((int)Buttons.Skill_1).gameObject, OnButtonSkill);
         AddUIEvent(GetButton((int)Buttons.Skill_2).gameObject, OnButtonSkill);
         AddUIEvent(GetButton((int)Buttons.Skill_3).gameObject, OnButtonSkill);
+
 
         Main.UIManager.Appear(scaler);
         return true;
@@ -63,7 +96,21 @@ public class UIPopup_SelectSkill : UIPopup
 
     private void OnButtonSkill(PointerEventData data)
     {
-        print(data.selectedObject);
+        string selectedButton = data.selectedObject.gameObject.name;
+        
+        switch (selectedButton)
+        {
+            case "Skill_1":
+                Main.GameManager.SkillType = _skill[0].text;
+                break;
+            case "Skill_2":
+                Main.GameManager.SkillType = _skill[1].text;
+                break;
+            case "Skill_3":
+                Main.GameManager.SkillType = _skill[2].text;
+                break;
+        }
+        print(Main.GameManager.SkillType);
         StartCoroutine(CoButtonSkill());
     }
     IEnumerator CoButtonSkill()
