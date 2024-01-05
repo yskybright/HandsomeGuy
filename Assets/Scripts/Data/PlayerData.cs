@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class PlayerData
+public class PlayerData : MonoBehaviour
 {
     public string id;
     public float hp;

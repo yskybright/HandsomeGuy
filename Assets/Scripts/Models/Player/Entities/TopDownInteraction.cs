@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using static UnityEditor.Progress;
 
 public class TopDownInteraction : MonoBehaviour
 {
     private ItemObject item;
+
     private TopDownCharacterController _controller;
     private void Awake()
     {
@@ -24,6 +26,12 @@ public class TopDownInteraction : MonoBehaviour
         {
             interaction.Interaction();
         }
+    }
+
+    private void OnSkill()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        //player.GetComponent<BaseActive>().UseSkill;
     }
 }
         // 아이템을 줍는 상호작용이라면
