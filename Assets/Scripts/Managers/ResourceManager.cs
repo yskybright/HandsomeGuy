@@ -9,7 +9,6 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 public class ResourceManager
 {
     public bool Loaded { get; set; }
-
     private Dictionary<string, UnityEngine.Object> resources = new Dictionary<string, UnityEngine.Object>();
     private Dictionary<string, AsyncOperationHandle> resourcesHandle = new Dictionary<string, AsyncOperationHandle>();
     private Dictionary<string, IList<IResourceLocation>> resourcesLabelHandle = new Dictionary<string, IList<IResourceLocation>>();
@@ -30,6 +29,7 @@ public class ResourceManager
         return UnityEngine.Object.Instantiate(go, parent, instantiateInWorld);
     }
 
+
     public void Destroy(GameObject obj)
     {
         if (obj == null) return;
@@ -46,6 +46,7 @@ public class ResourceManager
         if (!resources.TryGetValue(key, out UnityEngine.Object resource)) return null;
         return resource as T;
     }
+
 
     //메모리 해제
     public void ReleaseAsset(string key)
