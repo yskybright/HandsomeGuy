@@ -12,26 +12,26 @@ public class ObjectManager
     public T Spawn<T>(string key, Vector2 position) where T : MonoBehaviour
     {
         System.Type type = typeof(T);
-
-        if (type == typeof(Enemy))
-        {
-            EnemyData data = Main.DataManager.Enemies[key];
-            GameObject obj = Main.ResourceManager.Instantiate($"Enemy.prefab", pooling: true);
-            obj.transform.position = position;
         if (type == typeof(Player))
         {
             GameObject obj = Main.ResourceManager.Instantiate("Player.prefab");
             obj.transform.position = position;
 
-            Enemy enemy = obj.GetOrAddComponent<Enemy>();
-            enemy.SetInfo(key);
-            Enemies.Add(enemy);
             Player = obj.GetOrAddComponent<Player>();
             //Player.SetInfo(key);
 
-            return enemy as T;
-        }
             return Player as T;
+        }
+        if (type == typeof(Enemy))
+        {
+            EnemyData data = Main.DataManager.Enemies[key];
+            GameObject obj = Main.ResourceManager.Instantiate($"Enemy.prefab", pooling: true);
+            obj.transform.position = position;
+
+            Enemy enemy = obj.GetOrAddComponent<Enemy>();
+            enemy.SetInfo(key);
+            Enemies.Add(enemy);
+            return enemy as T;
         }
         //else if (type == typeof(Enemy))
         //{
