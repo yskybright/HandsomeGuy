@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class BaseActive : BaseSkill
 {
+    protected bool isSkillCool;
 
     protected override void Init()
     {
-        
+        base.Init();
+        isSkillCool = false;
     }
 
-    // UseSkill
+    protected virtual void UseSkill()
+    {
+
+    }
 
 }
