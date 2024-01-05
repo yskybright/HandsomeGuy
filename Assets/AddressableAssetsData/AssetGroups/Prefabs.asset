@@ -73,6 +73,8 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f3c7937c5d4b555438d04a56a07c1ede
     m_Address: UIScene_Lobby.prefab
+  - m_GUID: c925e7eec90e4854bb12f8829fc8cc24
+    m_Address: Enemy.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
