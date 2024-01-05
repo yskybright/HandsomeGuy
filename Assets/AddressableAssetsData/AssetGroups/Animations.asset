@@ -16,7 +16,19 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: be912bb9a6f467643b7a99a51f2995b0
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: c2351aa608cb9c94db19ff93010d2dd8
+    m_Address: Black.animController
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 00e92540753ecd542b532b2c6b55aa48
+    m_Address: Blue.animController
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9cf467bac39a6ab4995e973c50c05635, type: 2}
   m_SchemaSet:
