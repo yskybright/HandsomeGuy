@@ -1,11 +1,11 @@
 {
-  "Players": [
-    {
-      "id": "1",
-      "hp": 100.0,
-      "moveSpeed": 10.0,
-      "damage": 10.0,
-      "attackSpeed": 10.0
-    }
-  ]
+  "id": "1",
+  "currrentHp": 50.0,
+  "maxHp": 100.0,
+  "moveSpeed": 10.0,
+  "damage": 10.0,
+  "attackSpeed": 10.0,
+  "damageReduceRatio": 10.0,
+  "sightRange": 5.0,
+  "killCount": 0
 }

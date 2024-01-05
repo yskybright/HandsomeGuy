@@ -35,6 +35,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f9e8d6d0bc8e4fc43ac4768fd632a65d
+    m_Address: Gunbullet.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 95ceba5efaf70d14b9120fcce43cf6d0
     m_Address: Player.prefab
     m_ReadOnly: 0
