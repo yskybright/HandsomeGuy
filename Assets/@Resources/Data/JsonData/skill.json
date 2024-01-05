@@ -51,7 +51,8 @@
       "skillName": "투명인간",
       "description": "스킬 사용 시 4초간 투명 상태가 됩니다. (공격, 상호작용 가능)",
       "skillType": "Active",
-      "duration": 4
+      "duration": 4,
+      "coolTime": 60
     },
     {
       "skillName": "장충동 왕 족발 보쌈",

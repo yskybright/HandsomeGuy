@@ -5,22 +5,28 @@ using UnityEngine;
 
 public class Revival : BasePassive
 {
-    private int revivalCount;
+    private int _revivalCount;
+    public int RevivalCount { get { return _revivalCount; } private set { _revivalCount = value; } }
 
     protected override void Init()
     {
         base.Init();
-        revivalCount = 1;
-        Main.DataManager.SkillDict.TryGetValue("부활", out skill);
+        _revivalCount = 1;
+        if (!Main.DataManager.SkillDict.TryGetValue("부활", out skill))
+        {
+            Debug.Log("해당 스킬을 가져오는데 실패하였습니다.");
+        }
     }
 
-    private void Update()
+    IEnumerator OnRevivalCouroutine()
     {
-        //if (player.hp <= 0 && revivalCount != 0)
-        //{
-        //    player.hp = Mathf.RoundToInt((player.maxHp / 100.0f) * skill.revivalHealthRatio);
-        //    revivalCount--;
-        //}
-        //Debug.Log(player.hp);
+        yield return new WaitForSeconds(2.0f);
+        player._currentHp = Mathf.RoundToInt((player._maxHp / 100.0f) * skill.revivalHealthRatio);
+        _revivalCount--;
+    }
+
+    public void OnRevival()
+    {
+        StartCoroutine(OnRevivalCouroutine());
     }
 }

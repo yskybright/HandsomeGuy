@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 [System.Serializable]
 public class BaseSkill : MonoBehaviour
 {
-    protected PlayerData player;
+    protected Player player;
     protected Data.Skill skill;
     private void Start()
     {
@@ -16,6 +16,7 @@ public class BaseSkill : MonoBehaviour
 
     protected virtual void Init()
     {
-        //player = Main.ObjectManager.Player;
+        player = Main.ObjectManager.Player;
+        Debug.Log(player.tag);
     }
 }

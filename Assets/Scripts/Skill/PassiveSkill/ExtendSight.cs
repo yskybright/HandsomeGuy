@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class ExtendSight : BasePassive
 {
-    private GimmickMissionController _gimmickMissionController;
+    private PlayerStatusController _playerStatusController;
     private float _tempPlayerSight;
     protected override void Init()
     {
         base.Init();
-        Main.DataManager.SkillDict.TryGetValue("선택적 올빼미", out skill);
-        _tempPlayerSight = player.sightRange;
-        _gimmickMissionController = gameObject.GetComponent<GimmickMissionController>();
-        _gimmickMissionController.missionEvent += StartCoroutineAfterCheck;
+        if (!Main.DataManager.SkillDict.TryGetValue("선택적 올빼미", out skill))
+        {
+            Debug.Log("해당 스킬을 가져오는데 실패하였습니다.");
+        }
+        _tempPlayerSight = player._sightRange;
+        _playerStatusController = gameObject.GetComponent<PlayerStatusController>();
+        _playerStatusController.missionEvent += StartCoroutineAfterCheck;
     }
 
     IEnumerator IncreamentPlayerSightCoroutine()
@@ -21,12 +24,12 @@ public class ExtendSight : BasePassive
 
         yield return new WaitForSeconds(skill.duration);
 
-        player.sightRange = _tempPlayerSight;
+        player._sightRange = _tempPlayerSight;
     }
 
     private void IncreamentPlayerSight()
     {
-        player.sightRange = player.sightRange + skill.increamentSightRange;
+        player._sightRange = player._sightRange + skill.increamentSightRange;
     }
 
     public void StartCoroutineAfterCheck(bool isSuccessMission)
