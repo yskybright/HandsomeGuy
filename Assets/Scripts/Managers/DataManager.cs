@@ -15,9 +15,9 @@ public class DataManager
 
     public void Initialize()
     {
-        //SkillDict = LoadJson<Data.SkillData, string, Data.Skill>("skillData").MakeDictionary();
+        SkillDict = LoadJson<Data.SkillData, string, Data.Skill>("skillData").MakeDictionary();
         Enemies = LoadJson<EnemyDataLoader, string, EnemyData>("EnemyData").MakeDictionary();
-        //Player = LoadJson<PlayerDataLoader, string, PlayerData>("PlayerData").MakeDictionary();
+        Player = LoadJson<PlayerDataLoader, string, PlayerData>("PlayerData").MakeDictionary();
     }
 
 
