@@ -2,25 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum UsableType
+/// <summary>
+/// 소비형 아이템 매개변수 관리
+/// </summary>
+
+public abstract class UsableItemData : MonoBehaviour
 {
-    Healpack,
-    Grenade,
-    Dash,
-    Puppet,
-    //Goldenkey
+    [SerializeField] private bool destroyOnPickup = true;
+    [SerializeField] private LayerMask saveOnPickup;
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (saveOnPickup.value == (saveOnPickup.value | (1 << other.gameObject.layer)))
+        {
+            OnUse(other.gameObject);
+
+            if (destroyOnPickup)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+    protected abstract void OnUse(GameObject receiver);
 }
 
-[CreateAssetMenu(fileName = "UsableItemData_", menuName = "Data/UsableItemData", order = 2)]
+// Duration = 60s;
 
-public class UsableItemData : ItemData
-{
-    [Header("UsableType")]
-    public UsableType usableType;
+//1. HealPack 
+//   PlayerHP += 10
 
-    [Header("Stats")]
-    public float Hp;
-    public float Attack;
-    public float ItemPosition;
-    public float CharacterPosition;
-}
+//2. Grenade
+//   AttackDamage = 10
+
+//3. Dash
+//   player.position += 10
+
+//4. Puppet
+//   position = player.position + 5, (monster attack) bool = true, duration = 4s
+
+//5. GoldenKey
+//   (locked door) bool = false 

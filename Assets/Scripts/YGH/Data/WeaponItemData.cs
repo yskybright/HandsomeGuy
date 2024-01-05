@@ -2,22 +2,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponType
+/// <summary>
+/// 장착형 아이템 매개변수 관리
+/// </summary>
+
+public abstract class WeaponItemData : MonoBehaviour
 {
-    Pistol,
-    Rifle,
-    Hammer
+    [SerializeField] private bool destroyOnPickup = true;
+    [SerializeField] private LayerMask saveOnPickup;
+
+    protected float originAtk;
+    protected float originAtkSpeed;
+    protected float originAtkRange;
+    protected float changeAtk;
+    protected float changeAtkSpeed;
+    protected float changeAtkRange;
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (saveOnPickup.value == (saveOnPickup.value | (1 << other.gameObject.layer)))
+        {
+            OnEquip(other.gameObject);
+
+            if (destroyOnPickup)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+    protected abstract void OnEquip(GameObject receiver);
 }
 
-[CreateAssetMenu(fileName = "WeaponItemData_", menuName = "Data/WeaponItemData", order = 1)]
 
-public class WeaponItemData : ItemData
-{
-        [Header("WeaponType")]
-        public WeaponType weaponType;
+// Duration = 30s;
 
-        [Header("Stats")]
-        public float Attack;
-        public float AttackSpeed;
-        public float AttackRange;
-}
+// 1. Pistol (5, 5, 5)
+// 2. Bow, (7, 7, 7)
+// 3. Rifle, (10, 10, 10)
+
+
+// switch 방식으로 무기 타입을 바꿔 입력하는 방식 (대안)
+//    public void WeaponItem()
+//    {
+//        switch (WeaponData.weaponType)
+//        {
+//            case WeaponType.Pistol:
+//                Pistol();
+//                break;
+
+//            case WeaponType.Rifle:
+//                Rifle();
+//                break;
+
+//            case WeaponType.Bow:
+//                Bow();
+//                break;
+
+//            default:
+//                break;
+//        }
+//    }
+
