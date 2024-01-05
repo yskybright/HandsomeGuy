@@ -32,6 +32,8 @@ public class ObjectManager
             enemy.SetInfo(key);
             Enemies.Add(enemy);
 
+            Debug.Log("fdsafdsaf");
+
             return Player as T;
         }
         //else if (type == typeof(Enemy))
