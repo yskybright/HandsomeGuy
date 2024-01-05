@@ -1,0 +1,62 @@
+{
+  "skills": [
+    {
+      "skillName": "부활",
+      "description": "사망 시 전체 체력의 30% 체력으로 1회 부활합니다.",
+      "skillType": "Passive",
+      "revivalHealthRatio": 30
+    },
+    {
+      "skillName": "사디스트",
+      "description": "몬스터 10킬 당 데미지 5퍼가 증가합니다.",
+      "skillType": "Passive",
+      "increamentDamage": 2,
+      "increamentUnit": 10
+    },
+    {
+      "skillName": "마조히스트",
+      "description": "피격 데미지가 10% 감소합니다.",
+      "skillType": "Passive",
+      "reductionDamageRatio": 10
+    },
+    {
+      "skillName": "헤이스트",
+      "description": "이동속도가 10% 증가합니다.",
+      "skillType": "Passive",
+      "increamentMoveSpeedRatio": 10
+    },
+    {
+      "skillName": "선택적 올빼미",
+      "description": "기믹에 성공 시 4초간 시야가 증가합니다.",
+      "skillType": "Passive",
+      "increamentSightRange": 5,
+      "duration": 4
+    },
+    {
+      "skillName": "기계광",
+      "description": "스킬 사용 시 본인과 가장 가까운 기믹의 방향을 알 수 있습니다.",
+      "skillType": "Active",
+      "coolTime": 60,
+      "duration": 5 
+    },
+    {
+      "skillName": "스팀팩",
+      "description": "스킬 사용 시 10초간 공격속도가 50% 상승합니다.",
+      "skillType": "Active",
+      "coolTime": 60,
+      "increamentAttackSpeedRatio": 50,
+      "duration": 10
+    },
+    {
+      "skillName": "투명인간",
+      "description": "스킬 사용 시 4초간 투명 상태가 됩니다. (공격, 상호작용 가능)",
+      "skillType": "Active",
+      "duration": 4
+    },
+    {
+      "skillName": "장충동 왕 족발 보쌈",
+      "description": "걍 미침.",
+      "skillType": "Passive"
+    }
+  ]
+}
