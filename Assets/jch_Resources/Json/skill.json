@@ -10,7 +10,8 @@
       "skillName": "사디스트",
       "description": "몬스터 10킬 당 데미지 5퍼가 증가합니다.",
       "skillType": "Passive",
-      "increamentDamageRatio": 5
+      "increamentDamage": 2,
+      "increamentUnit": 10
     },
     {
       "skillName": "마조히스트",
@@ -28,7 +29,8 @@
       "skillName": "선택적 올빼미",
       "description": "기믹에 성공 시 4초간 시야가 증가합니다.",
       "skillType": "Passive",
-      "increamentSightRange": 5
+      "increamentSightRange": 5,
+      "duration": 4
     },
     {
       "skillName": "기계광",

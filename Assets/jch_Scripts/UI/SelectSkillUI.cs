@@ -27,9 +27,9 @@ public class ButtonController : UIPopup
         BindButton(typeof(Buttons),true);
         selectSkillDict = new Dictionary<string, Type>
         {
-            { "부활", typeof(AlarmGimmick) },
-            { "방어", typeof(AlarmGimmick) },
-            { "공격", typeof(AlarmGimmick) },
+            { "부활", typeof(ExtendSight) },
+            { "방어", typeof(ExtendSight) },
+            { "공격", typeof(ExtendSight) },
         };
 
 
