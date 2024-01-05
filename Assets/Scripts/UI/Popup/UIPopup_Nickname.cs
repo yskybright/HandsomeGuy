@@ -52,9 +52,10 @@ public class UIPopup_Nickname : UIPopup
     {
         _nickname = _inputField.text;
         if(_nickname == "") return;
+        
+        Main.GameManager.NickName = _nickname;
         print($"닉네임 : {_nickname}");
 
-        //TODO : 로비씬으로 넘기기
         StartCoroutine(CoDelay());
     }
 
