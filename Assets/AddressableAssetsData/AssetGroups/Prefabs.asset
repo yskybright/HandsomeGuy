@@ -35,7 +35,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3d83dad6b99e81d46861d810b5c196a0
+  - m_GUID: 95ceba5efaf70d14b9120fcce43cf6d0
     m_Address: Player.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
