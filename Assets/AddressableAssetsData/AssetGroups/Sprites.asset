@@ -37,6 +37,8 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 250cfa6e4f9a4364bfc35d688df49069
     m_Address: Hammer.sprite
+  - m_GUID: 014de57d3ba2dde47a22122df3dc64eb
+    m_Address: Boss.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
