@@ -35,6 +35,9 @@ public class BrokenMachine : MonoBehaviour
     {
         inputAction.Disable();
     }
+
+
+
     private void OnEnable()
     {
         // InputAction 활성화
@@ -56,8 +59,7 @@ public class BrokenMachine : MonoBehaviour
     private void Repair()
     {
         repairBar.fillAmount += Time.deltaTime/10;
-        progress.GetComponent<TMP_Text>().text = $"Progress : {(repairBar.fillAmount*100).ToString("N2")}%\r\nRefair - Press Hold E";
-        if(repairBar.fillAmount == 1 ) progress.GetComponent<TMP_Text>().text = $"Progress :Complete";
+        Main.GameManager.Repair(repairBar.fillAmount);
     }
 
 
@@ -66,8 +68,8 @@ public class BrokenMachine : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             //플레이어 상호작용 키 이벤트에 연결 해제 RepairToggle()
-            inputAction.Disable(); // InputAction 비활성화
-            progress.SetActive(false);
+            inputAction.Disable(); // inputaction 비활성화
+            Main.GameManager.RepairUI(false, 0);
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -76,11 +78,13 @@ public class BrokenMachine : MonoBehaviour
         {
             //플레이어 상호작용 키 이벤트에 연결 RepairToggle()
             inputAction.Enable(); // InputAction 활성화
-            progress.SetActive(true);
+            Main.GameManager.Repair(repairBar.fillAmount);
+            Main.GameManager.RepairUI(true, repairBar.fillAmount);
         }
     }
     private void RepairToggle()
     {
         repair = !repair;
+
     }
 }
