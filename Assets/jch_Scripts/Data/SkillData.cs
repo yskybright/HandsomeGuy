@@ -10,8 +10,9 @@ namespace Data{
         public string skillName;
         public string description;
         public string skillType;
+        public int increamentUnit;
         public float revivalHealthRatio;
-        public float increamentDamageRatio;
+        public int increamentDamage;
         public float reductionDamageRatio;
         public float increamentMoveSpeedRatio;
         public float increamentSightRange;
