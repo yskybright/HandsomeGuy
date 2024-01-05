@@ -14,7 +14,7 @@ public abstract class BaseScene : MonoBehaviour
         if (Main.ResourceManager.Loaded)
         {
             
-            //Main.Data.Initialize();
+            Main.DataManager.Initialize();
             //Main.Game.Initialize();
             Initialize();
         }
@@ -25,7 +25,7 @@ public abstract class BaseScene : MonoBehaviour
                 if (count >= totalCount)
                 {
                     Main.ResourceManager.Loaded = true;
-                    //Main.Data.Initialize();
+                    Main.DataManager.Initialize();
                     //Main.Game.Initialize();
                     Initialize();
                 }
@@ -40,7 +40,7 @@ public abstract class BaseScene : MonoBehaviour
     {
         if (_Initialized) return false;
 
-        //Main.SceneManager.CurrentScene = this;
+        //Main.SceneManagerEx.CurrentScene = this;
 
         Object obj = GameObject.FindObjectOfType<EventSystem>();
         if (obj == null) Main.ResourceManager.Instantiate("EventSystem.prefab").name = "@EventSystem";

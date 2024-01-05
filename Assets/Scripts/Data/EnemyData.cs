@@ -7,9 +7,9 @@ using UnityEngine;
 public class EnemyData
 {
     public string key;
-    public float HP;
+    public int HP;
     public float Speed;
-    public float Damage;
+    public int Damage;
 }
 
 [Serializable]

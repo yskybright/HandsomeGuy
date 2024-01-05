@@ -42,7 +42,7 @@ public class UIBase : MonoBehaviour
     protected void BindButton(Type type, bool recursive = false) => Bind<Button>(type, recursive);
     protected void BindImage(Type type, bool recursive = false) => Bind<Image>(type, recursive);
     protected void BindObject(Type type, bool recursive = false) => Bind<GameObject>(type, recursive);
-    //protected void BindText(Type type) => Bind<TextMeshProUGUI>(type);
+    protected void BindText(Type type, bool recursive = false) => Bind<TextMeshProUGUI>(type, recursive);
 
     protected void AddUIEvent(GameObject go, Action<PointerEventData> action = null, Define.UIEvent uIEvent = Define.UIEvent.Click)
     {
