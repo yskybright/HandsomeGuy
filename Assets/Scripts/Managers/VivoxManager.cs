@@ -8,15 +8,16 @@ using System.Threading.Tasks;
 
 public class VivoxManager
 {
-    private string _server = "https://unity.vivox.com/appconfig/14568-vivox-50837-udash";
+    private string _server = "https://unity.vivox.com/appconfig/14568-hands-62421-udash";
     private string _domain = "mtu1xp.vivox.com";
-    private string _issuer = "14568-vivox-50837-udash";
-    private string _tokenKey = "iJVdGUKNdH5wEEffmtre001BUyvhPDAU";
+    private string _issuer = "14568-hands-62421-udash";
+    private string _tokenKey = "9Q60Dqg64EMPKlHUv3GZW2XYO6anHDAc";
     private string _channelName = "lobbyChannel";
+    private IChatable _currentSceneUI;
     private string _userName => Main.GameManager.NickName;
 
     LoginOptions options;
-    async Task InitializeAsync()
+    public async Task InitializeAsync()
     {
         InitializationOptions options = new InitializationOptions();
         options.SetVivoxCredentials(_server, _domain, _issuer, _tokenKey);
@@ -24,6 +25,8 @@ public class VivoxManager
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
         await VivoxService.Instance.InitializeAsync();
+
+        _currentSceneUI = (IChatable)Main.SceneManagerEx.CurrentScene.UI;
 
         //참가자 관련
         VivoxService.Instance.ParticipantAddedToChannel += OnParticipantAdded;
@@ -44,41 +47,48 @@ public class VivoxManager
         options = new LoginOptions();
         options.DisplayName = _userName;
         await VivoxService.Instance.LoginAsync(options);
+        Debug.Log("로그인 완료");
     }
     public async Task LogoutOfVivoxAsync()
     {
         await VivoxService.Instance.LogoutAsync();
     }
-    public async Task JoinGroupChannelAsync(string channelName)
+    public async Task JoinGroupChannelAsync(string channelName = "lobbyChannel")
     {
-        string channelToJoin = channelName;
 
-        await VivoxService.Instance.JoinGroupChannelAsync(_channelName, ChatCapability.TextAndAudio);
+        await VivoxService.Instance.JoinGroupChannelAsync(channelName, ChatCapability.TextAndAudio);
     }
-    public async Task LeaveEchoChannelAsync(string channelName)
+    public async Task LeaveEchoChannelAsync(string channelName = "lobbyChannel")
     {
-        string channelToLeave = channelName;
         await VivoxService.Instance.LeaveChannelAsync(_channelName);
+        Debug.Log("채널 접속 완료");
     }
 
     void OnParticipantAdded(VivoxParticipant participant)
     {
-        //UI.InputUser(participant);
-        //UI.InputChat($"{participant.DisplayName} 님이 접속했습니다.");
+        _currentSceneUI.InputUser(participant);
+        _currentSceneUI.InputChat($"{participant.DisplayName} 님이 접속했습니다.");
     }
     void OnParticipantRemoved(VivoxParticipant participant)
     {
-        //UI.DeleteUser(participant);
-        //UI.InputChat($"{participant.DisplayName} 님이 떠났습니다.");
+        //_currentSceneUI.DeleteUser(participant);
+        _currentSceneUI.InputChat($"{participant.DisplayName} 님이 떠났습니다.");
     }
     void OnChannelMessageReceived(VivoxMessage message)
     {
-        //UI.InputChat(message.MessageText);
-        //UI.StartCoroutine(UI.SendScrollRectToBottom());
+        _currentSceneUI.InputChat(message.MessageText);
+        _currentSceneUI.SetScrollToBottom();
     }
     public void SendChatMessage(string msg)
     {
         msg = $"{_userName} : " + msg;
         VivoxService.Instance.SendChannelTextMessageAsync(_channelName, msg);
     }
+}
+
+public interface IChatable
+{
+    public void InputChat(string str);
+    public void InputUser(VivoxParticipant participant);
+    public void SetScrollToBottom();
 }
