@@ -40,7 +40,7 @@ public abstract class BaseScene : MonoBehaviour
     {
         if (_Initialized) return false;
 
-        //Main.SceneManager.CurrentScene = this;
+        //Main.SceneManagerEx.CurrentScene = this;
 
         Object obj = GameObject.FindObjectOfType<EventSystem>();
         if (obj == null) Main.ResourceManager.Instantiate("EventSystem.prefab").name = "@EventSystem";

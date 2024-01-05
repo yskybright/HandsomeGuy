@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class UIScene_Title : UIScene
 {
+    #region enums
     private enum Scales
     {
         TitleScale,
@@ -18,7 +19,7 @@ public class UIScene_Title : UIScene
     {
         TitleLogo
     }
-
+    #endregion
 
     void Start()
     {
@@ -56,6 +57,5 @@ public class UIScene_Title : UIScene
     {
         yield return new WaitForSeconds(1f);
         Main.UIManager.ShowPopupUI<UIPopup_Nickname>();
-
     }
 }

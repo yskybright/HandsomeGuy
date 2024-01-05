@@ -16,7 +16,7 @@ public class DataTransformer : EditorWindow
     public static void ParseExcel()
     {
         ParseEnemyData("Enemy");
-        ParseEnemyData("Player");
+        ParsePlayerData("Player");
     }
 
     private static void ParseEnemyData(string fileName)
@@ -33,9 +33,9 @@ public class DataTransformer : EditorWindow
             loader.Enemies.Add(new()
             {
                 key = row[0],
-                HP = ConvertValue<float>(row[1]),
+                HP = ConvertValue<int>(row[1]),
                 Speed = ConvertValue<float>(row[2]),
-                Damage = ConvertValue<float>(row[3]),
+                Damage = ConvertValue<int>(row[3]),
             });
         }
 
@@ -46,7 +46,7 @@ public class DataTransformer : EditorWindow
 
     private static void ParsePlayerData(string fileName)
     {
-        EnemyDataLoader loader = new();
+        PlayerDataLoader loader = new();
 
         string[] lines = File.ReadAllText($"{Application.dataPath}/@Resources/Data/CsvData/{fileName}Data.csv").Split("\n");
 
@@ -55,12 +55,13 @@ public class DataTransformer : EditorWindow
             string[] row = lines[y].Replace("\r", "").Split(',');
             if (row.Length == 0 || string.IsNullOrEmpty(row[0])) continue;
 
-            loader.Enemies.Add(new()
+            loader.Players.Add(new()
             {
-                key = row[0],
-                HP = ConvertValue<float>(row[1]),
-                Speed = ConvertValue<float>(row[2]),
-                Damage = ConvertValue<float>(row[3]),
+                id = row[0],
+                hp = ConvertValue<float>(row[1]),
+                moveSpeed = ConvertValue<float>(row[2]),
+                damage = ConvertValue<float>(row[3]),
+                attackSpeed = ConvertValue<float>(row[4]),
             });
         }
 

@@ -35,6 +35,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3c7937c5d4b555438d04a56a07c1ede
+    m_Address: UIScene_Lobby.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 68b0caaae1cef43409f0290a58fe6fd3
+    m_Address: UIPopup_SelectCharacter.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7480beb0606d8444b9a6acf3e442b486
+    m_Address: UIPopup_SelectSkill.prefab
+  - m_GUID: c925e7eec90e4854bb12f8829fc8cc24
+    m_Address: Enemy.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9cf467bac39a6ab4995e973c50c05635, type: 2}
   m_SchemaSet:
