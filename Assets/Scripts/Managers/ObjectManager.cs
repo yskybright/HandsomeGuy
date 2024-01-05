@@ -6,6 +6,7 @@ using UnityEngine;
 public class ObjectManager
 {
     public List<Projectile> Projectiles { get; private set; } = new();
+    public PlayerData Player { get; private set; } = new();
     public List<Enemy> Enemies { get; private set; } = new();
     public Player Player { get; private set; }
 
@@ -17,11 +18,16 @@ public class ObjectManager
             GameObject obj = Main.ResourceManager.Instantiate("Player.prefab");
             obj.transform.position = position;
 
-            Player = obj.GetOrAddComponent<Player>();
-            //Player.SetInfo(key);
+        if (type == typeof(PlayerData))
+        {
+            GameObject obj = Main.ResourceManager.Instantiate("Player.prefab");
+            obj.transform.position = position;
+
+            Player = obj.GetOrAddComponent<PlayerData>();
 
             return Player as T;
         }
+
         if (type == typeof(Enemy))
         {
             EnemyData data = Main.DataManager.Enemies[key];
@@ -31,7 +37,8 @@ public class ObjectManager
             Enemy enemy = obj.GetOrAddComponent<Enemy>();
             enemy.SetInfo(key);
             Enemies.Add(enemy);
-            return enemy as T;
+
+            return Player as T;
         }
         //else if (type == typeof(Enemy))
         //{
