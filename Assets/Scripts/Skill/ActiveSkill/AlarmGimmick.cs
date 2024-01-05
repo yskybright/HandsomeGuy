@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AlarmGimmick : BaseSkill
+public class AlarmGimmick : BaseActive
 {
 
-    protected override void Start()
+    protected override void Init()
     {
-        base.Start();
         if (Main.DataManager.SkillDict.TryGetValue("부활", out Data.Skill skill))
         {
             Debug.Log(skill.description);

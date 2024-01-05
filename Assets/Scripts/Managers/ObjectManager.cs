@@ -17,9 +17,8 @@ public class ObjectManager
         {
             GameObject obj = Main.ResourceManager.Instantiate("Player.prefab");
             obj.transform.position = position;
-
-            Player = obj.GetOrAddComponent<PlayerData>();
-
+         
+            Player = Main.DataManager.Player;
             return Player as T;
         }
 
@@ -35,8 +34,20 @@ public class ObjectManager
 
             Debug.Log("fdsafdsaf");
 
-            return Player as T;
+            return enemy as T; 
         }
+        //else if (type == typeof(Enemy))
+        //{
+        //    CreatureData data = Main.Data.Creatures[key];
+        //    GameObject obj = Main.ResourceManager.Instantiate($"{data.prefabName}.prefab", pooling: true);
+        //    obj.transform.position = position;
+
+        //    Enemy enemy = obj.GetOrAddComponent<Enemy>();
+        //    enemy.SetInfo(key);
+        //    Enemies.Add(enemy);
+
+        //    return enemy as T;
+        //}
         return null;
     }
 

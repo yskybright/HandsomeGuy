@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseActive : MonoBehaviour
+public class BaseActive : BaseSkill
 {
-    private void Start()
+
+    protected override void Init()
     {
         
     }
 
-    private void Update()
-    {
-        
-    }
+    // UseSkill
+
 }
