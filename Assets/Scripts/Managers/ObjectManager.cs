@@ -15,11 +15,11 @@ public class ObjectManager
         if (type == typeof(Enemy))
         {
             EnemyData data = Main.DataManager.Enemies[key];
-            GameObject obj = Main.ResourceManager.Instantiate($"Enemy.prefab", instantiateInWorld: true);
+            GameObject obj = Main.ResourceManager.Instantiate($"Enemy.prefab", pooling: true);
             obj.transform.position = position;
 
             Enemy enemy = obj.GetOrAddComponent<Enemy>();
-            //enemy.SetInfo(key);
+            enemy.SetInfo(key);
             Enemies.Add(enemy);
 
             return enemy as T;
