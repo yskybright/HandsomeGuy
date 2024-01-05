@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,7 +15,7 @@ public class BrokenMachine : MonoBehaviour
     [SerializeField] GameObject progress;
 
     bool repair = false;
-
+    bool repairComplete = false;
     private void Awake()
     {
         // InputAction 초기화
@@ -60,8 +61,17 @@ public class BrokenMachine : MonoBehaviour
     {
         repairBar.fillAmount += Time.deltaTime/10;
         Main.GameManager.Repair(repairBar.fillAmount);
+        if (repairBar.fillAmount >= 1) RepairComplete();
     }
 
+    private void RepairComplete()
+    {
+        if (!repairComplete)
+        {
+            Main.GameManager.RepairComplete();
+            repairComplete = true;
+        }
+    }
 
     private void OnTriggerExit2D(Collider2D collision)
     {

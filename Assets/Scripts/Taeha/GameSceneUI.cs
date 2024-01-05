@@ -44,7 +44,14 @@ public class GameSceneUI : UIBase
         brokenMachines = FindObjectsOfType<BrokenMachine>().Length;
         UIset();
         Main.GameManager.RepairView += Repair;
+        Main.GameManager.RepairCompleteEvent += RepairComplete;
         return true;
+    }
+
+    private void RepairComplete()
+    {
+        repairMachines++;
+        UIset();
     }
 
     private void UIset()
@@ -57,13 +64,14 @@ public class GameSceneUI : UIBase
     {
         this.repairBar = repairBar; 
         repairCheck = view;
-        if (repairCheck && repairBar >= 1) GetText((int)Texts.Progress).text = $"Progress :Complete";
-        else GetText((int)Texts.Progress).text = "";
+        
+        if(!repairCheck)GetText((int)Texts.Progress).text = "";
     }
 
     private void Update()
     {
-        if (repairCheck && repairBar < 1) GetText((int)Texts.Progress).text = $"Progress : {(Main.GameManager.RePairBar * 100).ToString("N2")}%\r\nRefair - Press Hold E";
+        if (repairCheck && Main.GameManager.RePairBar < 1) GetText((int)Texts.Progress).text = $"Progress : {(Main.GameManager.RePairBar * 100).ToString("N2")}%\r\nRefair - Press Hold E";
+        else if (repairCheck && Main.GameManager.RePairBar >= 1) GetText((int)Texts.Progress).text = $"Progress :Complete";
     }
 }
 

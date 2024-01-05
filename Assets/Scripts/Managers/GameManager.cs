@@ -5,23 +5,7 @@ using UnityEngine;
 
 public class GameManager
 {
-    #region Events
-
-    public event Action<bool, float> RepairView;
-    private float repairBar;
-
-    public float RePairBar { get { return repairBar; } }
-    #endregion
-
-
-    public void RepairUI(bool view, float repairBar)
-    {
-        RepairView?.Invoke(view, repairBar);
-    }
-    public void Repair(float repair)
-    {
-        this.repairBar = repair;
-    }
+    
     public GameData Data => _data;
     public string NickName
     {
@@ -40,4 +24,32 @@ public class GameManager
     }
 
     private GameData _data = new();
+
+    #region Events
+
+    public event Action<bool, float> RepairView;
+    public event Action RepairCompleteEvent;
+    private float repairBar;
+
+    public float RePairBar { get { return repairBar; } }
+
+
+    
+    #endregion
+
+
+
+    public void RepairUI(bool view, float repairBar)
+    {
+        RepairView?.Invoke(view, repairBar);
+    }
+    public void RepairComplete()
+    {
+        RepairCompleteEvent?.Invoke();
+    }
+    public void Repair(float repair)
+    {
+        this.repairBar = repair;
+    }
+
 }
