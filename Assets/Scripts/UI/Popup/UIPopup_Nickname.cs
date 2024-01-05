@@ -25,7 +25,7 @@ public class UIPopup_Nickname : UIPopup
 
     #region Fields
 
-    [SerializeField] private TMP_InputField _inputField;
+    private TMP_InputField _inputField;
     private string _nickname;
     GameObject scaler;
     #endregion
@@ -51,9 +51,18 @@ public class UIPopup_Nickname : UIPopup
     private void OnButtonOK(PointerEventData data)
     {
         _nickname = _inputField.text;
+        if(_nickname == "") return;
+        
+        Main.GameManager.NickName = _nickname;
         print($"닉네임 : {_nickname}");
-        Main.UIManager.Hide(scaler);
-        //TODO : 로비씬으로 넘기기
+
+        StartCoroutine(CoDelay());
     }
 
+    IEnumerator CoDelay()
+    {
+        Main.UIManager.Hide(scaler);
+        yield return new WaitForSeconds(1f);
+        Main.UIManager.ShowPopupUI<UIPopup_SelectCharacter>();
+    }
 }

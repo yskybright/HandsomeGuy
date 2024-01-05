@@ -16,6 +16,7 @@ public class DataTransformer : EditorWindow
     public static void ParseExcel()
     {
         ParseEnemyData("Enemy");
+        ParsePlayerData("Player");
     }
 
     private static void ParseEnemyData(string fileName)
@@ -32,9 +33,35 @@ public class DataTransformer : EditorWindow
             loader.Enemies.Add(new()
             {
                 key = row[0],
-                HP = ConvertValue<float>(row[1]),
+                HP = ConvertValue<int>(row[1]),
                 Speed = ConvertValue<float>(row[2]),
-                Damage = ConvertValue<float>(row[3]),
+                Damage = ConvertValue<int>(row[3]),
+            });
+        }
+
+        string jsonStr = JsonConvert.SerializeObject(loader, Formatting.Indented);
+        File.WriteAllText($"{Application.dataPath}/@Resources/Data/JsonData/{fileName}Data.json", jsonStr);
+        AssetDatabase.Refresh();
+    }
+
+    private static void ParsePlayerData(string fileName)
+    {
+        PlayerDataLoader loader = new();
+
+        string[] lines = File.ReadAllText($"{Application.dataPath}/@Resources/Data/CsvData/{fileName}Data.csv").Split("\n");
+
+        for (int y = 1; y < lines.Length; y++)
+        {
+            string[] row = lines[y].Replace("\r", "").Split(',');
+            if (row.Length == 0 || string.IsNullOrEmpty(row[0])) continue;
+
+            loader.Players.Add(new()
+            {
+                id = row[0],
+                hp = ConvertValue<float>(row[1]),
+                moveSpeed = ConvertValue<float>(row[2]),
+                damage = ConvertValue<float>(row[3]),
+                attackSpeed = ConvertValue<float>(row[4]),
             });
         }
 
