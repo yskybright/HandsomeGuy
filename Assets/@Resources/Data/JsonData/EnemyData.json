@@ -11,6 +11,12 @@
       "HP": 50,
       "Speed": 3.0,
       "Damage": 1
+    },
+    {
+      "key": "Boss",
+      "HP": 50,
+      "Speed": 3.0,
+      "Damage": 1
     }
   ]
 }

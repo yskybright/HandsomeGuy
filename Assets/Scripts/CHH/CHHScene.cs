@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CHHScene : BaseScene
 {
+    private EnemySpawn enemySpawn;
+
     public override void Clear()
     {
     }
@@ -12,9 +15,15 @@ public class CHHScene : BaseScene
     {
         if (!base.Initialize()) return false;
 
-        Main.ObjectManager.Spawn<Enemy>("Blue", new(7, 2));
-        Main.ObjectManager.Spawn<Enemy>("Black", new(7, 1));
+        if (enemySpawn == null) enemySpawn = this.gameObject.GetOrAddComponent<EnemySpawn>();
+
+        StartWave();
 
         return true;
+    }
+
+    private void StartWave()
+    {
+        enemySpawn.StartSpawn();
     }
 }

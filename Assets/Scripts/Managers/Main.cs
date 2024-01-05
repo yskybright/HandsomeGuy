@@ -19,6 +19,7 @@ public class Main : MonoBehaviour
     private DataManager _dataManager = new DataManager();
     private SceneManagerEx _sceneManagerEx = new SceneManagerEx();
     private GameManager _gameManager = new GameManager();
+    private VivoxManager _vivoxManager = new VivoxManager();
     public static UIManager UIManager { get { return Instance._uiManager; } }
     public static ResourceManager ResourceManager { get { return Instance._resourceManager; } }
     public static PoolManager PoolManager { get { return Instance._poolManager; } }
@@ -26,6 +27,7 @@ public class Main : MonoBehaviour
     public static DataManager DataManager { get { return Instance._dataManager;} }
     public static SceneManagerEx SceneManagerEx { get { return Instance._sceneManagerEx; } }
     public static GameManager GameManager => Instance?._gameManager;
+    public static VivoxManager VivoxManager => Instance?._vivoxManager;
 
     private void Start()
     {

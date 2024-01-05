@@ -3,8 +3,6 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.U2D.Animation;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class DataManager
@@ -16,8 +14,8 @@ public class DataManager
     public void Initialize()
     {
        Enemies = LoadJson<EnemyDataLoader, string, EnemyData>("EnemyData").MakeDictionary();
-        SkillDict = LoadJson<Data.SkillData, string, Data.Skill>("skillData").MakeDictionary();
-        Player = LoadJson<PlayerData>("PlayerData");
+       SkillDict = LoadJson<Data.SkillData, string, Data.Skill>("skillData").MakeDictionary();
+       Player = LoadJson("PlayerData");
     }
 
 
@@ -28,7 +26,7 @@ public class DataManager
     }
 
     
-    PlayerData LoadJson<PlayerData> (string path)
+    PlayerData LoadJson (string path)
     {
         TextAsset textAsset = Main.ResourceManager.GetResource<TextAsset>(path);
         return JsonConvert.DeserializeObject<PlayerData>(textAsset.text);

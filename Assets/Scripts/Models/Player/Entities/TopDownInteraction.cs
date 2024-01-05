@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class TopDownInteraction : MonoBehaviour
 {
@@ -18,6 +17,7 @@ public class TopDownInteraction : MonoBehaviour
     private void Start()
     {
         _controller.onInteractionEvent += OnInteraction;
+
     }
 
     private void OnInteraction()
@@ -26,13 +26,7 @@ public class TopDownInteraction : MonoBehaviour
         {
             interaction.Interaction();
         }
-    }
-
-    private void OnSkill()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        //player.GetComponent<BaseActive>().UseSkill;
-    }
+    } 
 }
         // 아이템을 줍는 상호작용이라면
         //if (... ) {
