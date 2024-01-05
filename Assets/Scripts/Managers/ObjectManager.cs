@@ -35,7 +35,7 @@ public class ObjectManager
 
             Debug.Log("fdsafdsaf");
 
-            return Player as T;
+            return enemy as T; 
         }
         return null;
     }
