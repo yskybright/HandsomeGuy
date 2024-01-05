@@ -24,8 +24,11 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer _enemySpriteRenderer;
     private Rigidbody2D _rigidbody;
     private Collider2D _collider;
+    protected Animator _animator;
 
     #endregion
+
+    #region Initialize
 
     private void Initialize()
     {
@@ -33,6 +36,7 @@ public class Enemy : MonoBehaviour
         _enemySpriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
+        _animator = GetComponent<Animator>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
     }
@@ -43,11 +47,17 @@ public class Enemy : MonoBehaviour
         _key = key;
         EnemyData enemy = Main.DataManager.Enemies.FirstOrDefault(e => e.Key == key).Value;
         _enemySpriteRenderer.sprite = Main.ResourceManager.GetResource<Sprite>($"{key}.sprite");
+        _animator.runtimeAnimatorController = Main.ResourceManager.GetResource<RuntimeAnimatorController>($"{key}.animController");
         hp = enemy.HP;
         currentHp = hp;
         speed = enemy.Speed;
+        _agent.speed = speed;
         damage = enemy.Damage;
     }
+
+    #endregion
+
+    #region MonoBehaviour
 
     private void Start()
     {
@@ -62,9 +72,15 @@ public class Enemy : MonoBehaviour
         if (target != null)
         {
             _agent.SetDestination(target.position);
+            
+            bool isTargetOnLeft = target.position.x < transform.position.x;
+            _enemySpriteRenderer.flipX = isTargetOnLeft;
         }
     }
 
+    #endregion
+
+    #region Movement
     private IEnumerator UpdateTarget(float interval)
     {
         while (true)
@@ -100,4 +116,5 @@ public class Enemy : MonoBehaviour
             target = closestPlayer;
         }
     }
+    #endregion
 }
