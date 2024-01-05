@@ -31,8 +31,13 @@ public class PlayerInputController : TopDownCharacterController
         IsAttacking = value.isPressed;
     }
 
-    public void OnInteraction(InputValue value)
+    public void OnInteraction()
     {
         CallInteratcionEvent();
+    }
+
+    public void OnSkill()
+    {
+        CallSkillEvent();
     }
 }

@@ -12,7 +12,7 @@ public class testtest : BaseScene
     protected override bool Initialize()
     {
         if (!base.Initialize()) return false;
-        Main.ObjectManager.Spawn<PlayerData>("Player.prefab", Vector2.zero);
+        Main.ObjectManager.Spawn<Player>("Player.prefab", Vector2.zero);
         return true;
     }
 }
