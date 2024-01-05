@@ -95,6 +95,7 @@ public class UIScene_Lobby : UIScene, IChatable
     private void OnButtonStart(PointerEventData data)
     {
         print("시작 버튼");
+        Main.SceneManagerEx.LoadScene(Define.Scene.testScene);
     }
 
     private void OnButtonReady(PointerEventData data)

@@ -12,7 +12,7 @@ public class BaseActive : BaseSkill
         isSkillCool = false;
     }
 
-    protected virtual void UseSkill()
+    public virtual void UseSkill()
     {
 
     }

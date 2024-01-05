@@ -52,7 +52,6 @@ public class ButtonController : UIPopup
 
         if (selectSkillDict.TryGetValue(skillName, out Type skillType))
         {
-            GameObject.Find("Player(Clone)").AddComponent(skillType);
             gameObject.SetActive(false);
         }
     }

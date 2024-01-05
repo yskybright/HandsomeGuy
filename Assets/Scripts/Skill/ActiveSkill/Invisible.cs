@@ -1,41 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Invisible : BaseActive
 {
-    //플레이어의 원래 sprite 투명도 temp 필드 추가
-    Color tempColor;
-    //Color currentColor = player.spriteRenderer.color;
+    private Color _tempColor;
+    private float _transparency;
+    private SpriteRenderer _playerSR;
     IEnumerator InvisibleManCoroutine()
     {
+        ApplySkillEffect();
+
+        yield return new WaitForSeconds(skill.duration);
+
+        ApplyOriginStatus();
+    }
+
+    IEnumerator SkillCoolCoroutine()
+    {
         isSkillCool = true;
-        Color invisibleColor = tempColor;
-        invisibleColor.a = invisibleColor.a * 0.5f;
-        //플레이어의 스프라이트 투명도 감소
-        //player.spriteRenderer.color = invisibleColor;
 
         yield return new WaitForSeconds(skill.coolTime);
-
-        //플레이어의 스프라이트 투명도 원래대로
-
-        //player.spriteRenderer.color = tempColor;
 
         isSkillCool = false;
     }
     protected override void Init()
     {
         base.Init();
-        if (Main.DataManager.SkillDict.TryGetValue("투명인간", out skill))
+        if (!Main.DataManager.SkillDict.TryGetValue("투명인간", out skill))
         {
             Debug.Log("해당 스킬을 가져오는데 실패하였습니다.");
         }
+        _playerSR = player.transform.Find("MainSprite").GetComponent<SpriteRenderer>();
+        _tempColor = _playerSR.color;
+        _transparency = 0.35f;
     }
 
-    protected override void UseSkill()
+    public override void UseSkill()
     {
         if (isSkillCool) return;
         base.UseSkill();
         StartCoroutine(InvisibleManCoroutine());
+        StartCoroutine(SkillCoolCoroutine());
+    }
+
+    private void ApplySkillEffect()
+    {
+        
+        Color invisibleColor = _tempColor;
+        invisibleColor.a = invisibleColor.a * _transparency;
+
+        player.tag = "Untagged";
+        player.transform.Find("MainSprite").GetComponent<SpriteRenderer>().color = invisibleColor;
+        GameObject.Find("WeaponSprite").GetComponent<SpriteRenderer>().color = invisibleColor;
+
+
+    }
+
+    private void ApplyOriginStatus()
+    {
+        player.tag = "Player";
+        player.transform.Find("MainSprite").GetComponent<SpriteRenderer>().color = _tempColor;
+        GameObject.Find("WeaponSprite").GetComponent<SpriteRenderer>().color = _tempColor; 
     }
 }

@@ -1,3 +1,4 @@
+using Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,11 @@ public class TestScene : BaseScene
         if (!base.Initialize()) return false;
         SceneType = Define.Scene.Game;
         test();
-        //Main.ObjectManager.Spawn<Player>("", new Vector2(0, 3.5f));
+        Main.ObjectManager.Spawn<Player>("Player.prefab", new Vector2(0, 3.5f));
+        Main.DataManager.SkillDict.TryGetValue(Main.GameManager.SkillType, out Data.Skill skill);
+        Debug.Log(skill.type);
+        GameObject.Find("Player(Clone)").AddComponent(skill.type);
+
 
         return true;
     }

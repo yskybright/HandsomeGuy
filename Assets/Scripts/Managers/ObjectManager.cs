@@ -20,6 +20,7 @@ public class ObjectManager
 
             Player player = obj.GetOrAddComponent<Player>();
             player.SetInfo(key);
+            Player = player;
 
             return Player as T;
         }

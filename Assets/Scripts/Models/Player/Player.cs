@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         _moveSpeed = playerData.moveSpeed;
         _damage = playerData.damage;
         _attackSpeed = playerData.attackSpeed;
-        _damageReduceRatio = playerData.attackSpeed;
+        _damageReduceRatio = playerData.damageReduceRatio;
         _sightRange = playerData.sightRange;
         _killCount = playerData.killCount;
     }
