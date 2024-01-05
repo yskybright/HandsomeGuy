@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +15,7 @@ public class ResourceManager
     private Dictionary<string, IList<IResourceLocation>> resourcesLabelHandle = new Dictionary<string, IList<IResourceLocation>>();
 
 
-    public GameObject Instantiate(string key, Transform parent = null, bool instantiateInWorld = false)
+    public GameObject Instantiate(string key, Transform parent = null, bool instantiateInWorld = false, bool pooling = false)
     {
         GameObject go = GetResource<GameObject>(key);
         if (go == null)
@@ -25,7 +25,7 @@ public class ResourceManager
         }
 
         // ToDo: 풀링 오브젝트면 처리해줄 로직 작성 
-        if (instantiateInWorld) return Main.PoolManager.Pop(go);
+        if (pooling) return Main.PoolManager.Pop(go);
 
         return UnityEngine.Object.Instantiate(go, parent, instantiateInWorld);
     }

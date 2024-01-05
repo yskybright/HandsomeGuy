@@ -30,8 +30,8 @@ public class CHHScene : MonoBehaviour
         
 
       
-        Main.ObjectManager.Spawn<Enemy>("Blue", new(0, -2));
-        Main.ObjectManager.Spawn<Enemy>("Black", new(0, -4));
+        Main.ObjectManager.Spawn<Enemy>("Blue", new(7, 2));
+        Main.ObjectManager.Spawn<Enemy>("Black", new(7, 1));
         
     }
 }

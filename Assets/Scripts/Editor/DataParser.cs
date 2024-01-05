@@ -33,9 +33,9 @@ public class DataTransformer : EditorWindow
             loader.Enemies.Add(new()
             {
                 key = row[0],
-                HP = ConvertValue<float>(row[1]),
+                HP = ConvertValue<int>(row[1]),
                 Speed = ConvertValue<float>(row[2]),
-                Damage = ConvertValue<float>(row[3]),
+                Damage = ConvertValue<int>(row[3]),
             });
         }
 
