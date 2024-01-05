@@ -11,7 +11,7 @@ public class TestScene : BaseScene
         if (!base.Initialize()) return false;
         SceneType = Define.Scene.Game;
         test();
-        Main.ObjectManager.Spawn<PlayerData>("", new Vector2(0, 3.5f));
+        //Main.ObjectManager.Spawn<Player>("", new Vector2(0, 3.5f));
 
         return true;
     }

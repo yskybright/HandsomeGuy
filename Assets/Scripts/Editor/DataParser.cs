@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
@@ -56,10 +57,14 @@ public class DataTransformer : EditorWindow
             if (row.Length == 0 || string.IsNullOrEmpty(row[0])) continue;
 
             loader.id = row[0];
-            loader.hp = ConvertValue<float>(row[1]);
-            loader.moveSpeed = ConvertValue<float>(row[2]);
-            loader.damage = ConvertValue<float>(row[3]);
-            loader.attackSpeed = ConvertValue<float>(row[4]);
+            loader.currrentHp = ConvertValue<float>(row[1]);
+            loader.maxHp = ConvertValue<float>(row[2]);
+            loader.moveSpeed = ConvertValue<float>(row[3]);
+            loader.damage = ConvertValue<float>(row[4]);
+            loader.attackSpeed = ConvertValue<float>(row[5]);
+            loader.damageReduceRatio = ConvertValue<float>(row[6]);
+            loader.sightRange = ConvertValue<float>(row[7]);
+            loader.killCount = ConvertValue<int>(row[8]);
         }
 
         string jsonStr = JsonConvert.SerializeObject(loader, Formatting.Indented);
