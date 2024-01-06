@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -15,8 +16,8 @@ public class ObjectManager
 
         if (type == typeof(Player))
         {
-            GameObject obj = Main.ResourceManager.Instantiate("Player.prefab");
-            obj.transform.position = position;
+            GameObject obj = PhotonNetwork.Instantiate("Prefabs/Player", position, Quaternion.identity);
+            Debug.Log(PhotonNetwork.CurrentRoom.Players.Count);
 
             Player player = obj.GetOrAddComponent<Player>();
             player.SetInfo(key);
