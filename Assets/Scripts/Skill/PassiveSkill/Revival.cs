@@ -15,6 +15,7 @@ public class Revival : BasePassive
         if (!Main.DataManager.SkillDict.TryGetValue("부활", out skill))
         {
             Debug.Log("해당 스킬을 가져오는데 실패하였습니다.");
+            return;
         }
     }
 

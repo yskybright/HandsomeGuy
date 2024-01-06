@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 using UnityEngine.EventSystems;
 using Data;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIPopup_SelectSkill : UIPopup
 {
@@ -44,6 +45,7 @@ public class UIPopup_SelectSkill : UIPopup
     private int rand;
     private List<TextMeshProUGUI> _skill = new List<TextMeshProUGUI>();
     private List<TextMeshProUGUI> _desc = new List<TextMeshProUGUI>();
+    private List<Image> _skillImage = new List<Image>();
     private List<int> selectedSkillIdx = new List<int>();
 
     #endregion
@@ -64,6 +66,9 @@ public class UIPopup_SelectSkill : UIPopup
         _skill.Add(GetText((int)Texts.Skill1_Name));
         _skill.Add(GetText((int)Texts.Skill2_Name));
         _skill.Add(GetText((int)Texts.Skill3_Name));
+        _skillImage.Add(GetImage((int)Images.Skill1_Icon));
+        _skillImage.Add(GetImage((int)Images.Skill2_Icon));
+        _skillImage.Add(GetImage((int)Images.Skill3_Icon));
         _desc.Add(GetText((int)Texts.Skill1_Desc));
         _desc.Add(GetText((int)Texts.Skill2_Desc));
         _desc.Add(GetText((int)Texts.Skill3_Desc));
@@ -81,6 +86,7 @@ public class UIPopup_SelectSkill : UIPopup
         {
             _skill[i].text = Main.DataManager.SkillDict.ElementAt(selectedSkillIdx[i]).Key;
             _desc[i].text = Main.DataManager.SkillDict.ElementAt(selectedSkillIdx[i]).Value.description;
+            _skillImage[i].sprite = Main.DataManager.SkillDict.ElementAt(selectedSkillIdx[i]).Value.sprite;
         }
 
         scaler = GetObject((int)Objects.PopupSelectSkillScale);

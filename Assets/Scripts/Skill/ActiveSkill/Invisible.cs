@@ -31,6 +31,7 @@ public class Invisible : BaseActive
         if (!Main.DataManager.SkillDict.TryGetValue("투명인간", out skill))
         {
             Debug.Log("해당 스킬을 가져오는데 실패하였습니다.");
+            return;
         }
         _playerSR = player.transform.Find("MainSprite").GetComponent<SpriteRenderer>();
         _tempColor = _playerSR.color;
@@ -54,8 +55,6 @@ public class Invisible : BaseActive
         player.tag = "Untagged";
         player.transform.Find("MainSprite").GetComponent<SpriteRenderer>().color = invisibleColor;
         GameObject.Find("WeaponSprite").GetComponent<SpriteRenderer>().color = invisibleColor;
-
-
     }
 
     private void ApplyOriginStatus()
