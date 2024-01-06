@@ -12,6 +12,7 @@ public class ExtendSight : BasePassive
         if (!Main.DataManager.SkillDict.TryGetValue("선택적 올빼미", out skill))
         {
             Debug.Log("해당 스킬을 가져오는데 실패하였습니다.");
+            return;
         }
         _tempPlayerSight = player._sightRange;
         _playerStatusController = gameObject.GetComponent<PlayerStatusController>();

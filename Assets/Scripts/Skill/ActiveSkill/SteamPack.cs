@@ -29,6 +29,7 @@ public class SteamPack : BaseActive
         if (!Main.DataManager.SkillDict.TryGetValue("스팀팩", out skill))
         {
             Debug.Log("해당 스킬을 가져오는데 실패하였습니다.");
+            return;
         }
         _tempAttackSpeed = player._attackSpeed;
     }

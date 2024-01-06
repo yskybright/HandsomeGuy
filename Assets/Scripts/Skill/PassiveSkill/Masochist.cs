@@ -11,7 +11,8 @@ public class Masochist : BasePassive
         if (!Main.DataManager.SkillDict.TryGetValue("마조히스트", out skill))
         {
             Debug.Log("해당 스킬을 가져오는데 실패하였습니다.");
+            return;
         }
-        player._damageReduceRatio = 10.0f;
+        player._damageReduceRatio = skill.reductionDamageRatio;
     }
 }

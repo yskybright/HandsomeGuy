@@ -13,6 +13,7 @@ public class Sadist : BasePassive
         if (!Main.DataManager.SkillDict.TryGetValue("사디스트", out skill))
         {
             Debug.Log("해당 스킬을 가져오는데 실패하였습니다.");
+            return;
         }
         stack = 1;
         nextGoalKill = skill.increamentUnit * stack;

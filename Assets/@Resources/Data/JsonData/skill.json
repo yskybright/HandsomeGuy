@@ -57,7 +57,12 @@
     {
       "skillName": "장충동 왕 족발 보쌈",
       "description": "걍 미침.",
-      "skillType": "Passive"
+      "skillType": "Passive",
+      "increamentAttackSpeedRatio": 50,
+      "increamentSightRange": 15,
+      "increamentDamage": 10,
+      "increamentMoveSpeedRatio": 30,
+      "reductionDamageRatio": 30
     }
   ]
 }
