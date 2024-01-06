@@ -15,25 +15,30 @@ public class VivoxManager
     private string _channelName = "lobbyChannel";
     private IChatable _currentSceneUI;
     private string _userName => Main.GameManager.NickName;
-
+    private bool _initialized = false;
     LoginOptions options;
     public async Task InitializeAsync()
     {
-        InitializationOptions options = new InitializationOptions();
-        options.SetVivoxCredentials(_server, _domain, _issuer, _tokenKey);
-        await UnityServices.InitializeAsync(options);
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        if (!_initialized)
+        {
+            InitializationOptions options = new InitializationOptions();
+            options.SetVivoxCredentials(_server, _domain, _issuer, _tokenKey);
+            await UnityServices.InitializeAsync(options);
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-        await VivoxService.Instance.InitializeAsync();
+            await VivoxService.Instance.InitializeAsync();
+            _initialized = true;
+
+            //참가자 관련
+            VivoxService.Instance.ParticipantAddedToChannel += OnParticipantAdded;
+            VivoxService.Instance.ParticipantRemovedFromChannel += OnParticipantRemoved;
+
+            //메시지 관련
+            VivoxService.Instance.ChannelMessageReceived += OnChannelMessageReceived;
+        }
 
         _currentSceneUI = (IChatable)Main.SceneManagerEx.CurrentScene.UI;
 
-        //참가자 관련
-        VivoxService.Instance.ParticipantAddedToChannel += OnParticipantAdded;
-        VivoxService.Instance.ParticipantRemovedFromChannel += OnParticipantRemoved;
-
-        //메시지 관련
-        VivoxService.Instance.ChannelMessageReceived += OnChannelMessageReceived;
     }
     private void OnDestroy()
     {
@@ -52,6 +57,7 @@ public class VivoxManager
     public async Task LogoutOfVivoxAsync()
     {
         await VivoxService.Instance.LogoutAsync();
+        Debug.Log("로그아웃");
     }
     public async Task JoinGroupChannelAsync(string channelName = "lobbyChannel")
     {
@@ -61,7 +67,7 @@ public class VivoxManager
     public async Task LeaveEchoChannelAsync(string channelName = "lobbyChannel")
     {
         await VivoxService.Instance.LeaveChannelAsync(_channelName);
-        Debug.Log("채널 접속 완료");
+        Debug.Log("채널 퇴장");
     }
 
     void OnParticipantAdded(VivoxParticipant participant)
@@ -71,7 +77,7 @@ public class VivoxManager
     }
     void OnParticipantRemoved(VivoxParticipant participant)
     {
-        //_currentSceneUI.DeleteUser(participant);
+        _currentSceneUI.DeleteUser(participant);
         _currentSceneUI.InputChat($"{participant.DisplayName} 님이 떠났습니다.");
     }
     void OnChannelMessageReceived(VivoxMessage message)
@@ -90,5 +96,6 @@ public interface IChatable
 {
     public void InputChat(string str);
     public void InputUser(VivoxParticipant participant);
+    public void DeleteUser(VivoxParticipant participant);
     public void SetScrollToBottom();
 }
