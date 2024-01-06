@@ -12,6 +12,6 @@ public class Haste : BasePassive
             Debug.Log("해당 스킬을 가져오는데 실패하였습니다.");
             return;
         }
-        player._moveSpeed = player._moveSpeed * (1 + skill.increamentMoveSpeedRatio / 100f);
+        //player._moveSpeed = player._moveSpeed * (1 + skill.increamentMoveSpeedRatio / 100f);
     }
 }

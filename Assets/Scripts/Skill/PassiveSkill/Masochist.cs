@@ -13,6 +13,6 @@ public class Masochist : BasePassive
             Debug.Log("해당 스킬을 가져오는데 실패하였습니다.");
             return;
         }
-        player._damageReduceRatio = skill.reductionDamageRatio;
+        //player._damageReduceRatio = skill.reductionDamageRatio;
     }
 }
