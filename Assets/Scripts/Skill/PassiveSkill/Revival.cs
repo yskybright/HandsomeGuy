@@ -22,7 +22,7 @@ public class Revival : BasePassive
     IEnumerator OnRevivalCouroutine()
     {
         yield return new WaitForSeconds(2.0f);
-        player._currentHp = Mathf.RoundToInt((player._maxHp / 100.0f) * skill.revivalHealthRatio);
+        //player._currentHp = Mathf.RoundToInt((player._maxHp / 100.0f) * skill.revivalHealthRatio);
         _revivalCount--;
     }
 
