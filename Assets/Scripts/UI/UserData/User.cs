@@ -14,10 +14,18 @@ public class User : MonoBehaviour
     [SerializeField] Image User_Img;
     [SerializeField] TMP_Text user_name;
     [SerializeField] TMP_Text skill_name;
+    public GameObject ready;
     public void SetupItem(VivoxParticipant participant /*,string skill*/)
     {
         Participant = participant;
         user_name.text = "닉네임 : " + participant.DisplayName;
         //skill_name.text = skill;
+    }
+    public void ToggleReady()
+    {
+        if(ready.activeSelf)
+            ready.SetActive(false);
+        else
+            ready.SetActive(true);
     }
 }
