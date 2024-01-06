@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -95,7 +96,10 @@ public class UIScene_Lobby : UIScene, IChatable
     private void OnButtonStart(PointerEventData data)
     {
         print("시작 버튼");
-        Main.SceneManagerEx.LoadScene(Define.Scene.testScene);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel("testScene");
+        }
     }
 
     private void OnButtonReady(PointerEventData data)

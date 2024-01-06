@@ -13,6 +13,8 @@ public class LobbyScene : BaseScene
         print($"닉네임 : {Main.GameManager.NickName}, 캐릭터 : {Main.GameManager.CharacterType}, 스킬 : {Main.GameManager.SkillType}");
 
         UI = Main.UIManager.ShowSceneUI<UIScene_Lobby>();
+        Launcher launcher = GetComponent<Launcher>();
+        launcher.Connect();
         return true;
     }
 }
