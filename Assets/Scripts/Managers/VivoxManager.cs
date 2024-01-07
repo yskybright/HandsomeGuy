@@ -106,4 +106,5 @@ public interface IChatable
     public void InputUser(VivoxParticipant participant);
     public void DeleteUser(VivoxParticipant participant);
     public void SetScrollToBottom();
+    void ReadyCheck(VivoxMessage message);
 }

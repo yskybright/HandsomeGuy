@@ -92,7 +92,11 @@ public class UIScene_Lobby : UIScene, IChatable
 
         _inputField.onEndEdit.AddListener((string text) => { EnterKeyOnTextField(); });
 
-        AddUIEvent(GetButton((int)Buttons.StartButton).gameObject, OnButtonStart);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            GetButton((int)Buttons.StartButton).gameObject.SetActive(true);
+            AddUIEvent(GetButton((int)Buttons.StartButton).gameObject, OnButtonStart);
+        }
         AddUIEvent(GetButton((int)Buttons.ReadyButton).gameObject, OnButtonReady);
         AddUIEvent(GetButton((int)Buttons.ExitButton).gameObject, OnButtonExitAsync);
 
@@ -132,8 +136,7 @@ public class UIScene_Lobby : UIScene, IChatable
     {
         if (!Input.GetKeyDown(KeyCode.Return))
         {
-            return;
-        }
+            return;        }
         SendMessage();
     }
     public void SendMessage()
