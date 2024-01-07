@@ -92,11 +92,7 @@ public class UIScene_Lobby : UIScene, IChatable
 
         _inputField.onEndEdit.AddListener((string text) => { EnterKeyOnTextField(); });
 
-        if (PhotonNetwork.IsMasterClient)
-        {
-            GetButton((int)Buttons.StartButton).gameObject.SetActive(true);
-            AddUIEvent(GetButton((int)Buttons.StartButton).gameObject, OnButtonStart);
-        }
+        AddUIEvent(GetButton((int)Buttons.StartButton).gameObject, OnButtonStart);
         AddUIEvent(GetButton((int)Buttons.ReadyButton).gameObject, OnButtonReady);
         AddUIEvent(GetButton((int)Buttons.ExitButton).gameObject, OnButtonExitAsync);
 
@@ -111,6 +107,11 @@ public class UIScene_Lobby : UIScene, IChatable
             if (PhotonNetwork.IsMasterClient)
             {
                 PhotonNetwork.LoadLevel("testScene");
+                print("아직 모든 유저가 준비하지 않았습니다.");
+            }
+            else
+            {
+                print("방장이 아닙니다.");
             }
         }
         else

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,7 +6,7 @@ using Unity.Services.Vivox;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class User : MonoBehaviour
+public class User : MonoBehaviour, IPunObservable
 {
     public VivoxParticipant Participant;
     private GameData _gameData = new();
@@ -32,5 +33,12 @@ public class User : MonoBehaviour
     public void SetImage()
     {
         User_Img.sprite = Main.ResourceManager.GetResource<Sprite>($"{Main.GameManager.CharacterType}.sprite");
+    }
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+            stream.SendNext(User_Img);
+        else
+            User_Img.sprite = (Sprite)stream.ReceiveNext();
     }
 }
