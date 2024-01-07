@@ -36,7 +36,6 @@ public class ObjectManager
 
         else if (type == typeof(Enemy))
         {
-            EnemyData data = Main.DataManager.Enemies[key];
             GameObject obj = Main.ResourceManager.Instantiate($"Enemy.prefab", pooling: true);
             obj.transform.position = position;
 
@@ -46,7 +45,19 @@ public class ObjectManager
 
             return enemy as T;
         }
-        
+
+        else if (type == typeof(Boss))
+        {
+            GameObject obj = Main.ResourceManager.Instantiate($"Boss.prefab", pooling: true);
+            obj.transform.position = position;
+
+            Enemy enemy = obj.GetOrAddComponent<Boss>();
+            enemy.SetInfo(key);
+            Enemies.Add(enemy);
+
+            return enemy as T;
+        }
+
         return null;
     }
 
