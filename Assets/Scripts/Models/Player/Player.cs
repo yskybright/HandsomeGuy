@@ -51,14 +51,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         //_animator = GetComponent<Animator>();
     }
 
-    public void SetInfo(string key)
+    public void SetInfo()
     {
         Initialize();
-        _id = key;
         playerData = Main.DataManager.Player;
         //_weaponSprite.sprite = Main.ResourceManager.GetResource<Sprite>($"{_weaponSprite.sprite.name}.sprite");
         //_animator.runtimeAnimatorController = Main.ResourceManager.GetResource<RuntimeAnimatorController>($"{key}.animController");
-        _id = playerData.id;
+        //_id = playerData.id;
         _currentHp = playerData.currrentHp;
         _maxHp = playerData.maxHp;
         _moveSpeed = playerData.moveSpeed;

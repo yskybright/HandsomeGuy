@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Projectile : MonoBehaviour
 {
 
     #region Properties
 
-    // TODO:: Data.
-
-    public Vector2 Velocity { get; protected set; }
+    public Vector2 Velocity = Vector2.right;
     public Vector2 Direction { get; protected set; }
     public int Damage { get; protected set; }
 
@@ -17,68 +16,46 @@ public class Projectile : MonoBehaviour
 
     #region fields
 
-    protected SpriteRenderer _spriter;
-    protected Rigidbody2D _rigidbody;
-    protected Vector3 mousePoint;
-
+    private SpriteRenderer _spriter;
+    private Rigidbody2D _rigidbody;
 
     [SerializeField] private bool _initialized;
 
     #endregion
 
     #region MonoBehaviours
-    protected virtual void Awake()
-    {
-        Camera camera = Camera.main;
-        mousePoint = camera.ScreenToWorldPoint(Input.mousePosition);
-    }
-    protected virtual void Start()
-    {
-        Initialize();
-    }
-    protected virtual void FixedUpdate()
-    {
-        if (!_initialized) return;
-        _rigidbody.velocity = Velocity;
-    }
 
-    protected virtual void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.TryGetComponent<Enemy>(out var creature))
         {
             Debug.Log(creature.name + " " + creature.hp);
             creature.hp -= Damage;
         }
+
+        if (!(this.gameObject.activeSelf && this.gameObject != null)) return;
+        Main.ObjectManager.Despawn(this);
     }
 
     #endregion
 
-    public virtual bool Initialize()
+    private void Initialize()
     {
-        if (_initialized) return false;
-        _initialized = true;
         _spriter = this.GetComponentInChildren<SpriteRenderer>();
         _rigidbody = this.GetComponent<Rigidbody2D>();
-        _spriter.sprite = Main.ResourceManager.GetResource<Sprite>("bullet");
-
-        return true;
     }
 
-    public virtual void SetInfo()
+    public void SetVelocity(Vector2 velocity)
     {
-        Initialize();
-
-        // #1. Data 설정.
-        // TODO::
+        _rigidbody.velocity = velocity;
     }
 
-    public virtual void SetInfo(Vector2 triggerPosition, Vector2 dir, float velocity, int layer, int damage)
+    public void SetInfo(string key, int damage)
     {
+        Debug.Log(key);
         Initialize();
-        transform.position = triggerPosition;
-        Direction = dir.normalized;
-        Velocity = velocity * Direction;
-        gameObject.layer = layer;
+        _spriter.sprite = Main.ResourceManager.GetResource<Sprite>($"{key}.sprite");
+        
         Damage = damage;
     }
 }
