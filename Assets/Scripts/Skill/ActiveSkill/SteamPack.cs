@@ -45,12 +45,12 @@ public class SteamPack : BaseActive
     private void ApplySkillEffect()
     {
         isSkillCool = true;
-        //player._attackSpeed = player._attackSpeed * (1 + (player._attackSpeed * skill.increamentAttackSpeedRatio) / 100);
+        player.ChangeAttackSpeed(player._attackSpeed * (1 + (player._attackSpeed * skill.increamentAttackSpeedRatio) / 100));
     }
 
     private void ApplyOriginStatus()
     {
-        //player._attackSpeed = _tempAttackSpeed;
+        player.ChangeAttackSpeed(_tempAttackSpeed);
         isSkillCool = false;
     }
 }

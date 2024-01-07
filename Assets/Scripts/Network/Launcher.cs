@@ -8,6 +8,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 {
     string gameVersion = "1";
     private byte maxPlayersPerRoom = 6;
+    private bool isConnect;
     private void Awake()
     {
         //나중에 PhotonNetwork.LoadLevel() 이걸 통해 마스터가 씬을 옮기면 같은 룸에 인원들도 같은 씬으로 이동하게 해줌
@@ -58,4 +59,15 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinRandomRoom();
     }
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        Debug.Log($"{otherPlayer.NickName}");
+    }
+
+    public override void OnLeftRoom()
+    {
+        Debug.Log("out");
+    }
+
 }
