@@ -44,7 +44,7 @@ public class User : MonoBehaviourPunCallbacks , IPunObservable
 
     public void SetImage()
     {
-        User_Img.sprite = Main.ResourceManager.GetResource<Sprite>($"{SpriteName}.sprite");
+        User_Img.sprite = Main.ResourceManager.GetResource<Sprite>($"{SpriteName.text}.sprite");
     }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -53,12 +53,14 @@ public class User : MonoBehaviourPunCallbacks , IPunObservable
             stream.SendNext(user_name.text);
             stream.SendNext(skill_name.text);
             stream.SendNext(SpriteName.text);
+            stream.SendNext(ready.activeSelf);
         }
         else
         {
             user_name.text = (string)stream.ReceiveNext();
             skill_name.text = (string)stream.ReceiveNext();
             SpriteName.text = (string)stream.ReceiveNext();
+            ready.SetActive((bool)stream.ReceiveNext());
             SetImage();
         }
     }

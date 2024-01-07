@@ -124,7 +124,8 @@ public class UIScene_Lobby : UIScene, IChatable
     private void OnButtonReady(PointerEventData data)
     {
         print("준비 버튼");
-        Main.VivoxManager.OnReady();
+        //Main.VivoxManager.OnReady();
+        _me.ToggleReady();
     }
     public void ReadyCheck(VivoxMessage message)
     {
@@ -190,8 +191,8 @@ public class UIScene_Lobby : UIScene, IChatable
             var tmp = PhotonNetwork.Instantiate("Prefabs/User", Vector3.zero, Quaternion.identity);
             tmp.gameObject.transform.SetParent(_userPos);
             _me = tmp.GetOrAddComponent<User>();
-            _me.SetImage();
             _me.SetupItem(participant);
+            _me.SetImage();
         }
 
 
