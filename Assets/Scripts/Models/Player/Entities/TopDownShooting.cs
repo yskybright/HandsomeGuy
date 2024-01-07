@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,12 +10,14 @@ public class TopDownShooting : MonoBehaviour
 
     [SerializeField] private Transform projectileSpawnPosition;
     private Vector2 _aimDirection = Vector2.zero;
+    private PhotonView _pv;
 
     public GameObject testPrefab;
 
     private void Awake()
     {
         _controller = GetComponent<TopDownCharacterController>();
+        _pv = GetComponent<PhotonView>();
     }
 
     private void Start()
@@ -25,12 +28,18 @@ public class TopDownShooting : MonoBehaviour
 
     private void OnAim(Vector2 newAimDirection)
     {
-        _aimDirection = newAimDirection;
+        if (_pv.IsMine)
+        {
+            _aimDirection = newAimDirection;
+        }
     }
 
     private void OnShoot()
     {
-        CreateProjectile();
+        if (_pv.IsMine)
+        {
+            CreateProjectile();
+        }
     }
 
     private void CreateProjectile()

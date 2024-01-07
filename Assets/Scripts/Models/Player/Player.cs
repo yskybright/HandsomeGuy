@@ -58,6 +58,11 @@ public class Player : MonoBehaviour
         _killCount = playerData.killCount;
     }
 
+    public void SetSprite(string keyname)
+    {
+        GameObject.Find("MainSprite").GetComponent<SpriteRenderer>().sprite = Main.ResourceManager.GetResource<Sprite>(keyname);
+    }
+
     #endregion
 
     #region MonoBehaviour

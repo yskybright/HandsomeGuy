@@ -181,8 +181,13 @@ public class UIScene_Lobby : UIScene, IChatable
 
         var tmp = Main.ResourceManager.Instantiate("User.prefab", _userPos);        
         User newItem = tmp.GetOrAddComponent<User>();
+        
         if (participant.IsSelf)
+        {
             _me = newItem;
+            _me.SetImage();
+        }
+
         Users.Add(newItem);
 
         foreach (var user in Users)

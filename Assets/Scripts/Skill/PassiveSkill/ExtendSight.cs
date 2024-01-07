@@ -25,12 +25,12 @@ public class ExtendSight : BasePassive
 
         yield return new WaitForSeconds(skill.duration);
 
-        //player._sightRange = _tempPlayerSight;
+        player.ChangeSightRange(_tempPlayerSight);
     }
 
     private void IncreamentPlayerSight()
     {
-        //player._sightRange = player._sightRange + skill.increamentSightRange;
+        player.ChangeSightRange(player._sightRange + skill.increamentSightRange);
     }
 
     public void StartCoroutineAfterCheck(bool isSuccessMission)

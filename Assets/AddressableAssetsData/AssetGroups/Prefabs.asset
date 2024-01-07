@@ -41,12 +41,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 95ceba5efaf70d14b9120fcce43cf6d0
-    m_Address: Player.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 01b160782e59fb44baae067b9b220870
     m_Address: User.prefab
     m_ReadOnly: 0
