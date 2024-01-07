@@ -35,12 +35,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f9e8d6d0bc8e4fc43ac4768fd632a65d
-    m_Address: Gunbullet.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 01b160782e59fb44baae067b9b220870
     m_Address: User.prefab
     m_ReadOnly: 0
@@ -83,8 +77,19 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+<<<<<<< Updated upstream
   - m_GUID: 681441fcf30e56f41bb817754bdf87aa
     m_Address: Boss.prefab
+=======
+  - m_GUID: f9e8d6d0bc8e4fc43ac4768fd632a65d
+    m_Address: Gunbullet.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc9a31cff501c654bb34ec1b9b7fd8df
+    m_Address: SeongGyuPlayer
+>>>>>>> Stashed changes
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
