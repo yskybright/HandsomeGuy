@@ -14,7 +14,7 @@ using UnityEngine.UI;
 using static UnityEditor.Progress;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 
-public class UIScene_Lobby : UIScene, IChatable
+public class UIScene_Lobby : UIScene, IChatable, IPunObservable
 {
     #region enums
     private enum Objects
@@ -182,12 +182,12 @@ public class UIScene_Lobby : UIScene, IChatable
     {
 
         //var tmp = Main.ResourceManager.Instantiate("User.prefab", _userPos);
-        //tmp.gameObject.transform.SetParent(_userPos);
         //User newItem = tmp.GetOrAddComponent<User>();
         
         if (participant.IsSelf)
         {
             var tmp = PhotonNetwork.Instantiate("Prefabs/User", Vector3.zero, Quaternion.identity);
+            tmp.gameObject.transform.SetParent(_userPos);
             _me = tmp.GetOrAddComponent<User>();
             _me.SetImage();
             _me.SetupItem(participant);
@@ -233,4 +233,15 @@ public class UIScene_Lobby : UIScene, IChatable
 
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(_userPos);
+        }
+        else if (stream.IsReading)
+        {
+            _userPos = (Transform)stream.ReceiveNext();
+        }
+    }
 }

@@ -36,9 +36,9 @@ public class User : MonoBehaviour, IPunObservable
     }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.IsWriting)
-            stream.SendNext(User_Img.sprite);
-        else
-            User_Img.sprite = (Sprite)stream.ReceiveNext();
+        //if (stream.IsWriting)
+        //    stream.SendNext(User_Img.sprite);
+        //else
+        //    User_Img.sprite = (Sprite)stream.ReceiveNext();
     }
 }
