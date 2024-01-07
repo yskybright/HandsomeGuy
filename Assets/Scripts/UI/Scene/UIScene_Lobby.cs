@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TMPro;
 using Unity.Services.Vivox;
 using Unity.VisualScripting;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -63,7 +64,7 @@ public class UIScene_Lobby : UIScene, IChatable
     private Transform _textPos; 
     private ScrollRect _chatRect;
 
-    private List<User> Users = new();
+    private List<VivoxParticipant> Users = new();
     private User _me;
     #endregion
 
@@ -102,9 +103,20 @@ public class UIScene_Lobby : UIScene, IChatable
     private void OnButtonStart(PointerEventData data)
     {
         print("시작 버튼");
-        if (PhotonNetwork.IsMasterClient)
+        if (IsAllReady())
         {
-            PhotonNetwork.LoadLevel("testScene");
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.LoadLevel("testScene");
+            }
+            else
+            {
+                print("방장이 아닙니다.");
+            }
+        }
+        else
+        {
+            print("아직 모든 유저가 준비하지 않았습니다.");
         }
     }
 
@@ -116,6 +128,7 @@ public class UIScene_Lobby : UIScene, IChatable
     private void OnButtonExitAsync(PointerEventData data)
     {
         print("나가기 버튼");
+        PhotonNetwork.Disconnect();
         StartCoroutine(CoExit());
     }
     private async Task OnExitAsync()
@@ -162,33 +175,44 @@ public class UIScene_Lobby : UIScene, IChatable
 
     public void InputUser(VivoxParticipant participant)
     {
-        var tmp = Main.ResourceManager.Instantiate("User.prefab", _userPos);        
-        User newItem = tmp.GetOrAddComponent<User>();
-        
+        Users.Add(participant);
+        //var tmp = Main.ResourceManager.Instantiate("User.prefab", _userPos);
+        //User newItem = tmp.GetOrAddComponent<User>();
+        //Users.Add(newItem);
         if (participant.IsSelf)
         {
-            _me = newItem;
+            var tmp = PhotonNetwork.Instantiate("Prefabs/User", Vector3.zero, Quaternion.identity);
+            tmp.gameObject.transform.SetParent(_userPos);
+            _me = tmp.GetOrAddComponent<User>();
+            _me.SetupItem(participant);
             _me.SetImage();
         }
 
-        Users.Add(newItem);
 
-        participant.SetLocalVolume(0);
-        newItem.SetupItem(participant);
+        //participant.SetLocalVolume(0);
+        
     }
     public void DeleteUser(VivoxParticipant participant)
     {
-        User removedItem = Users.FirstOrDefault(p => p.Participant.PlayerId == participant.PlayerId);
+        VivoxParticipant removedItem = Users.FirstOrDefault(p => p.PlayerId == participant.PlayerId);
         if (removedItem != null)
         {
             Users.Remove(removedItem);
-            Destroy(removedItem.gameObject);
         }
     }
     public void InputChat(string str)
     {
         var tmp = Main.ResourceManager.Instantiate("ChatItem.prefab", _textPos);
         tmp.GetComponentInChildren<TMP_Text>().text = str;
+    }
+    public bool IsAllReady()
+    {
+        for(int i = 0; i < _userPos.childCount; i++)
+        {
+            if (!_userPos.GetChild(i).GetComponent<User>().ready.activeSelf)
+                return false;
+        }
+        return true;
     }
     IEnumerator CoExit()
     {
