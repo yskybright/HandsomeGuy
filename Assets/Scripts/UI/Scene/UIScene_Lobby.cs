@@ -183,8 +183,9 @@ public class UIScene_Lobby : UIScene, IChatable
         User newItem = tmp.GetOrAddComponent<User>();
         if (participant.IsSelf)
             _me = newItem;
+        Users.Add(newItem);
 
-        foreach(var user in Users)
+        foreach (var user in Users)
         {
             user.ready.SetActive(false);
         }
