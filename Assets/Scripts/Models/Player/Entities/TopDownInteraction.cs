@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,9 +10,11 @@ public class TopDownInteraction : MonoBehaviour
     private ItemObject item;
 
     private TopDownCharacterController _controller;
+    private PhotonView _pv;
     private void Awake()
     {
         _controller = GetComponent<TopDownCharacterController>();
+        _pv = GetComponent<PhotonView>();
     }
 
     private void Start()
@@ -22,7 +25,7 @@ public class TopDownInteraction : MonoBehaviour
 
     private void OnInteraction()
     {
-        if (item is IInteraction interaction)
+        if (item is IInteraction interaction && _pv.IsMine)
         {
             interaction.Interaction();
         }

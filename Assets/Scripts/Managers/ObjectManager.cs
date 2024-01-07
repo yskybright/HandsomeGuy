@@ -20,7 +20,15 @@ public class ObjectManager
             Debug.Log(PhotonNetwork.CurrentRoom.Players.Count);
 
             Player player = obj.GetOrAddComponent<Player>();
+            PhotonView pv = player.GetComponent<PhotonView>();
+           
             player.SetInfo(key);
+
+            if (pv.IsMine)
+            {
+                player.SetSprite($"{Main.GameManager.CharacterType}.sprite");
+            }
+            
             Player = player;
 
             return Player as T;

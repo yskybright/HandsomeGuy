@@ -28,4 +28,9 @@ public class User : MonoBehaviour
         else
             ready.SetActive(true);
     }
+
+    public void SetImage()
+    {
+        User_Img.sprite = Main.ResourceManager.GetResource<Sprite>($"{Main.GameManager.CharacterType}.sprite");
+    }
 }
