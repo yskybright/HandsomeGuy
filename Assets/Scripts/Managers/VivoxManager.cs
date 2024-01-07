@@ -82,6 +82,10 @@ public class VivoxManager
     }
     void OnChannelMessageReceived(VivoxMessage message)
     {
+        if (message.MessageText == "/준비")
+        {
+            _currentSceneUI.ReadyCheck(message);
+        }
         _currentSceneUI.InputChat(message.MessageText);
         _currentSceneUI.SetScrollToBottom();
     }
@@ -89,6 +93,10 @@ public class VivoxManager
     {
         msg = $"{_userName} : " + msg;
         VivoxService.Instance.SendChannelTextMessageAsync(_channelName, msg);
+    }
+    public void OnReady()
+    {
+        VivoxService.Instance.SendChannelTextMessageAsync(_channelName, "/준비");
     }
 }
 

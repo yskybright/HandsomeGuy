@@ -111,7 +111,12 @@ public class UIScene_Lobby : UIScene, IChatable
     private void OnButtonReady(PointerEventData data)
     {
         print("준비 버튼");
-        _me.ToggleReady();
+        Main.VivoxManager.OnReady();
+    }
+    public void ReadyCheck(VivoxMessage message)
+    {
+        User sender = Users.FirstOrDefault(p => p.Participant.PlayerId == message.SenderPlayerId);
+        sender.ToggleReady();        
     }
     private void OnButtonExitAsync(PointerEventData data)
     {
@@ -193,4 +198,5 @@ public class UIScene_Lobby : UIScene, IChatable
         Main.SceneManagerEx.LoadScene(Define.Scene.StartScene);
 
     }
+
 }
