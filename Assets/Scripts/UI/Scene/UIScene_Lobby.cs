@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TMPro;
 using Unity.Services.Vivox;
 using Unity.VisualScripting;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -181,17 +182,18 @@ public class UIScene_Lobby : UIScene, IChatable
     {
 
         //var tmp = Main.ResourceManager.Instantiate("User.prefab", _userPos);
-        var tmp = PhotonNetwork.Instantiate("Prefabs/User", Vector3.zero,Quaternion.identity);
-        tmp.gameObject.transform.SetParent(_userPos);
-        User newItem = tmp.GetOrAddComponent<User>();
+        //tmp.gameObject.transform.SetParent(_userPos);
+        //User newItem = tmp.GetOrAddComponent<User>();
         
         if (participant.IsSelf)
         {
-            _me = newItem;
+            var tmp = PhotonNetwork.Instantiate("Prefabs/User", Vector3.zero, Quaternion.identity);
+            _me = tmp.GetOrAddComponent<User>();
             _me.SetImage();
+            _me.SetupItem(participant);
         }
 
-        Users.Add(newItem);
+        //Users.Add(newItem);
 
         foreach (var user in Users)
         {
@@ -199,7 +201,7 @@ public class UIScene_Lobby : UIScene, IChatable
         }
 
         //participant.SetLocalVolume(0);
-        newItem.SetupItem(participant);
+        
     }
     public void DeleteUser(VivoxParticipant participant)
     {
