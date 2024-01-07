@@ -7,8 +7,8 @@ public class Rifle : WeaponItemData
 {
     protected override void OnEquip(GameObject receiver)
     {
-        originAtk = 9;
-        originAtkSpeed = 9;
-        originAtkRange = 9;
+        originAtk = 7;
+        originAtkSpeed = 7;
+        originAtkRange = 7;
     }
 }
