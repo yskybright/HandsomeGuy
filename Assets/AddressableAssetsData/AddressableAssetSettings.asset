@@ -98,6 +98,7 @@ MonoBehaviour:
     - PreLoad
     - StartScene
     - LobbyScene
+    - GameScene
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 52b2f8e9926ddc540a1dc12d9b252213, type: 2}
