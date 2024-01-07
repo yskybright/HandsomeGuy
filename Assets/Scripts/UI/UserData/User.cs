@@ -6,7 +6,7 @@ using Unity.Services.Vivox;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class User : MonoBehaviour, IPunObservable
+public class User : MonoBehaviourPunCallbacks, IPunObservable
 {
     public VivoxParticipant Participant;
     private GameData _gameData = new();
@@ -51,4 +51,6 @@ public class User : MonoBehaviour, IPunObservable
 
         }
     }
+    [ContextMenu("ㅁㅁ")]
+    public void blabla() => user_name.text = "blabla";
 }

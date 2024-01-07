@@ -14,7 +14,7 @@ using UnityEngine.UI;
 using static UnityEditor.Progress;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 
-public class UIScene_Lobby : UIScene, IChatable, IPunObservable
+public class UIScene_Lobby : UIScene, IChatable
 {
     #region enums
     private enum Objects
@@ -231,17 +231,5 @@ public class UIScene_Lobby : UIScene, IChatable, IPunObservable
         yield return new WaitForSeconds(1.0f);
         Main.SceneManagerEx.LoadScene(Define.Scene.StartScene);
 
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(_userPos);
-        }
-        else if (stream.IsReading)
-        {
-            _userPos = (Transform)stream.ReceiveNext();
-        }
     }
 }
