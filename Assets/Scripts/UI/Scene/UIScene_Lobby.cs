@@ -178,13 +178,18 @@ public class UIScene_Lobby : UIScene, IChatable
 
     public void InputUser(VivoxParticipant participant)
     {
+
         var tmp = Main.ResourceManager.Instantiate("User.prefab", _userPos);        
         User newItem = tmp.GetOrAddComponent<User>();
         if (participant.IsSelf)
             _me = newItem;
-        Users.Add(newItem);
 
-        participant.SetLocalVolume(0);
+        foreach(var user in Users)
+        {
+            user.ready.SetActive(false);
+        }
+
+        //participant.SetLocalVolume(0);
         newItem.SetupItem(participant);
     }
     public void DeleteUser(VivoxParticipant participant)
