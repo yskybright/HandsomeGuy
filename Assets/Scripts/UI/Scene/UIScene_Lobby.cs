@@ -106,9 +106,16 @@ public class UIScene_Lobby : UIScene, IChatable
     private void OnButtonStart(PointerEventData data)
     {
         print("시작 버튼");
-        if (PhotonNetwork.IsMasterClient)
+        if (IsAllReady())
         {
-            PhotonNetwork.LoadLevel("testScene");
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.LoadLevel("testScene");
+            }
+        }
+        else
+        {
+            print("아직 모든 유저가 준비하지 않았습니다.");
         }
     }
 
@@ -136,7 +143,8 @@ public class UIScene_Lobby : UIScene, IChatable
     {
         if (!Input.GetKeyDown(KeyCode.Return))
         {
-            return;        }
+            return;
+        }
         SendMessage();
     }
     public void SendMessage()
@@ -192,6 +200,13 @@ public class UIScene_Lobby : UIScene, IChatable
     {
         var tmp = Main.ResourceManager.Instantiate("ChatItem.prefab", _textPos);
         tmp.GetComponentInChildren<TMP_Text>().text = str;
+    }
+    public bool IsAllReady()
+    {
+        if (Users.All(p => p.ready.activeSelf))
+            return true;
+        else
+            return false;
     }
     IEnumerator CoExit()
     {

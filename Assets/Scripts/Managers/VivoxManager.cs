@@ -85,6 +85,7 @@ public class VivoxManager
         if (message.MessageText == "/준비")
         {
             _currentSceneUI.ReadyCheck(message);
+            return;
         }
         _currentSceneUI.InputChat(message.MessageText);
         _currentSceneUI.SetScrollToBottom();
