@@ -16,6 +16,10 @@ public class User : MonoBehaviour, IPunObservable
     [SerializeField] TMP_Text user_name;
     [SerializeField] TMP_Text skill_name;
     public GameObject ready;
+    private void Awake()
+    {
+        gameObject.transform.SetParent(GameObject.FindWithTag("Users").transform);
+    }
     public void SetupItem(VivoxParticipant participant /*,string skill*/)
     {
         Participant = participant;
@@ -36,9 +40,15 @@ public class User : MonoBehaviour, IPunObservable
     }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        //if (stream.IsWriting)
-        //    stream.SendNext(User_Img.sprite);
-        //else
-        //    User_Img.sprite = (Sprite)stream.ReceiveNext();
+        if (stream.IsWriting)
+        {
+            stream.SendNext(user_name.text);
+            
+        }
+        else
+        {
+            user_name.text = (string)stream.ReceiveNext();
+
+        }
     }
 }
