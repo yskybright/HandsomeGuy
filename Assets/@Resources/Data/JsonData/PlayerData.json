@@ -6,6 +6,6 @@
   "damage": 10.0,
   "attackSpeed": 10.0,
   "damageReduceRatio": 10.0,
-  "sightRange": 5.0,
+  "sightRange": 20.0,
   "killCount": 0
 }
