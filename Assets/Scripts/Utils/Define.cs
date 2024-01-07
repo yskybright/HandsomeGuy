@@ -20,6 +20,7 @@ public class Define
         StartScene,
         LobbyScene,
         Loading,
-        Game
+        Game,
+        testScene
     }
 }

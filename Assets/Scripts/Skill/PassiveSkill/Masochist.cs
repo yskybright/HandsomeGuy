@@ -8,7 +8,11 @@ public class Masochist : BasePassive
     protected override void Init()
     {
         base.Init();
-        Main.DataManager.SkillDict.TryGetValue("마조히스트", out skill);
-        player.damageReduceRatio = 10.0f;
+        if (!Main.DataManager.SkillDict.TryGetValue("마조히스트", out skill))
+        {
+            Debug.Log("해당 스킬을 가져오는데 실패하였습니다.");
+            return;
+        }
+        player.ChangeDamageReduceRatio(skill.reductionDamageRatio);
     }
 }

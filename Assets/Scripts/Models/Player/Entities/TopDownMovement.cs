@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +6,18 @@ using UnityEngine;
 public class TopDownMovement : MonoBehaviour
 {
     private TopDownCharacterController _controller;
+    private Player player;
 
     private Vector2 _movementDirection = Vector2.zero;
     private Rigidbody2D _rigidbody;
+    private PhotonView pv;
 
     private void Awake()
     {
+        player = GetComponent<Player>();
         _controller = GetComponent<TopDownCharacterController>();
         _rigidbody = GetComponent<Rigidbody2D>();
+        pv = GetComponent<PhotonView>();
     }
 
     private void Start()
@@ -32,7 +37,10 @@ public class TopDownMovement : MonoBehaviour
 
     private void ApplyMovent(Vector2 direction)
     {
-        direction *= 5;
-        _rigidbody.velocity = direction;
+        if (pv.IsMine)
+        {
+            direction *= player._moveSpeed; //Main.ObjectManager.Player._moveSpeed;
+            _rigidbody.velocity = direction;
+        }
     }
 }

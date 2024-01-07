@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,13 @@ using UnityEngine;
 public class TopDownSkill : MonoBehaviour
 {
     private TopDownCharacterController _controller;
+    
+    private PhotonView _pv;
 
     private void Awake()
     {
         _controller = GetComponent<TopDownCharacterController>();
+        _pv = GetComponent<PhotonView>();
     }
     private void Start()
     {
@@ -17,7 +21,12 @@ public class TopDownSkill : MonoBehaviour
 
     private void OnSkill()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        //player.GetComponent<BaseActive>().UseSkill;
+        BaseActive baseActive = GetComponent<BaseActive>();
+        if (baseActive == null) return;
+
+        if (_pv.IsMine)
+        {
+            baseActive.UseSkill();
+        }
     }
 }

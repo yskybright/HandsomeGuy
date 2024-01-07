@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,10 +11,12 @@ public class TopDownAimRotation : MonoBehaviour
     [SerializeField] private SpriteRenderer characterRenderer;
 
     private TopDownCharacterController _controller;
+    private PhotonView _pv;
 
     private void Awake()
     {
         _controller = GetComponent<TopDownCharacterController>();
+        _pv = GetComponent<PhotonView>();
     }
 
     private void Start()
@@ -23,7 +26,10 @@ public class TopDownAimRotation : MonoBehaviour
 
     private void OnAim(Vector2 newAimDirection)
     {
-        RotateArm(newAimDirection);
+        if (_pv.IsMine)
+        {
+            RotateArm(newAimDirection);
+        }
     }
 
     private void RotateArm(Vector2 direction)

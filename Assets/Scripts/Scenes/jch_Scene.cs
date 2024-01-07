@@ -1,34 +1,40 @@
+using Data;
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TestScene : BaseScene
 {
-    public GameObject _playerPrefab;
+    public Transform[] points;
 
     protected override bool Initialize()
     {
         if (!base.Initialize()) return false;
         SceneType = Define.Scene.Game;
-        test();
-        //Main.ObjectManager.Spawn<Player>("", new Vector2(0, 3.5f));
+
+        Main.ResourceManager.LoadAllAsync<UnityEngine.Object>("GameScene", (key, count, totalCount) =>
+        {
+            if (count >= totalCount)
+            {
+                InitialAfterLoad();
+            }
+        });
 
         return true;
     }
 
-    public void test()
+    public void InitialAfterLoad()
     {
-        Main.ResourceManager.LoadAllAsync<UnityEngine.Object>("testGroup", (key, count, totalCount) =>
-        {
-            if (count >= totalCount)
-            {
-                Main.DataManager.Initialize();
-            }
-        });
+        points = GameObject.Find("PlayerSpawnGroup").GetComponentsInChildren<Transform>();
+        int idx = Random.Range(1, points.Length);
+        Main.ObjectManager.Spawn<Player>("Player", points[idx].position);
+        Main.DataManager.SkillDict.TryGetValue(Main.GameManager.SkillType, out Data.Skill skill);
+        GameObject.Find("Player(Clone)").AddComponent(skill.type);
     }
 
     public override void Clear()
     {
-        Debug.Log("Clear TestScene");
+        Main.ResourceManager.ReleaseAllAsset("GameScene");
     }
 }

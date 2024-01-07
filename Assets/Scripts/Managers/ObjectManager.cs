@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -15,18 +16,26 @@ public class ObjectManager
 
         if (type == typeof(Player))
         {
-            GameObject obj = Main.ResourceManager.Instantiate("Player.prefab");
-            obj.transform.position = position;
+            GameObject obj = PhotonNetwork.Instantiate("Prefabs/Player", position, Quaternion.identity);
+            Debug.Log(PhotonNetwork.CurrentRoom.Players.Count);
 
             Player player = obj.GetOrAddComponent<Player>();
+            PhotonView pv = player.GetComponent<PhotonView>();
+           
             player.SetInfo(key);
+
+            if (pv.IsMine)
+            {
+                player.SetSprite($"{Main.GameManager.CharacterType}.sprite");
+            }
+            
+            Player = player;
 
             return Player as T;
         }
 
         else if (type == typeof(Enemy))
         {
-            EnemyData data = Main.DataManager.Enemies[key];
             GameObject obj = Main.ResourceManager.Instantiate($"Enemy.prefab", pooling: true);
             obj.transform.position = position;
 
@@ -36,7 +45,19 @@ public class ObjectManager
 
             return enemy as T;
         }
-        
+
+        else if (type == typeof(Boss))
+        {
+            GameObject obj = Main.ResourceManager.Instantiate($"Boss.prefab", pooling: true);
+            obj.transform.position = position;
+
+            Enemy enemy = obj.GetOrAddComponent<Boss>();
+            enemy.SetInfo(key);
+            Enemies.Add(enemy);
+
+            return enemy as T;
+        }
+
         return null;
     }
 

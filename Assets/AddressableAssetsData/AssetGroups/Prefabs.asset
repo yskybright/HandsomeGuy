@@ -21,13 +21,13 @@ MonoBehaviour:
     m_Address: UIPopup_Nickname.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - PreLoad
+    - StartScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f284860da7789da408fe7b8fdffbe862
     m_Address: UIScene_Title.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - PreLoad
+    - StartScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4bd81c44f6f8d054fb869e4a509cc802
     m_Address: EventSystem.prefab
@@ -41,41 +41,35 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 95ceba5efaf70d14b9120fcce43cf6d0
-    m_Address: Player.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 01b160782e59fb44baae067b9b220870
     m_Address: User.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - PreLoad
+    - LobbyScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a3bb60124a2943c41a2fa49b37ff3fb3
     m_Address: ChatItem.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - PreLoad
+    - LobbyScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 68b0caaae1cef43409f0290a58fe6fd3
     m_Address: UIPopup_SelectCharacter.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - PreLoad
+    - StartScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7480beb0606d8444b9a6acf3e442b486
     m_Address: UIPopup_SelectSkill.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - PreLoad
+    - StartScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f3c7937c5d4b555438d04a56a07c1ede
     m_Address: UIScene_Lobby.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - PreLoad
+    - LobbyScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c925e7eec90e4854bb12f8829fc8cc24
     m_Address: Enemy.prefab
@@ -85,6 +79,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 350ad818349ebee4c93e2763cf9d828f
     m_Address: Machine.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 681441fcf30e56f41bb817754bdf87aa
+    m_Address: Boss.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

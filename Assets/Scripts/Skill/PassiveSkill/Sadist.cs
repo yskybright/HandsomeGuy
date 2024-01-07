@@ -10,14 +10,18 @@ public class Sadist : BasePassive
     protected override void Init()
     {
         base.Init();
-        Main.DataManager.SkillDict.TryGetValue("사디스트", out skill);
+        if (!Main.DataManager.SkillDict.TryGetValue("사디스트", out skill))
+        {
+            Debug.Log("해당 스킬을 가져오는데 실패하였습니다.");
+            return;
+        }
         stack = 1;
         nextGoalKill = skill.increamentUnit * stack;
     }
 
     private void Update()
     {
-        if (player.killCount >= nextGoalKill)
+        if (player._killCount >= nextGoalKill)
         {
             UpdatePlayerAttackDamage();
         }
@@ -25,7 +29,7 @@ public class Sadist : BasePassive
 
     public void UpdatePlayerAttackDamage()
     {
-        player.damage += skill.increamentDamage;
+        player.ChangeDamage(player._damage + skill.increamentDamage);
         stack++;
         nextGoalKill = skill.increamentUnit * stack;
     }

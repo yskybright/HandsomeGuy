@@ -1,12 +1,18 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.Services.Vivox;
 using Unity.VisualScripting;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class UIScene_Lobby : UIScene, IChatable
 {
@@ -58,6 +64,8 @@ public class UIScene_Lobby : UIScene, IChatable
     private Transform _textPos; 
     private ScrollRect _chatRect;
 
+    private List<VivoxParticipant> Users = new();
+    private User _me;
     #endregion
 
     async void Start()
@@ -87,7 +95,7 @@ public class UIScene_Lobby : UIScene, IChatable
 
         AddUIEvent(GetButton((int)Buttons.StartButton).gameObject, OnButtonStart);
         AddUIEvent(GetButton((int)Buttons.ReadyButton).gameObject, OnButtonReady);
-        AddUIEvent(GetButton((int)Buttons.ExitButton).gameObject, OnButtonExit);
+        AddUIEvent(GetButton((int)Buttons.ExitButton).gameObject, OnButtonExitAsync);
 
         return true;
     }
@@ -95,15 +103,38 @@ public class UIScene_Lobby : UIScene, IChatable
     private void OnButtonStart(PointerEventData data)
     {
         print("시작 버튼");
+        if (IsAllReady())
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.LoadLevel("testScene");
+            }
+            else
+            {
+                print("방장이 아닙니다.");
+            }
+        }
+        else
+        {
+            print("아직 모든 유저가 준비하지 않았습니다.");
+        }
     }
 
     private void OnButtonReady(PointerEventData data)
     {
         print("준비 버튼");
+        _me.ToggleReady();
     }
-    private void OnButtonExit(PointerEventData data)
+    private void OnButtonExitAsync(PointerEventData data)
     {
         print("나가기 버튼");
+        PhotonNetwork.Disconnect();
+        StartCoroutine(CoExit());
+    }
+    private async Task OnExitAsync()
+    {
+        await Main.VivoxManager.LeaveEchoChannelAsync();
+        await Main.VivoxManager.LogoutOfVivoxAsync();
     }
     void EnterKeyOnTextField()
     {
@@ -144,27 +175,51 @@ public class UIScene_Lobby : UIScene, IChatable
 
     public void InputUser(VivoxParticipant participant)
     {
-        var tmp = Main.ResourceManager.Instantiate("User.prefab", _userPos);        
-        User newItem = tmp.GetOrAddComponent<User>();
-        participant.SetLocalVolume(0);
+        Users.Add(participant);
+        //var tmp = Main.ResourceManager.Instantiate("User.prefab", _userPos);
+        //User newItem = tmp.GetOrAddComponent<User>();
+        //Users.Add(newItem);
+        if (participant.IsSelf)
+        {
+            var tmp = PhotonNetwork.Instantiate("Prefabs/User", Vector3.zero, Quaternion.identity);
+            tmp.gameObject.transform.SetParent(_userPos);
+            _me = tmp.GetOrAddComponent<User>();
+            _me.SetupItem(participant);
+            _me.SetImage();
+        }
 
-        newItem.SetupItem(participant);
+
+        //participant.SetLocalVolume(0);
+        
     }
-    //public void DeleteUser(VivoxParticipant participant)
-    //{
-    //    Item removedItem = RosterItems.FirstOrDefault(p => p.Participant.PlayerId == participant.PlayerId);
-    //    WordItem removedWordItem = RosterWordItems.FirstOrDefault(p => p.Participant.PlayerId == participant.PlayerId);
-    //    if (removedItem != null)
-    //    {
-    //        RosterItems.Remove(removedItem);
-    //        RosterWordItems.Remove(removedWordItem);
-    //        Destroy(removedItem.gameObject);
-    //        Destroy(removedWordItem.gameObject);
-    //    }
-    //}
+    public void DeleteUser(VivoxParticipant participant)
+    {
+        VivoxParticipant removedItem = Users.FirstOrDefault(p => p.PlayerId == participant.PlayerId);
+        if (removedItem != null)
+        {
+            Users.Remove(removedItem);
+        }
+    }
     public void InputChat(string str)
     {
         var tmp = Main.ResourceManager.Instantiate("ChatItem.prefab", _textPos);
         tmp.GetComponentInChildren<TMP_Text>().text = str;
+    }
+    public bool IsAllReady()
+    {
+        for(int i = 0; i < _userPos.childCount; i++)
+        {
+            if (!_userPos.GetChild(i).GetComponent<User>().ready.activeSelf)
+                return false;
+        }
+        return true;
+    }
+    IEnumerator CoExit()
+    {
+        Main.UIManager.Hide(GetObject((int)Objects.SceneLobbyScale).gameObject);
+        OnExitAsync();
+        yield return new WaitForSeconds(1.0f);
+        Main.SceneManagerEx.LoadScene(Define.Scene.StartScene);
+
     }
 }
