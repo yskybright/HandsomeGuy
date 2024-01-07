@@ -29,7 +29,7 @@ public class Sadist : BasePassive
 
     public void UpdatePlayerAttackDamage()
     {
-        player._damage += skill.increamentDamage;
+        //player._damage += skill.increamentDamage;
         stack++;
         nextGoalKill = skill.increamentUnit * stack;
     }

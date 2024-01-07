@@ -5,12 +5,14 @@ using UnityEngine;
 public class TopDownMovement : MonoBehaviour
 {
     private TopDownCharacterController _controller;
+    private Player player;
 
     private Vector2 _movementDirection = Vector2.zero;
     private Rigidbody2D _rigidbody;
 
     private void Awake()
     {
+        player = GetComponent<Player>();
         _controller = GetComponent<TopDownCharacterController>();
         _rigidbody = GetComponent<Rigidbody2D>();
     }
@@ -32,7 +34,7 @@ public class TopDownMovement : MonoBehaviour
 
     private void ApplyMovent(Vector2 direction)
     {
-        direction *= 5;
+        direction *= player._moveSpeed; //Main.ObjectManager.Player._moveSpeed;
         _rigidbody.velocity = direction;
     }
 }

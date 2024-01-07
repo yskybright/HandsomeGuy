@@ -8,16 +8,16 @@ public class Player : MonoBehaviour
 {
     #region Properties
 
-    public PlayerData playerData;
-    public string _id;
-    public float _currentHp;
-    public float _maxHp;
-    public float _moveSpeed;
-    public float _damage;
-    public float _attackSpeed;
-    public float _damageReduceRatio;
-    public float _sightRange;
-    public int _killCount;
+    public PlayerData playerData { get; private set; }
+    public string _id { get; private set; }
+    public float _currentHp { get; private set; }
+    public float _maxHp { get; private set; }
+    public float _moveSpeed { get; private set; }
+    public float _damage { get; private set; }
+    public float _attackSpeed { get; private set; }
+    public float _damageReduceRatio { get; private set; }
+    public float _sightRange { get; private set; }
+    public int _killCount { get; private set; }
 
     #endregion
 
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
 
     private void Initialize()
     {
-       // _weaponSprite = transform.Find("WeaponSprite").GetComponent<SpriteRenderer>();
+        // _weaponSprite = transform.Find("WeaponSprite").GetComponent<SpriteRenderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
         //_animator = GetComponent<Animator>();
@@ -69,18 +69,67 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
-    {
-        
-    }
-
-    private void ChangeWeapon(string weaponName)
     {
 
     }
 
     #endregion
+
+    #region ChangeMethod
+
+    public void ChangeWeapon(string weaponName)
+    {
+
+    }
+
+    public void ChangeId(string newId)
+    {
+        _id = newId;
+    }
+
+    public void ChangeCurrentHp(float newCurrentHp)
+    {
+        _currentHp = newCurrentHp;
+    }
+
+    public void ChangeMaxHp(float newMaxHp)
+    {
+        _maxHp = newMaxHp;
+    }
+
+    public void ChangeMoveSpeed(float newMoveSpeed)
+    {
+        _moveSpeed = newMoveSpeed;
+    }
+
+    public void ChangeDamage(float newDamage)
+    {
+        _damage = newDamage;
+    }
+
+    public void ChangeAttackSpeed(float newAttackSpeed)
+    {
+        _attackSpeed = newAttackSpeed;
+    }
+
+    public void ChangeDamageReduceRatio(float newDamageReduceRatio)
+    {
+        _damageReduceRatio = newDamageReduceRatio;
+    }
+
+    public void ChangeSightRange(float newSightRange)
+    {
+        _sightRange = newSightRange;
+    }
+
+    public void ChangeKillCount(int newKillCount)
+    {
+        _killCount = newKillCount;
+    }
+    #endregion
+
 }
