@@ -17,6 +17,9 @@ public class CHHScene : BaseScene
 
         if (enemySpawn == null) enemySpawn = this.gameObject.GetOrAddComponent<EnemySpawn>();
 
+
+        //Main.ResourceManager.Instantiate("Map");
+        //Main.ResourceManager.Instantiate("NavMesh");
         StartWave();
 
         return true;
