@@ -3,10 +3,11 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region Properties
 
@@ -34,7 +35,9 @@ public class Player : MonoBehaviour
     private float width;
     public Vector2 center;
     public Vector2 size;
-    
+    public SpriteRenderer _SR;
+    public TMP_Text SpriteName;
+
 
     #endregion
 
@@ -155,6 +158,19 @@ public class Player : MonoBehaviour
     public void ChangeKillCount(int newKillCount)
     {
         _killCount = newKillCount;
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(SpriteName.text);
+        }
+        else
+        {
+            SpriteName.text = (string)stream.ReceiveNext();
+            _SR.sprite = Main.ResourceManager.GetResource<Sprite>($"{SpriteName.text}.sprite");
+        }
     }
     #endregion
 
