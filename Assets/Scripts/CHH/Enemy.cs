@@ -1,24 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
+
+public enum EnemyState
+{
+    Idle,
+    Dead,
+}
 
 public class Enemy : MonoBehaviour
 {
     #region Properties
 
+    // Data.
     public EnemyData Data;
+
+    // Status.
     public string _key;
     public int hp;
-    public int currentHp;
     public float speed;
     public int damage;
 
+    // State.
+    public EnemyState State
+    {
+        get => _state;
+        set
+        {
+            _state = value;
+            switch (value)
+            {
+                case EnemyState.Idle: OnStateEntered_Idle(); break;
+                case EnemyState.Dead: OnStateEntered_Dead(); break;
+            }
+        }
+    }
+    public int currentHp
+    {
+        get => _currentHp;
+        set
+        {
+            if (value > hp) _currentHp = hp;
+            else if (value <= 0)
+            {
+                _currentHp = 0;
+                if (State != EnemyState.Dead)
+                    State = EnemyState.Dead;
+            }
+            else _currentHp = value;
+        }
+    }
     #endregion
 
     #region Fileds
+    // State
+    private EnemyState _state;
+    private int _currentHp;
 
+    // Components
     private Transform target;
     private NavMeshAgent _agent;
     private SpriteRenderer _enemySpriteRenderer;
@@ -59,6 +101,18 @@ public class Enemy : MonoBehaviour
 
     #region MonoBehaviour
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("PlayerProjectile"))
+        {
+            Projectile projectile = collision.gameObject.GetComponent<Projectile>();
+            if (projectile != null)
+                OnHit(projectile.Damage);
+
+            if (projectile.IsValid()) Main.ObjectManager.Despawn(projectile);
+        }
+    }
+
     private void Start()
     {
         FindTarget();
@@ -76,6 +130,24 @@ public class Enemy : MonoBehaviour
             bool isTargetOnLeft = target.position.x < transform.position.x;
             _enemySpriteRenderer.flipX = isTargetOnLeft;
         }
+    }
+
+    #endregion
+
+    #region State
+    protected virtual void OnStateEntered_Idle() 
+    { 
+
+    }
+
+    protected virtual void OnStateEntered_Dead()
+    {
+        Main.ObjectManager.Despawn(this);
+    }
+
+    public void OnHit(int damage)
+    {
+        currentHp -= damage;
     }
 
     #endregion

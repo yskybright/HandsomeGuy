@@ -88,6 +88,12 @@ public class ObjectManager
             Main.ResourceManager.Destroy(obj.gameObject);
         }
 
+        if (type == typeof(Boss))
+        {
+            Enemies.Remove(obj as Boss);
+            Main.ResourceManager.Destroy(obj.gameObject);
+        }
+
         if (type == typeof(Projectile))
         {
             Projectiles.Remove(obj as Projectile);
