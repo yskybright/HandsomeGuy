@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class ObjectManager
 {
@@ -18,20 +17,19 @@ public class ObjectManager
 
         if (type == typeof(Player))
         {
-            //GameObject obj = PhotonNetwork.Instantiate("Prefabs/Player", position, Quaternion.identity);
-            //Debug.Log(PhotonNetwork.CurrentRoom.Players.Count);
+            GameObject obj = PhotonNetwork.Instantiate("Prefabs/Player", position, Quaternion.identity);
+            Debug.Log(PhotonNetwork.CurrentRoom.Players.Count);
 
-            GameObject obj = Main.ResourceManager.Instantiate("SeongGyuPlayer");
-            obj.transform.position = position;
+            //GameObject obj = Main.ResourceManager.Instantiate("SeongGyuPlayer");
+            //obj.transform.position = position;
             
             Player player = obj.GetOrAddComponent<Player>();
-            //PhotonView pv = player.GetComponent<PhotonView>();
+            PhotonView pv = player.GetComponent<PhotonView>();
 
             player.SetInfo();
 
             if (pv.IsMine)
             {
-                player.SpriteName.text = Main.GameManager.CharacterType;
                 player.SetSprite($"{Main.GameManager.CharacterType}.sprite");
             }
             
