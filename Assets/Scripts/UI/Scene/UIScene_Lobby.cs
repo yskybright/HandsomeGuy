@@ -64,7 +64,7 @@ public class UIScene_Lobby : UIScene, IChatable
     private Transform _textPos; 
     private ScrollRect _chatRect;
 
-    private List<User> Users = new();
+    private List<VivoxParticipant> Users = new();
     private User _me;
     #endregion
 
@@ -124,13 +124,7 @@ public class UIScene_Lobby : UIScene, IChatable
     private void OnButtonReady(PointerEventData data)
     {
         print("준비 버튼");
-        //Main.VivoxManager.OnReady();
         _me.ToggleReady();
-    }
-    public void ReadyCheck(VivoxMessage message)
-    {
-        User sender = Users.FirstOrDefault(p => p.Participant.PlayerId == message.SenderPlayerId);
-        sender.ToggleReady();        
     }
     private void OnButtonExitAsync(PointerEventData data)
     {
@@ -181,11 +175,10 @@ public class UIScene_Lobby : UIScene, IChatable
 
     public void InputUser(VivoxParticipant participant)
     {
-
+        Users.Add(participant);
         //var tmp = Main.ResourceManager.Instantiate("User.prefab", _userPos);
         //User newItem = tmp.GetOrAddComponent<User>();
         //Users.Add(newItem);
-
         if (participant.IsSelf)
         {
             var tmp = PhotonNetwork.Instantiate("Prefabs/User", Vector3.zero, Quaternion.identity);
@@ -196,21 +189,15 @@ public class UIScene_Lobby : UIScene, IChatable
         }
 
 
-        foreach (var user in Users)
-        {
-            user.ready.SetActive(false);
-        }
-
         //participant.SetLocalVolume(0);
         
     }
     public void DeleteUser(VivoxParticipant participant)
     {
-        User removedItem = Users.FirstOrDefault(p => p.Participant.PlayerId == participant.PlayerId);
+        VivoxParticipant removedItem = Users.FirstOrDefault(p => p.PlayerId == participant.PlayerId);
         if (removedItem != null)
         {
             Users.Remove(removedItem);
-            Destroy(removedItem.gameObject);
         }
     }
     public void InputChat(string str)
@@ -220,10 +207,12 @@ public class UIScene_Lobby : UIScene, IChatable
     }
     public bool IsAllReady()
     {
-        if (Users.All(p => p.ready.activeSelf))
-            return true;
-        else
-            return false;
+        for(int i = 0; i < _userPos.childCount; i++)
+        {
+            if (!_userPos.GetChild(i).GetComponent<User>().ready.activeSelf)
+                return false;
+        }
+        return true;
     }
     IEnumerator CoExit()
     {
