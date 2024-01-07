@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class ObjectManager
 {
@@ -31,7 +30,6 @@ public class ObjectManager
 
             if (pv.IsMine)
             {
-                player.SpriteName.text = Main.GameManager.CharacterType;
                 player.SetSprite($"{Main.GameManager.CharacterType}.sprite");
             }
             
