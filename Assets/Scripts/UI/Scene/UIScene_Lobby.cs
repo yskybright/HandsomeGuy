@@ -108,7 +108,6 @@ public class UIScene_Lobby : UIScene, IChatable
             if (PhotonNetwork.IsMasterClient)
             {
                 PhotonNetwork.LoadLevel("testScene");
-                print("아직 모든 유저가 준비하지 않았습니다.");
             }
             else
             {
@@ -129,6 +128,7 @@ public class UIScene_Lobby : UIScene, IChatable
     private void OnButtonExitAsync(PointerEventData data)
     {
         print("나가기 버튼");
+        PhotonNetwork.Disconnect();
         StartCoroutine(CoExit());
     }
     private async Task OnExitAsync()
