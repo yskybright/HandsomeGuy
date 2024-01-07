@@ -28,13 +28,8 @@ public class Player : MonoBehaviour
     //private SpriteRenderer _weaponSprite;
     private Rigidbody2D _rigidbody;
     private Collider2D _collider;
-    private PhotonView _pv;
     //protected Animator _animator;
-    private float height;
-    private float width;
-    public Vector2 center;
-    public Vector2 size;
-    
+ 
 
     #endregion
 
@@ -72,37 +67,6 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    #region MonoBehaviour
-
-    private void Start()
-    {
-        _pv = GetComponent<PhotonView>();
-        height = Camera.main.orthographicSize;
-        width = height * Screen.width / Screen.height;
-    }
-
-    private void Update()
-    {
-
-    }
-
-    private void FixedUpdate()
-    {
-        if (_pv.IsMine)
-        {
-            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, transform.position, Time.deltaTime * 5);
-
-            float x = size.x * 0.5f - width;
-            float y = size.y * 0.5f - width;
-
-            float limitX = Mathf.Clamp(Camera.main.transform.position.x, -x + center.x, x + center.x);
-            float limitY = Mathf.Clamp(Camera.main.transform.position.y, -y + center.y, y + center.y);
-
-            Camera.main.transform.position = new Vector3(limitX, limitY, _sightRange * -1);
-        }
-    }
-
-    #endregion
 
     #region ChangeMethod
 

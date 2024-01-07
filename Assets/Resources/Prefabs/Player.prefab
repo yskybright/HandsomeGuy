@@ -142,14 +142,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5965653470911246260}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6826892109155861417}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &6496886675444521655
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -352,8 +352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abd422aa5594b8498436d52fd603fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {x: 0, y: 0}
-  size: {x: 50, y: 50}
 --- !u!114 &6050062237423643809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,9 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabe5f025ca6a84382dc260beee9705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armRenderer: {fileID: 6496886675444521655}
   armPivot: {fileID: 6826892109155861417}
-  characterRenderer: {fileID: 7534667613028140406}
 --- !u!114 &411187547597955948
 MonoBehaviour:
   m_ObjectHideFlags: 0
