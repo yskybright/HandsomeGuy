@@ -6,41 +6,35 @@ using UnityEngine;
 
 public class TestScene : BaseScene
 {
-    public GameObject _playerPrefab;
     public Transform[] points;
 
     protected override bool Initialize()
     {
         if (!base.Initialize()) return false;
         SceneType = Define.Scene.Game;
-        test();
 
-        points = GameObject.Find("PlayerSpawnGroup").GetComponentsInChildren<Transform>();
-        int idx = Random.Range(1, points.Length);
-
-        
-
-        Main.ObjectManager.Spawn<Player>("Player", points[idx].position);
-        Main.DataManager.SkillDict.TryGetValue(Main.GameManager.SkillType, out Data.Skill skill);
-        GameObject.Find("Player(Clone)").AddComponent(skill.type);
-
+        Main.ResourceManager.LoadAllAsync<UnityEngine.Object>("GameScene", (key, count, totalCount) =>
+        {
+            if (count >= totalCount)
+            {
+                InitialAfterLoad();
+            }
+        });
 
         return true;
     }
 
-    public void test()
+    public void InitialAfterLoad()
     {
-        Main.ResourceManager.LoadAllAsync<UnityEngine.Object>("testGroup", (key, count, totalCount) =>
-        {
-            if (count >= totalCount)
-            {
-                Main.DataManager.Initialize();
-            }
-        });
+        points = GameObject.Find("PlayerSpawnGroup").GetComponentsInChildren<Transform>();
+        int idx = Random.Range(1, points.Length);
+        Main.ObjectManager.Spawn<Player>("Player", points[idx].position);
+        Main.DataManager.SkillDict.TryGetValue(Main.GameManager.SkillType, out Data.Skill skill);
+        GameObject.Find("Player(Clone)").AddComponent(skill.type);
     }
 
     public override void Clear()
     {
-        Debug.Log("Clear TestScene");
+        Main.ResourceManager.ReleaseAllAsset("GameScene");
     }
 }

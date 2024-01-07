@@ -21,7 +21,6 @@ MonoBehaviour:
     m_Address: skillData
     m_ReadOnly: 0
     m_SerializedLabels:
-    - testGroup
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d87fae6e500f8f448a71ac4470ef6519
