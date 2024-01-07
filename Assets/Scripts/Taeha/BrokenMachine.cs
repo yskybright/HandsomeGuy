@@ -93,6 +93,7 @@ public class BrokenMachine : MonoBehaviour
             Main.GameManager.RepairUI(true, repairBar.fillAmount);
         }
     }
+
     private void RepairToggle()
     {
         repair = !repair;

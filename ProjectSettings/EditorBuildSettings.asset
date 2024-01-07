@@ -11,8 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JW/LobbyScene.unity
     guid: 3a7560299d3c6ab40822e792f65bf0d1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/jchwoon/testScene.unity
     guid: 9ad58d1e2546c3444a735eab1fa82a7c
+  - enabled: 1
+    path: Assets/Scenes/Taeha/TaehaMap.unity
+    guid: 4e52dd6ff9b5c834eac2c7a8ff5e3c51
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 45c26c683e08d6b47a93907a1799822a, type: 2}

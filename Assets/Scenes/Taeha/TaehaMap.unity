@@ -223,6 +223,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 908003365726666318, guid: b04c9ed33656ebd41a495132606dc655, type: 3}
+      propertyPath: m_Name
+      value: PlayerSpawnGroup
+      objectReference: {fileID: 0}
     - target: {fileID: 1250106177561022055, guid: b04c9ed33656ebd41a495132606dc655, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -266,6 +270,10 @@ PrefabInstance:
     - target: {fileID: 1250106177561022055, guid: b04c9ed33656ebd41a495132606dc655, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776429220731014341, guid: b04c9ed33656ebd41a495132606dc655, type: 3}
+      propertyPath: sceneViewId
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9178029016667793352, guid: b04c9ed33656ebd41a495132606dc655, type: 3}
       propertyPath: m_Name

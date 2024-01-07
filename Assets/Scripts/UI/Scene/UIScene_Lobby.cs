@@ -1,5 +1,5 @@
 using Photon.Pun;
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 using TMPro;
 using Unity.Services.Vivox;
 using Unity.VisualScripting;
-using UnityEditorInternal.Profiling.Memory.Experimental;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
+
 
 public class UIScene_Lobby : UIScene, IChatable
 {
@@ -107,7 +106,7 @@ public class UIScene_Lobby : UIScene, IChatable
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.LoadLevel("testScene");
+                PhotonNetwork.LoadLevel("TaehaMap");
             }
             else
             {

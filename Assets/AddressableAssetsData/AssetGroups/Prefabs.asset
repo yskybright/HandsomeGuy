@@ -39,7 +39,7 @@ MonoBehaviour:
     m_Address: Gunbullet.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - PreLoad
+    - GameScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 01b160782e59fb44baae067b9b220870
     m_Address: User.prefab
