@@ -41,6 +41,8 @@ public class EnemySpawn : MonoBehaviour
         }
     }
 
+    // 리팩토링이 필요해 보임
+
     private IEnumerator SpawnBlueCoroutine()
     {
         while (true)
@@ -93,6 +95,8 @@ public class EnemySpawn : MonoBehaviour
             blueSpawnCount += blueInitialSpawnCount;
             blackSpawnCount += blackInitialSpawnCount;
             bossSpawnCount += bossInitialSpawnCount;
+
+            // TODO 플레이어 수만큼 증가 추가 해야됨
         }
     }
 

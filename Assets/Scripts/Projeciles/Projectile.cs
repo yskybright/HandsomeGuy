@@ -25,16 +25,13 @@ public class Projectile : MonoBehaviour
 
     #region MonoBehaviours
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (col.TryGetComponent<Enemy>(out var creature))
+        // TODO 벽에 Wall 태그 추가해야됨
+        if (collision.gameObject.CompareTag("Wall"))
         {
-            Debug.Log(creature.name + " " + creature.hp);
-            creature.hp -= Damage;
+            if (this.IsValid()) Main.ObjectManager.Despawn(this);
         }
-
-        if (!(this.gameObject.activeSelf && this.gameObject != null)) return;
-        Main.ObjectManager.Despawn(this);
     }
 
     #endregion
