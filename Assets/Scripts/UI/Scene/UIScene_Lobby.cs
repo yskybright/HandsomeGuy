@@ -180,7 +180,9 @@ public class UIScene_Lobby : UIScene, IChatable
     public void InputUser(VivoxParticipant participant)
     {
 
-        var tmp = Main.ResourceManager.Instantiate("User.prefab", _userPos);        
+        //var tmp = Main.ResourceManager.Instantiate("User.prefab", _userPos);
+        var tmp = PhotonNetwork.Instantiate("Prefabs/User", Vector3.zero,Quaternion.identity);
+        tmp.gameObject.transform.SetParent(_userPos);
         User newItem = tmp.GetOrAddComponent<User>();
         
         if (participant.IsSelf)
