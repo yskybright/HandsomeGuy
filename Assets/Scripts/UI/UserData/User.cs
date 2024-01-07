@@ -6,7 +6,7 @@ using Unity.Services.Vivox;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class User : MonoBehaviourPunCallbacks, IPunObservable
+public class User : MonoBehaviourPunCallbacks , IPunObservable
 {
     public VivoxParticipant Participant;
     private GameData _gameData = new();
@@ -15,16 +15,25 @@ public class User : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] Image User_Img;
     [SerializeField] TMP_Text user_name;
     [SerializeField] TMP_Text skill_name;
+    private PhotonView pv;
     public GameObject ready;
     private void Awake()
     {
         gameObject.transform.SetParent(GameObject.FindWithTag("Users").transform);
     }
+    private void Start()
+    {
+        pv = GetComponent<PhotonView>();
+        if (pv.IsMine)
+        {
+            SetImage();
+        }
+    }
     public void SetupItem(VivoxParticipant participant /*,string skill*/)
     {
         Participant = participant;
         user_name.text = "닉네임 : " + participant.DisplayName;
-        //skill_name.text = skill;
+        skill_name.text = "스킬 : " + Main.GameManager.SkillType;
     }
     public void ToggleReady()
     {
@@ -43,11 +52,13 @@ public class User : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(user_name.text);
-            
+            stream.SendNext(skill_name.text);
+
         }
         else
         {
             user_name.text = (string)stream.ReceiveNext();
+            skill_name.text = (string)stream.ReceiveNext();
 
         }
     }
