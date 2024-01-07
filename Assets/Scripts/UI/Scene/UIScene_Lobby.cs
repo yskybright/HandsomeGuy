@@ -183,7 +183,8 @@ public class UIScene_Lobby : UIScene, IChatable
 
         //var tmp = Main.ResourceManager.Instantiate("User.prefab", _userPos);
         //User newItem = tmp.GetOrAddComponent<User>();
-        
+        //Users.Add(newItem);
+
         if (participant.IsSelf)
         {
             var tmp = PhotonNetwork.Instantiate("Prefabs/User", Vector3.zero, Quaternion.identity);
@@ -193,7 +194,6 @@ public class UIScene_Lobby : UIScene, IChatable
             _me.SetupItem(participant);
         }
 
-        //Users.Add(newItem);
 
         foreach (var user in Users)
         {

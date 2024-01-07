@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Services.Vivox;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class User : MonoBehaviourPunCallbacks , IPunObservable
     [SerializeField] Image User_Img;
     [SerializeField] TMP_Text user_name;
     [SerializeField] TMP_Text skill_name;
+    public TMP_Text SpriteName;
     private PhotonView pv;
     public GameObject ready;
     private void Awake()
@@ -24,16 +26,13 @@ public class User : MonoBehaviourPunCallbacks , IPunObservable
     private void Start()
     {
         pv = GetComponent<PhotonView>();
-        if (pv.IsMine)
-        {
-            SetImage();
-        }
     }
     public void SetupItem(VivoxParticipant participant /*,string skill*/)
     {
         Participant = participant;
         user_name.text = "닉네임 : " + participant.DisplayName;
         skill_name.text = "스킬 : " + Main.GameManager.SkillType;
+        SpriteName.text = Main.GameManager.CharacterType;
     }
     public void ToggleReady()
     {
@@ -45,7 +44,7 @@ public class User : MonoBehaviourPunCallbacks , IPunObservable
 
     public void SetImage()
     {
-        User_Img.sprite = Main.ResourceManager.GetResource<Sprite>($"{Main.GameManager.CharacterType}.sprite");
+        User_Img.sprite = Main.ResourceManager.GetResource<Sprite>($"{SpriteName}.sprite");
     }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -53,13 +52,14 @@ public class User : MonoBehaviourPunCallbacks , IPunObservable
         {
             stream.SendNext(user_name.text);
             stream.SendNext(skill_name.text);
-
+            stream.SendNext(SpriteName.text);
         }
         else
         {
             user_name.text = (string)stream.ReceiveNext();
             skill_name.text = (string)stream.ReceiveNext();
-
+            SpriteName.text = (string)stream.ReceiveNext();
+            SetImage();
         }
     }
     [ContextMenu("ㅁㅁ")]
