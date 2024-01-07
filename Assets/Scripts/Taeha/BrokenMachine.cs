@@ -68,6 +68,7 @@ public class BrokenMachine : MonoBehaviour
     {
         if (!repairComplete)
         {
+
             Main.GameManager.RepairComplete();
             repairComplete = true;
         }
