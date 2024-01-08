@@ -69,7 +69,13 @@ MonoBehaviour:
     m_Address: Gunbullet.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - PreLoad
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ce9946cd657b494eb1ef6a50810aa3c
+    m_Address: Alarm.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5ec4412c311102249a875b54546fb7fe
     m_Address: NavMesh.prefab
