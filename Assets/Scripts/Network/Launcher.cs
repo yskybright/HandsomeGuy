@@ -7,7 +7,7 @@ using UnityEngine;
 public class Launcher : MonoBehaviourPunCallbacks
 {
     string gameVersion = "1";
-    private byte maxPlayersPerRoom = 6;
+    private byte maxPlayersPerRoom = 20;
     private bool isConnect;
     private void Awake()
     {
