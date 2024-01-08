@@ -19,7 +19,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     public void Connect()
     {
-        PhotonNetwork.Disconnect();
+        //PhotonNetwork.Disconnect();
         if (PhotonNetwork.IsConnected)
         {
             PhotonNetwork.JoinLobby();
@@ -47,7 +47,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
 
         // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-        PhotonNetwork.CreateRoom("test112", new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+        PhotonNetwork.CreateRoom("test1", new RoomOptions { MaxPlayers = maxPlayersPerRoom });
     }
 
     public override void OnJoinedRoom()
@@ -57,8 +57,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        PhotonNetwork.CreateRoom("test112", new RoomOptions { MaxPlayers = maxPlayersPerRoom });
-        //PhotonNetwork.JoinRandomRoom();
+        //PhotonNetwork.CreateRoom("test112", new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+        PhotonNetwork.JoinRandomRoom();
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)

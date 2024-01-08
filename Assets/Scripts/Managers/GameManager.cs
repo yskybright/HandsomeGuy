@@ -53,6 +53,7 @@ public class GameManager
     }
     public void RepairComplete()
     {
+        Debug.Log("수리 완료");
         RepairCompleteEvent?.Invoke();
     }
     public void Repair(float repair)
@@ -64,4 +65,6 @@ public class GameManager
     {
         UISetEvent?.Invoke();
     }
+
+
 }

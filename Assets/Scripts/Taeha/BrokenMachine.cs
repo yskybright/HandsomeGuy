@@ -59,7 +59,7 @@ public class BrokenMachine : MonoBehaviour
     }
     private void Repair()
     {
-        repairBar.fillAmount += Time.deltaTime/10;
+        repairBar.fillAmount += Time.deltaTime*10;
         Main.GameManager.Repair(repairBar.fillAmount);
         if (repairBar.fillAmount >= 1) RepairComplete();
     }

@@ -33,10 +33,9 @@ public class ExtendSight : BasePassive
         player.ChangeSightRange(player._sightRange + skill.increamentSightRange);
     }
 
-    public void StartCoroutineAfterCheck(bool isSuccessMission)
+    public void StartCoroutineAfterCheck()
     {
-        if (!isSuccessMission) return;
-
+        
         StartCoroutine(IncreamentPlayerSightCoroutine());
     }
 }

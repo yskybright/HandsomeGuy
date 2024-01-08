@@ -1,21 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+
+
+
+
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class GameSceneUI : UIBase
 {
 
 
     #region Fields
-
+    [SerializeField] GameObject clear;
+    [SerializeField] GameObject over;
     private int brokenMachines;
     private int repairMachines=0;
     private bool repairCheck;
-    private float repairBar;
+
+
+
     public int _repairmachines { get { return repairMachines; } set { repairMachines = value; } }
     #endregion
 
@@ -33,18 +34,24 @@ public class GameSceneUI : UIBase
     {
         Machine
     }
+    private enum Buttons
+    {
+        ExitBtn1,
+        ExitBtn2
+    }
     #endregion
 
-    private TMP_Text progress;
     public override bool Init()
     {
         if (!base.Init()) return false;
 
         BindText(typeof(Texts), true);
-
+        BindButton(typeof(Buttons), true);
         Main.GameManager.UISetEvent += UIset;
         Main.GameManager.RepairView += Repair;
         Main.GameManager.RepairCompleteEvent += RepairComplete;
+        clear.SetActive(false);
+        over.SetActive(false); 
         return true;
     }
 
@@ -58,12 +65,15 @@ public class GameSceneUI : UIBase
     {
         brokenMachines = FindObjectsOfType<BrokenMachine>().Length;
         GetText((int)Texts.MissionNum).text = $"{brokenMachines} / {repairMachines}";
+        if(brokenMachines == repairMachines)
+        {
+            GameOver(true);
+        }
     }
 
     
     public void Repair(bool view, float repairBar)
     {
-        this.repairBar = repairBar; 
         repairCheck = view;
         
         if(!repairCheck)GetText((int)Texts.Progress).text = "";
@@ -73,6 +83,24 @@ public class GameSceneUI : UIBase
     {
         if (repairCheck && Main.GameManager.RePairBar < 1) GetText((int)Texts.Progress).text = $"Progress : {(Main.GameManager.RePairBar * 100).ToString("N2")}%\r\nRefair - Press Hold E";
         else if (repairCheck && Main.GameManager.RePairBar >= 1) GetText((int)Texts.Progress).text = $"Progress :Complete";
+    }
+    private void GameOver(bool set)
+    {
+        if (set)
+        {
+            clear.SetActive(true);
+            GetButton((int)Buttons.ExitBtn1).onClick.AddListener(BackLobby);
+        }
+        else
+        {
+            over.SetActive(true);
+            GetButton((int)Buttons.ExitBtn2).onClick.AddListener(BackLobby);
+        }
+
+    }
+    private void BackLobby()
+    {
+        Main.SceneManagerEx.LoadScene(Define.Scene.StartScene);
     }
 }
 

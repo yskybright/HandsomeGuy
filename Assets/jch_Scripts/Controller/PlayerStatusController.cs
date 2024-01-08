@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class PlayerStatusController : MonoBehaviour
 {
-    public event Action<bool> missionEvent;
+    public event Action missionEvent;
     public event Action dieEvent;
 
-    public void CallMissionEvent(bool isSuccessMission)
+    public void CallMissionEvent()
     {
-        missionEvent?.Invoke(isSuccessMission);
+        Debug.Log("사람 열림");
+        missionEvent?.Invoke();
     }
 
     public void CallDieEvent()
@@ -23,5 +24,9 @@ public class PlayerStatusController : MonoBehaviour
         }
 
         dieEvent?.Invoke();
+    }
+    private void OnEnable()
+    {
+        Main.GameManager.RepairCompleteEvent += CallMissionEvent;
     }
 }
