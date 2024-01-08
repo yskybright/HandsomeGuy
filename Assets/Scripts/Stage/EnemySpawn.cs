@@ -15,9 +15,9 @@ public class EnemySpawn : MonoBehaviour
     private int blackInitialSpawnCount = 1 * PhotonNetwork.CurrentRoom.Players.Count;
     private int bossInitialSpawnCount = 1 * PhotonNetwork.CurrentRoom.Players.Count;
 
-    private int blueSpawnCount = 1 * PhotonNetwork.CurrentRoom.Players.Count;
-    private int blackSpawnCount = 2 * PhotonNetwork.CurrentRoom.Players.Count;
-    private int bossSpawnCount = 1 * PhotonNetwork.CurrentRoom.Players.Count;
+    private int blueSpawnCount = 1;
+    private int blackSpawnCount = 1;
+    private int bossSpawnCount = 1;
 
     public void StartSpawn()
     {

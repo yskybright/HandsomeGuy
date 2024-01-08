@@ -81,9 +81,7 @@ public class Spawn :BaseScene
 
     private void StartWave()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            enemySpawn.StartSpawn();
-        }
+        if(PhotonNetwork.IsMasterClient)
+        enemySpawn.StartSpawn();
     }
 }
