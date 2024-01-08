@@ -1,3 +1,5 @@
+using Cinemachine;
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +8,9 @@ using UnityEngine;
 
 public class Spawn :BaseScene
 {
+    private CinemachineVirtualCamera _virtualCamera;
+    private PhotonView _pv;
+    private Player _player;
     public override void Clear()
     {
         Main.ResourceManager.ReleaseAllAsset("GameScene");
@@ -16,17 +21,29 @@ public class Spawn :BaseScene
     protected override bool Initialize()
     {
         if (!base.Initialize()) return false;
+        SceneType = Define.Scene.Game;
 
-        SpawnMachine(6);
         Main.ResourceManager.LoadAllAsync<UnityEngine.Object>("GameScene", (key, count, totalCount) =>
         {
             if (count >= totalCount)
             {
-                
+                InitialAndSpawnPlayer();
+                SpawnMachine(6);
             }
         });
-        InitialAfterLoad();
+
         return true;
+    }
+
+    private void Update()
+    {
+        if (_virtualCamera == null || _player == null) return;
+
+
+        if (_pv.IsMine)
+        {
+            _virtualCamera.Follow = _player.transform;
+        }
     }
 
     private void SpawnMachine(int set)
@@ -43,12 +60,16 @@ public class Spawn :BaseScene
         }
         Main.GameManager.UISet();
     }
-    public void InitialAfterLoad()
+
+    private void InitialAndSpawnPlayer()
     {
         playerpoints = GameObject.Find("PlayerSpawnGroup").GetComponentsInChildren<Transform>();
-        int idx = Random.Range(1, playerpoints.Length);
-        Main.ObjectManager.Spawn<Player>("Player", playerpoints[idx].position);
+
+        int idx = Random.Range(0, playerpoints.Length);
+        _player  = Main.ObjectManager.Spawn<Player>("Player", playerpoints[idx].position);
         Main.DataManager.SkillDict.TryGetValue(Main.GameManager.SkillType, out Data.Skill skill);
-        GameObject.Find("Player(Clone)").AddComponent(skill.type);
+        _player.gameObject.AddComponent(skill.type);
+        _pv = _player.GetComponent<PhotonView>();
+        _virtualCamera = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
     }
 }
