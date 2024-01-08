@@ -40,6 +40,12 @@ public class Main : MonoBehaviour
 
     }
 
+    public static void Clear()
+    {
+        PoolManager.Clear();
+        ObjectManager.Clear();
+    }
+
     private static void Init()
     {
         if (s_instance == null)

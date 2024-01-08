@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.Progress;
 
 public enum EnemyState
 {
@@ -54,6 +51,9 @@ public class Enemy : MonoBehaviour
             else _currentHp = value;
         }
     }
+
+    private bool isRunning = true;
+
     #endregion
 
     #region Fileds
@@ -133,6 +133,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        StopTargetUpdate();
+    }
+
     #endregion
 
     #region State
@@ -173,11 +178,17 @@ public class Enemy : MonoBehaviour
     #region Movement
     private IEnumerator UpdateTarget(float interval)
     {
-        while (true)
+        while (isRunning)
         {
             yield return new WaitForSeconds(interval);
             FindTarget();
         }
+    }
+
+
+    public void StopTargetUpdate()
+    {
+        isRunning = false;
     }
 
     /// <summary>
