@@ -42,6 +42,8 @@ MonoBehaviour:
   - SetSprite
   - SetHPBar
   - SetName
+  - SetInfo
+  - BuildNavMeshRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

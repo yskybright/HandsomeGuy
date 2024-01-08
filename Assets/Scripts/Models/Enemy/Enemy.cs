@@ -77,6 +77,10 @@ public class Enemy : MonoBehaviour
     private void Initialize()
     {
         _agent = GetComponent<NavMeshAgent>();
+        if (_agent == null)
+        {
+            _agent = gameObject.AddComponent<NavMeshAgent>();
+        }
         _enemySpriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
@@ -129,7 +133,6 @@ public class Enemy : MonoBehaviour
     {
         if (target != null && _agent != null)
         {
-            Debug.Log(_agent);
             _agent.SetDestination(target.position);
 
             bool isTargetOnLeft = target.position.x < transform.position.x;
