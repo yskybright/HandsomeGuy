@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviourPunCallbacks
 {
     #region Properties
 
@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Collider2D _collider;
     //protected Animator _animator;
+    public SpriteRenderer spriteRenderer;
  
 
     #endregion
@@ -60,9 +61,10 @@ public class Player : MonoBehaviour
         _killCount = playerData.killCount;
     }
 
+    [PunRPC]
     public void SetSprite(string keyname)
     {
-        GameObject.Find("MainSprite").GetComponent<SpriteRenderer>().sprite = Main.ResourceManager.GetResource<Sprite>(keyname);
+        spriteRenderer.sprite = Main.ResourceManager.GetResource<Sprite>(keyname);
     }
 
     #endregion
