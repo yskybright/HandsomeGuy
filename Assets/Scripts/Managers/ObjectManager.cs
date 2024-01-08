@@ -1,11 +1,12 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ObjectManager
+public class ObjectManager: MonoBehaviourPunCallbacks
 {
     public List<Projectile> Projectiles { get; private set; } = new();
     public Player Player { get; private set; } = new();
@@ -30,7 +31,7 @@ public class ObjectManager
 
             if (pv.IsMine)
             {
-                player.SetSprite($"{Main.GameManager.CharacterType}.sprite");
+                pv.RPC("SetSprite", RpcTarget.AllBuffered, ($"{Main.GameManager.CharacterType}.sprite"));
             }
             
             Player = player;
