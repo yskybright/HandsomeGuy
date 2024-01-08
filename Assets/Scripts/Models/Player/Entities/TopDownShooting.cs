@@ -41,11 +41,12 @@ public class TopDownShooting : MonoBehaviour
     {
         if (_pv.IsMine)
         {
-            CreateProjectile();
+            _pv.RPC("CreateProjectile", RpcTarget.AllBuffered);
         }
     }
 
-    private void CreateProjectile()
+    [PunRPC]
+    public void CreateProjectile()
     {
         // 발사체의 Sprite 회전
         float angle = Mathf.Atan2(_aimDirection.y, _aimDirection.x) * Mathf.Rad2Deg;

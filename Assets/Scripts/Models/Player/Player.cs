@@ -8,6 +8,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using static Define;
 
 public class Player : MonoBehaviourPunCallbacks
 {
@@ -38,6 +39,8 @@ public class Player : MonoBehaviourPunCallbacks
     [SerializeField] private Image HPBar;
     [SerializeField] private TMP_Text NickName;
     private PhotonView _pv;
+    private bool _isInvincible;
+    private float _invincibleTime = 1.0f;
 
     #endregion
 
@@ -83,36 +86,60 @@ public class Player : MonoBehaviourPunCallbacks
     #endregion
 
     #region MonoBehaviour
+    private void Start()
+    {
+        GetComponent<PlayerStatusController>().dieEvent += OnDiePlayer;
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Enemy enemy= collision.gameObject.GetComponent<Enemy>();
-            if (enemy != null)
-                StartCoroutine(HitWithDelay(enemy, enemy.damage, 1.0f));
+            if (enemy != null && !_isInvincible)
+            {
+                OnHit(enemy, enemy.damage);
+            }
         }
     }
 
     #endregion
 
-    private IEnumerator HitWithDelay(Enemy enemy, int damage, float delay)
+    private IEnumerator HitWithDelay(float delay)
     {
+        _isInvincible = true;
+
         yield return new WaitForSeconds(delay);
 
-        OnHit(enemy, damage);
+        _isInvincible = false;
     }
 
     public void OnHit(Enemy enemy, int damage)
     {
+        
         _currentHp -= damage;
         if(_pv.IsMine)
+        {
             _pv.RPC("SetHPBar", RpcTarget.All);
+            if (_currentHp > 0)
+            {
+                StartCoroutine(HitWithDelay(_invincibleTime));
+            }
+        }
     }
     [PunRPC]
     public void SetHPBar()
     {
+        if (_currentHp <= 0)
+        {
+            GetComponent<PlayerStatusController>().CallDieEvent();
+        }
         HPBar.fillAmount = _currentHp / _maxHp;
+    }
+
+    private void OnDiePlayer()
+    {
+        Main.GameManager.LeaveRoom();
     }
 
     #region ChangeMethod

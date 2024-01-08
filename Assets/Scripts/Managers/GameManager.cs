@@ -1,9 +1,11 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager
+public class GameManager : MonoBehaviourPunCallbacks
 {
     
     public GameData Data => _data;
@@ -66,5 +68,10 @@ public class GameManager
         UISetEvent?.Invoke();
     }
 
+    public void LeaveRoom()
+    {
+        Main.SceneManagerEx.LoadScene(Define.Scene.StartScene);
+        PhotonNetwork.LeaveRoom();
+    }
 
 }

@@ -46,6 +46,8 @@ public class ObjectManager: MonoBehaviourPunCallbacks
         {
             //GameObject obj = Main.ResourceManager.Instantiate($"Enemy.prefab", pooling: true);
             GameObject obj = Main.ResourceManager.GetResource<GameObject>("Enemy.prefab");
+
+
             GameObject go = Main.PoolManager.Pop(obj.gameObject);
             go.transform.position = position;
 

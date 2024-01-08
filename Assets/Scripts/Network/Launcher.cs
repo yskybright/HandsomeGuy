@@ -52,13 +52,14 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        PhotonNetwork.LeaveLobby();
         Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
     }
 
     public override void OnJoinedLobby()
     {
         PhotonNetwork.JoinRandomRoom();
-        //PhotonNetwork.CreateRoom("test1", new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+        //PhotonNetwork.CreateRoom("tes", new RoomOptions { MaxPlayers = maxPlayersPerRoom });
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
@@ -68,7 +69,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        Debug.Log("out");
+        PhotonNetwork.Disconnect();
     }
 
 }
