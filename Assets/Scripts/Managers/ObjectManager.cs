@@ -44,10 +44,12 @@ public class ObjectManager: MonoBehaviourPunCallbacks
 
         else if (type == typeof(Enemy))
         {
-            GameObject obj = Main.ResourceManager.Instantiate($"Enemy.prefab", pooling: true);
-            obj.transform.position = position;
+            //GameObject obj = Main.ResourceManager.Instantiate($"Enemy.prefab", pooling: true);
+            GameObject obj = Main.ResourceManager.GetResource<GameObject>("Enemy.prefab");
+            GameObject go = Main.PoolManager.Pop(obj.gameObject);
+            go.transform.position = position;
 
-            Enemy enemy = obj.GetOrAddComponent<Enemy>();
+            Enemy enemy = go.GetOrAddComponent<Enemy>();
             enemy.SetInfo(key);
             Enemies.Add(enemy);
 
@@ -56,10 +58,12 @@ public class ObjectManager: MonoBehaviourPunCallbacks
 
         else if (type == typeof(Boss))
         {
-            GameObject obj = Main.ResourceManager.Instantiate($"Boss.prefab", pooling: true);
-            obj.transform.position = position;
+            //GameObject obj = Main.ResourceManager.Instantiate($"Boss.prefab", pooling: true);
+            GameObject obj = Main.ResourceManager.GetResource<GameObject>("Boss.prefab");
+            GameObject go = Main.PoolManager.Pop(obj.gameObject);
+            go.transform.position = position;
 
-            Enemy enemy = obj.GetOrAddComponent<Boss>();
+            Enemy enemy = go.GetOrAddComponent<Boss>();
             enemy.SetInfo(key);
             Enemies.Add(enemy);
 
