@@ -181,8 +181,8 @@ public class UIScene_Lobby : UIScene, IChatable
         //Users.Add(newItem);
         if (participant.IsSelf)
         {
-            var tmp = PhotonNetwork.Instantiate("Prefabs/User", Vector3.zero, Quaternion.identity);
-            tmp.gameObject.transform.SetParent(_userPos);
+            GameObject tmp = PhotonNetwork.Instantiate("Prefabs/User", Vector3.zero, Quaternion.identity);
+            tmp.transform.SetParent(_userPos);
             _me = tmp.GetOrAddComponent<User>();
             _me.SetupItem(participant);
             _me.SetImage();

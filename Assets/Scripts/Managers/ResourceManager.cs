@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ public class ResourceManager
             Debug.LogError($"[ResourceManager] Instantiate({key}): Failed to load prefab.");
             return null;
         }
+
 
         // ToDo: 풀링 오브젝트면 처리해줄 로직 작성 
         if (pooling) return Main.PoolManager.Pop(go);
