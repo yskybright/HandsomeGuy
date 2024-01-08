@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Spawn :BaseScene
 {
+    private EnemySpawn enemySpawn;
+
     public override void Clear()
     {
         Main.ResourceManager.ReleaseAllAsset("GameScene");
@@ -17,6 +19,8 @@ public class Spawn :BaseScene
     {
         if (!base.Initialize()) return false;
 
+        if (enemySpawn == null) enemySpawn = this.gameObject.GetOrAddComponent<EnemySpawn>();
+
         SpawnMachine(6);
         Main.ResourceManager.LoadAllAsync<UnityEngine.Object>("GameScene", (key, count, totalCount) =>
         {
@@ -26,6 +30,9 @@ public class Spawn :BaseScene
             }
         });
         InitialAfterLoad();
+        Main.ResourceManager.Instantiate($"NavMesh.prefab");
+        StartWave();
+
         return true;
     }
 
@@ -50,5 +57,10 @@ public class Spawn :BaseScene
         Main.ObjectManager.Spawn<Player>("Player", playerpoints[idx].position);
         Main.DataManager.SkillDict.TryGetValue(Main.GameManager.SkillType, out Data.Skill skill);
         GameObject.Find("Player(Clone)").AddComponent(skill.type);
+    }
+
+    private void StartWave()
+    {
+        enemySpawn.StartSpawn();
     }
 }
