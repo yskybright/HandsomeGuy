@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -10,13 +11,13 @@ public class EnemySpawn : MonoBehaviour
     private float blackSpawnInterval = 7f;
     private float bossSpawnInterval = 60f;
 
-    private int blueInitialSpawnCount = 1;
-    private int blackInitialSpawnCount = 1;
-    private int bossInitialSpawnCount = 1;
+    private int blueInitialSpawnCount = 1 * PhotonNetwork.CurrentRoom.Players.Count;
+    private int blackInitialSpawnCount = 1 * PhotonNetwork.CurrentRoom.Players.Count;
+    private int bossInitialSpawnCount = 1 * PhotonNetwork.CurrentRoom.Players.Count;
 
-    private int blueSpawnCount = 1;
-    private int blackSpawnCount = 2;
-    private int bossSpawnCount = 1;
+    private int blueSpawnCount = 1 * PhotonNetwork.CurrentRoom.Players.Count;
+    private int blackSpawnCount = 2 * PhotonNetwork.CurrentRoom.Players.Count;
+    private int bossSpawnCount = 1 * PhotonNetwork.CurrentRoom.Players.Count;
 
     public void StartSpawn()
     {

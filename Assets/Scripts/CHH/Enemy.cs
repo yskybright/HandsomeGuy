@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.Progress;
 
 public enum EnemyState
 {
@@ -107,7 +108,7 @@ public class Enemy : MonoBehaviour
         {
             Projectile projectile = collision.gameObject.GetComponent<Projectile>();
             if (projectile != null)
-                OnHit(projectile.Damage);
+                OnHit(projectile.Damage, projectile);
 
             if (projectile.IsValid()) Main.ObjectManager.Despawn(projectile);
         }
@@ -145,9 +146,26 @@ public class Enemy : MonoBehaviour
         Main.ObjectManager.Despawn(this);
     }
 
-    public void OnHit(int damage)
+    private void OnHit(int damage, Projectile projectile)
     {
         currentHp -= damage;
+        StartCoroutine(Knockback(projectile.transform.position));
+    }
+
+    private IEnumerator Knockback(Vector2 origin)
+    {
+        float elapsed = 0;
+        while (elapsed < 0.1f)
+        {
+            elapsed += Time.deltaTime;
+
+            Vector2 direction = (Vector2)this.transform.position - origin;
+            Vector2 deltaPosition = direction.normalized * 10f * Time.fixedDeltaTime;
+            _rigidbody.MovePosition(_rigidbody.position + deltaPosition);
+
+            yield return null;
+        }
+        yield break;
     }
 
     #endregion
