@@ -10,6 +10,7 @@ public class GameData
     public string nickName = "Player";
     public string characterType = "CharacterA";
     public string skillType = "SkillName";
+    public string weaponType = "WeaponName";
 
     #endregion
 }

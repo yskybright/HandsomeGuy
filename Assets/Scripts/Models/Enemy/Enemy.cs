@@ -1,24 +1,67 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+
+public enum EnemyState
+{
+    Idle,
+    Dead,
+}
 
 public class Enemy : MonoBehaviour
 {
     #region Properties
 
+    // Data.
     public EnemyData Data;
+
+    // Status.
     public string _key;
     public int hp;
-    public int currentHp;
     public float speed;
     public int damage;
+
+    // State.
+    public EnemyState State
+    {
+        get => _state;
+        set
+        {
+            _state = value;
+            switch (value)
+            {
+                case EnemyState.Idle: OnStateEntered_Idle(); break;
+                case EnemyState.Dead: OnStateEntered_Dead(); break;
+            }
+        }
+    }
+    public int currentHp
+    {
+        get => _currentHp;
+        set
+        {
+            if (value > hp) _currentHp = hp;
+            else if (value <= 0)
+            {
+                _currentHp = 0;
+                if (State != EnemyState.Dead)
+                    State = EnemyState.Dead;
+            }
+            else _currentHp = value;
+        }
+    }
+
+    private bool isRunning = true;
 
     #endregion
 
     #region Fileds
+    // State
+    private EnemyState _state;
+    private int _currentHp;
 
+    // Components
     private Transform target;
     private NavMeshAgent _agent;
     private SpriteRenderer _enemySpriteRenderer;
@@ -59,6 +102,18 @@ public class Enemy : MonoBehaviour
 
     #region MonoBehaviour
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("PlayerProjectile"))
+        {
+            Projectile projectile = collision.gameObject.GetComponent<Projectile>();
+            if (projectile != null)
+                OnHit(projectile.Damage, projectile);
+
+            if (projectile.IsValid()) Main.ObjectManager.Despawn(projectile);
+        }
+    }
+
     private void Start()
     {
         FindTarget();
@@ -78,16 +133,62 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        StopTargetUpdate();
+    }
+
+    #endregion
+
+    #region State
+    protected virtual void OnStateEntered_Idle() 
+    { 
+
+    }
+
+    protected virtual void OnStateEntered_Dead()
+    {
+        Main.ObjectManager.Despawn(this);
+    }
+
+    private void OnHit(int damage, Projectile projectile)
+    {
+        currentHp -= damage;
+        StartCoroutine(Knockback(projectile.transform.position));
+    }
+
+    private IEnumerator Knockback(Vector2 origin)
+    {
+        float elapsed = 0;
+        while (elapsed < 0.1f)
+        {
+            elapsed += Time.deltaTime;
+
+            Vector2 direction = (Vector2)this.transform.position - origin;
+            Vector2 deltaPosition = direction.normalized * 10f * Time.fixedDeltaTime;
+            _rigidbody.MovePosition(_rigidbody.position + deltaPosition);
+
+            yield return null;
+        }
+        yield break;
+    }
+
     #endregion
 
     #region Movement
     private IEnumerator UpdateTarget(float interval)
     {
-        while (true)
+        while (isRunning)
         {
             yield return new WaitForSeconds(interval);
             FindTarget();
         }
+    }
+
+
+    public void StopTargetUpdate()
+    {
+        isRunning = false;
     }
 
     /// <summary>

@@ -198,7 +198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec7a384a2413c34fa200f6a15558939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 8058118968608280004, guid: 95ceba5efaf70d14b9120fcce43cf6d0, type: 3}
   points: []
 --- !u!4 &381194491
 Transform:
@@ -450,7 +449,7 @@ Camera:
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 40
-  orthographic: 0
+  orthographic: 1
   orthographic size: 10
   m_Depth: -1
   m_CullingMask:
@@ -475,7 +474,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714003770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.918623, y: 3.14565, z: -0.96700144}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

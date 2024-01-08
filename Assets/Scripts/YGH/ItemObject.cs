@@ -9,6 +9,16 @@ using UnityEngine;
 
 public class ItemObject : MonoBehaviour, IInteraction
 {
+    // 무기 아이템
+    Rifle rifle = new Rifle();
+    Sniper sniper = new Sniper();
+
+    // 소비 아이템
+    Healpack healpack = new Healpack();
+    Dash dash = new Dash();
+    Puppet puppet = new Puppet();
+    Grenade grenade = new Grenade();
+
     // 닿으면 상자 파괴
     [SerializeField] private bool destroyOnPickup = true;
     [SerializeField] private bool saveOnPickup = true;
@@ -30,7 +40,8 @@ public class ItemObject : MonoBehaviour, IInteraction
             // 조건) 장착 아이템이라면
             //if (items == equipitems)
             {
-                // 기본 총 해제, 아이템 장착
+            // 기본 총 해제, 아이템 장착
+            
             }
 
             // 조건) 소비 아이템이라면

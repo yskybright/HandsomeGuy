@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -10,13 +11,13 @@ public class EnemySpawn : MonoBehaviour
     private float blackSpawnInterval = 7f;
     private float bossSpawnInterval = 60f;
 
-    private int blueInitialSpawnCount = 1;
-    private int blackInitialSpawnCount = 1;
-    private int bossInitialSpawnCount = 1;
+    private int blueInitialSpawnCount = 1 * PhotonNetwork.CurrentRoom.Players.Count;
+    private int blackInitialSpawnCount = 1 * PhotonNetwork.CurrentRoom.Players.Count;
+    private int bossInitialSpawnCount = 1 * PhotonNetwork.CurrentRoom.Players.Count;
 
-    private int blueSpawnCount = 1;
-    private int blackSpawnCount = 2;
-    private int bossSpawnCount = 1;
+    private int blueSpawnCount = 1 * PhotonNetwork.CurrentRoom.Players.Count;
+    private int blackSpawnCount = 2 * PhotonNetwork.CurrentRoom.Players.Count;
+    private int bossSpawnCount = 1 * PhotonNetwork.CurrentRoom.Players.Count;
 
     public void StartSpawn()
     {
@@ -40,6 +41,8 @@ public class EnemySpawn : MonoBehaviour
             }
         }
     }
+
+    // 리팩토링이 필요해 보임
 
     private IEnumerator SpawnBlueCoroutine()
     {
@@ -93,6 +96,8 @@ public class EnemySpawn : MonoBehaviour
             blueSpawnCount += blueInitialSpawnCount;
             blackSpawnCount += blackInitialSpawnCount;
             bossSpawnCount += bossInitialSpawnCount;
+
+            // TODO 플레이어 수만큼 증가 추가 해야됨
         }
     }
 

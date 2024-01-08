@@ -35,11 +35,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 250cfa6e4f9a4364bfc35d688df49069
-    m_Address: Hammer.sprite
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 014de57d3ba2dde47a22122df3dc64eb
     m_Address: Boss.sprite
     m_ReadOnly: 0
@@ -126,6 +121,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 38f65bc89da8bbf45aa32a34e366e78d
     m_Address: CharacterE.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e2a6681a47145e592d1d0273eb0d4d3
+    m_Address: Gunbullet.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

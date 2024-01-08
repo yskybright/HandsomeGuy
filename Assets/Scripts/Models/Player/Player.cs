@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviourPunCallbacks
 {
     #region Properties
 
@@ -28,13 +28,9 @@ public class Player : MonoBehaviour
     //private SpriteRenderer _weaponSprite;
     private Rigidbody2D _rigidbody;
     private Collider2D _collider;
-    private PhotonView _pv;
     //protected Animator _animator;
-    private float height;
-    private float width;
-    public Vector2 center;
-    public Vector2 size;
-    
+    public SpriteRenderer spriteRenderer;
+ 
 
     #endregion
 
@@ -48,14 +44,13 @@ public class Player : MonoBehaviour
         //_animator = GetComponent<Animator>();
     }
 
-    public void SetInfo(string key)
+    public void SetInfo()
     {
         Initialize();
-        _id = key;
         playerData = Main.DataManager.Player;
         //_weaponSprite.sprite = Main.ResourceManager.GetResource<Sprite>($"{_weaponSprite.sprite.name}.sprite");
         //_animator.runtimeAnimatorController = Main.ResourceManager.GetResource<RuntimeAnimatorController>($"{key}.animController");
-        _id = playerData.id;
+        //_id = playerData.id;
         _currentHp = playerData.currrentHp;
         _maxHp = playerData.maxHp;
         _moveSpeed = playerData.moveSpeed;
@@ -66,44 +61,14 @@ public class Player : MonoBehaviour
         _killCount = playerData.killCount;
     }
 
+    [PunRPC]
     public void SetSprite(string keyname)
     {
-        GameObject.Find("MainSprite").GetComponent<SpriteRenderer>().sprite = Main.ResourceManager.GetResource<Sprite>(keyname);
+        spriteRenderer.sprite = Main.ResourceManager.GetResource<Sprite>(keyname);
     }
 
     #endregion
 
-    #region MonoBehaviour
-
-    private void Start()
-    {
-        _pv = GetComponent<PhotonView>();
-        height = Camera.main.orthographicSize;
-        width = height * Screen.width / Screen.height;
-    }
-
-    private void Update()
-    {
-
-    }
-
-    private void FixedUpdate()
-    {
-        if (_pv.IsMine)
-        {
-            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, transform.position, Time.deltaTime * 5);
-
-            float x = size.x * 0.5f - width;
-            float y = size.y * 0.5f - width;
-
-            float limitX = Mathf.Clamp(Camera.main.transform.position.x, -x + center.x, x + center.x);
-            float limitY = Mathf.Clamp(Camera.main.transform.position.y, -y + center.y, y + center.y);
-
-            Camera.main.transform.position = new Vector3(limitX, limitY, _sightRange * -1);
-        }
-    }
-
-    #endregion
 
     #region ChangeMethod
 

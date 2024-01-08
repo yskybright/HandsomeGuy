@@ -1,4 +1,4 @@
 ﻿Key,HP,Speed,Damage
-Black,50,3,1
-Blue,50,3,1
-Boss,50,3,1
+Black,100,5,5
+Blue,50,6,5
+Boss,2000,4,15

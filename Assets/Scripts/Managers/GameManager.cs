@@ -17,6 +17,13 @@ public class GameManager
         get => _data.characterType;
         set => _data.characterType = value;
     }
+
+    public string WeaponType
+    {
+        get => _data.weaponType;
+        set => _data.weaponType = value;
+    }
+
     public string SkillType
     {
         get => _data.skillType;
