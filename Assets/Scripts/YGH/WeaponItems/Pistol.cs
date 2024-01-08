@@ -7,9 +7,8 @@ public class Pistol : WeaponItemData
 {
     protected override void OnEquip(GameObject receiver)
     {
-        originAtk = 5;
-        originAtkSpeed = 5;
-        originAtkRange = 5;
+        Main.ObjectManager.Player.ChangeDamage(Main.ObjectManager.Player._damage + 5);
+        Main.ObjectManager.Player.ChangeAttackSpeed(Main.ObjectManager.Player._attackSpeed + 5);
     }
 
     // player stat 을 직접 변경하는 방법 (대안)
