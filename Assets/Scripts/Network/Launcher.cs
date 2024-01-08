@@ -20,7 +20,6 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void Connect()
     {
-        PhotonNetwork.Disconnect();
         if (PhotonNetwork.IsConnected)
         {
             PhotonNetwork.JoinLobby();
