@@ -2,21 +2,21 @@
   "Enemies": [
     {
       "key": "Black",
-      "HP": 50,
-      "Speed": 3.0,
-      "Damage": 1
+      "HP": 100,
+      "Speed": 5.0,
+      "Damage": 5
     },
     {
       "key": "Blue",
       "HP": 50,
-      "Speed": 3.0,
-      "Damage": 1
+      "Speed": 6.0,
+      "Damage": 5
     },
     {
       "key": "Boss",
-      "HP": 50,
-      "Speed": 3.0,
-      "Damage": 1
+      "HP": 2000,
+      "Speed": 4.0,
+      "Damage": 15
     }
   ]
 }
