@@ -95,32 +95,32 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: dc6955d72b4142c583fcb26052984bcb
-    m_Address: CharacterA.sprite
+  - m_GUID: ec422a0af92cbd64fb5c9195c376434a
+    m_Address: CharacterE.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 887216e115be21b469658a7a3ee71cec
-    m_Address: CharacterB.sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f3a81040c0120f74f83179a5ed1a081a
-    m_Address: CharacterC.sprite
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: dbe0ec56bbb01ac4faa42a0cc46b4163
+  - m_GUID: a84f02772f3d4e04eb21a3f601da0dc7
     m_Address: CharacterD.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 38f65bc89da8bbf45aa32a34e366e78d
-    m_Address: CharacterE.sprite
+  - m_GUID: e813b32014fa77540984fa987ef2a7f8
+    m_Address: CharacterC.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f04162b4ecd6d534cadcdc95bfcd0d66
+    m_Address: CharacterB.sprite
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e88b7fde824a7942b8a270947980508
+    m_Address: CharacterA.sprite
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad

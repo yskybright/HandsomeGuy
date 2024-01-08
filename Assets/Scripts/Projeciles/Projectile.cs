@@ -8,9 +8,14 @@ public class Projectile : MonoBehaviour
 
     #region Properties
 
-    public Vector2 Velocity = Vector2.right;
-    public Vector2 Direction { get; protected set; }
+    // 총알의 초기 위치
+    private Vector2 _position;
+    // 총알이 이동한 현재 거리
+    private float _traveledDistance = 0;
+
     public int Damage { get; protected set; }
+
+    public float Range { get; protected set; }
 
     #endregion
 
@@ -30,6 +35,19 @@ public class Projectile : MonoBehaviour
         // TODO 벽에 Wall 태그 추가해야됨
         if (collision.gameObject.CompareTag("Wall"))
         {
+            Debug.Log("collision Wall");
+            if (this.IsValid()) Main.ObjectManager.Despawn(this);
+        }
+    }
+
+    private void Update()
+    {
+        // 이동한 거리 계산
+        _traveledDistance = Vector2.Distance(_position, this.transform.position);
+
+        // 총알이 이동한 거리가 사정거리를 초과하면
+        if (_traveledDistance > Range)
+        {
             if (this.IsValid()) Main.ObjectManager.Despawn(this);
         }
     }
@@ -38,6 +56,7 @@ public class Projectile : MonoBehaviour
 
     private void Initialize()
     {
+        _position = this.transform.position;
         _spriter = this.GetComponentInChildren<SpriteRenderer>();
         _rigidbody = this.GetComponent<Rigidbody2D>();
     }
@@ -47,9 +66,13 @@ public class Projectile : MonoBehaviour
         _rigidbody.velocity = velocity;
     }
 
+    public void SetSightRange(float range)
+    {
+        Range = range;
+    }
+
     public void SetInfo(string key, int damage)
     {
-        Debug.Log(key);
         Initialize();
         _spriter.sprite = Main.ResourceManager.GetResource<Sprite>($"{key}.sprite");
         

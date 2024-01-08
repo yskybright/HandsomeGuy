@@ -55,6 +55,7 @@ public class TopDownShooting : MonoBehaviour
         projectile.SetInfo("Gunbullet", (int)_player._damage);
         projectile.transform.rotation = rotation;
         projectile.SetVelocity(_aimDirection * _player._attackSpeed);
+        projectile.SetSightRange(_player._sightRange);
         projectile.gameObject.tag = "PlayerProjectile";
     }
 }
