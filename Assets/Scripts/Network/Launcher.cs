@@ -58,8 +58,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        //PhotonNetwork.JoinRandomRoom();
-        PhotonNetwork.CreateRoom("test", new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+        PhotonNetwork.JoinRandomRoom();
+        //PhotonNetwork.CreateRoom("test1", new RoomOptions { MaxPlayers = maxPlayersPerRoom });
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
