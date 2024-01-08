@@ -128,7 +128,6 @@ public class UIScene_Lobby : UIScene, IChatable
     private void OnButtonExitAsync(PointerEventData data)
     {
         print("나가기 버튼");
-        PhotonNetwork.Disconnect();
         StartCoroutine(CoExit());
     }
     private async Task OnExitAsync()
@@ -219,7 +218,6 @@ public class UIScene_Lobby : UIScene, IChatable
         Main.UIManager.Hide(GetObject((int)Objects.SceneLobbyScale).gameObject);
         OnExitAsync();
         yield return new WaitForSeconds(1.0f);
-        Main.SceneManagerEx.LoadScene(Define.Scene.StartScene);
-
+        Main.GameManager.LeaveRoom();
     }
 }

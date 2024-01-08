@@ -1,6 +1,6 @@
 {
   "id": "1",
-  "currrentHp": 50.0,
+  "currrentHp": 100.0,
   "maxHp": 100.0,
   "moveSpeed": 10.0,
   "damage": 10.0,

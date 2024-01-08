@@ -17,7 +17,7 @@ public class PlayerStatusController : MonoBehaviour
     public void CallDieEvent()
     {
         Revival hasRevival = Main.ObjectManager.Player.GetComponent<Revival>();
-        if (hasRevival != null && hasRevival.RevivalCount != 0)
+        if (hasRevival != null && hasRevival.RevivalCount > 0)
         {
             hasRevival.OnRevival();
             return;
