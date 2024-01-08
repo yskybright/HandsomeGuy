@@ -34,6 +34,7 @@ public class ObjectManager: MonoBehaviourPunCallbacks
             if (pv.IsMine)
             {
                 pv.RPC("SetSprite", RpcTarget.AllBuffered, ($"{Main.GameManager.CharacterType}.sprite"));
+                pv.RPC("SetName",RpcTarget.AllBuffered,($"{Main.GameManager.NickName}"));
             }
             
             Player = player;
