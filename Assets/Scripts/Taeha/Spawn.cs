@@ -27,18 +27,16 @@ public class Spawn :BaseScene
 
         if (enemySpawn == null) enemySpawn = this.gameObject.GetOrAddComponent<EnemySpawn>();
 
-        SpawnMachine(6);
         Main.ResourceManager.LoadAllAsync<UnityEngine.Object>("GameScene", (key, count, totalCount) =>
         {
             if (count >= totalCount)
             {
                 InitialAndSpawnPlayer();
                 SpawnMachine(6);
+                Main.ResourceManager.Instantiate($"NavMesh.prefab");
+                StartWave();
             }
         });
-        InitialAfterLoad();
-        Main.ResourceManager.Instantiate($"NavMesh.prefab");
-        StartWave();
 
         return true;
     }
