@@ -102,4 +102,10 @@ public class ObjectManager: MonoBehaviourPunCallbacks
         }
   
     }
+
+    public void Clear()
+    {
+        Enemies.Clear();
+        Projectiles.Clear();
+    }
 }
