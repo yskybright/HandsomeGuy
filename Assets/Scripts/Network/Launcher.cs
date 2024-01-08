@@ -17,9 +17,10 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.SerializationRate = 30;
         PhotonNetwork.NickName = Main.GameManager.NickName;
     }
+
     public void Connect()
     {
-        //PhotonNetwork.Disconnect();
+        PhotonNetwork.Disconnect();
         if (PhotonNetwork.IsConnected)
         {
             PhotonNetwork.JoinLobby();
@@ -57,8 +58,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        //PhotonNetwork.CreateRoom("test112", new RoomOptions { MaxPlayers = maxPlayersPerRoom });
-        PhotonNetwork.JoinRandomRoom();
+        //PhotonNetwork.JoinRandomRoom();
+        PhotonNetwork.CreateRoom("test", new RoomOptions { MaxPlayers = maxPlayersPerRoom });
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)

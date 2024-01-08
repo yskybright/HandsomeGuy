@@ -1,3 +1,4 @@
+using ExitGames.Client.Photon.StructWrapping;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
@@ -21,9 +22,10 @@ public class ObjectManager: MonoBehaviourPunCallbacks
             GameObject obj = PhotonNetwork.Instantiate("Prefabs/Player", position, Quaternion.identity);
             Debug.Log(PhotonNetwork.CurrentRoom.Players.Count);
 
+
             //GameObject obj = Main.ResourceManager.Instantiate("SeongGyuPlayer");
             //obj.transform.position = position;
-            
+
             Player player = obj.GetOrAddComponent<Player>();
             PhotonView pv = player.GetComponent<PhotonView>();
 
@@ -66,10 +68,18 @@ public class ObjectManager: MonoBehaviourPunCallbacks
 
         else if (type == typeof(Projectile))
         {
-            GameObject obj = Main.ResourceManager.Instantiate($"Gunbullet.prefab", pooling: true);
-            obj.transform.position = position;
 
-            Projectile projectile = obj.GetOrAddComponent<Projectile>();
+            //GameObject obj = PhotonNetwork.Instantiate("Prefabs/GunBullet", position, Quaternion.identity);
+            //Debug.Log(PhotonNetwork.CurrentRoom.Players.Count);
+            //GameObject obj = Main.ResourceManager.Instantiate($"Gunbullet.prefab", pooling: true);
+            
+
+            GameObject obj = Main.ResourceManager.GetResource<GameObject>("Gunbullet.prefab");
+            GameObject go = Main.PoolManager.Pop(obj.gameObject);
+
+            go.transform.position = position;
+
+            Projectile projectile = go.GetOrAddComponent<Projectile>();
             Projectiles.Add(projectile);
 
             return projectile as T;

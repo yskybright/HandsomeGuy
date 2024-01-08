@@ -35,18 +35,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f9e8d6d0bc8e4fc43ac4768fd632a65d
-    m_Address: Gunbullet.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - GameScene
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 01b160782e59fb44baae067b9b220870
-    m_Address: User.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - LobbyScene
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a3bb60124a2943c41a2fa49b37ff3fb3
     m_Address: ChatItem.prefab
     m_ReadOnly: 0
@@ -88,6 +76,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae89e84eac2ff8f49a3173d59ee1d60b
+    m_Address: Gunbullet.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9cf467bac39a6ab4995e973c50c05635, type: 2}

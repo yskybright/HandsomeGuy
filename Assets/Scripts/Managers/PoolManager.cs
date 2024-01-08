@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -58,7 +59,7 @@ public class Pool
     /// <returns></returns>
     private GameObject OnCreate()
     {
-        GameObject obj = GameObject.Instantiate(prefab);
+        GameObject obj = PhotonNetwork.Instantiate(prefab.name, prefab.transform.position, Quaternion.identity);
         obj.transform.SetParent(Root);
         obj.name = prefab.name;
         return obj;
