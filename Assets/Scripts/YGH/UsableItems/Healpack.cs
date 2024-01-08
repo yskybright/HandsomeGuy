@@ -10,9 +10,7 @@ public class Healpack : UsableItemData
 
     protected override void OnUse(GameObject receiver)
     {
-        // 플레이어의 HP 변수 가져오기
-        //_healthSystem = receiver.GetComponent<HealthSystem>();
-        //_healthSystem.ChangeHealth(healValue);
+        Main.ObjectManager.Player.ChangeCurrentHp(Main.ObjectManager.Player._currentHp + 20);
     }
 }
 
