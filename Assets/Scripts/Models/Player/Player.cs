@@ -1,5 +1,6 @@
 using Cinemachine;
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ public class Player : MonoBehaviourPunCallbacks
     public float _damageReduceRatio { get; private set; }
     public float _sightRange { get; private set; }
     public int _killCount { get; private set; }
+
 
     #endregion
 
@@ -68,6 +70,32 @@ public class Player : MonoBehaviourPunCallbacks
     }
 
     #endregion
+
+    #region MonoBehaviour
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Enemy enemy= collision.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+                StartCoroutine(HitWithDelay(enemy, enemy.damage, 1.0f));
+        }
+    }
+
+    #endregion
+
+    private IEnumerator HitWithDelay(Enemy enemy, int damage, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        OnHit(enemy, damage);
+    }
+
+    public void OnHit(Enemy enemy, int damage)
+    {
+        _currentHp -= damage;
+    }
 
 
     #region ChangeMethod
