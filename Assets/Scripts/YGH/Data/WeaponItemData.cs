@@ -18,6 +18,9 @@ public abstract class WeaponItemData : MonoBehaviour
     protected float changeAtkSpeed;
     protected float changeAtkRange;
 
+    PlayerData damage;
+    PlayerData attackSpeed;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (saveOnPickup.value == (saveOnPickup.value | (1 << other.gameObject.layer)))

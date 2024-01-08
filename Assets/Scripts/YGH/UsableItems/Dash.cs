@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class UsableItem : UsableItemData
+public class Dash : UsableItemData
 {
     [SerializeField] int distance = 10;
     Vector2 mousePos, transPos, targetPos;
