@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class Sniper : WeaponItemData
 {
-    
+
     protected override void OnEquip(GameObject receiver)
     {
-        originAtk = 10;
-        originAtkSpeed = 3;
-        originAtkRange = 10;
+        Main.ObjectManager.Player.ChangeDamage(Main.ObjectManager.Player._damage + 3);
+        Main.ObjectManager.Player.ChangeAttackSpeed(Main.ObjectManager.Player._attackSpeed + 10);
     }
 }

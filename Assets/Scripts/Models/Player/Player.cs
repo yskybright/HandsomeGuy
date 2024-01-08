@@ -4,8 +4,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviourPunCallbacks
 {
@@ -31,8 +33,11 @@ public class Player : MonoBehaviourPunCallbacks
     private Rigidbody2D _rigidbody;
     private Collider2D _collider;
     //protected Animator _animator;
-    public SpriteRenderer spriteRenderer;
- 
+    
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Image HPBar;
+    [SerializeField] private TMP_Text NickName;
+    private PhotonView _pv;
 
     #endregion
 
@@ -43,6 +48,7 @@ public class Player : MonoBehaviourPunCallbacks
         // _weaponSprite = transform.Find("WeaponSprite").GetComponent<SpriteRenderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
+        _pv = GetComponent<PhotonView>();
         //_animator = GetComponent<Animator>();
     }
 
@@ -67,6 +73,11 @@ public class Player : MonoBehaviourPunCallbacks
     public void SetSprite(string keyname)
     {
         spriteRenderer.sprite = Main.ResourceManager.GetResource<Sprite>(keyname);
+    }
+    [PunRPC]
+    public void SetName(string name)
+    {
+        NickName.text = name;
     }
 
     #endregion
@@ -95,8 +106,14 @@ public class Player : MonoBehaviourPunCallbacks
     public void OnHit(Enemy enemy, int damage)
     {
         _currentHp -= damage;
+        if(_pv.IsMine)
+            _pv.RPC("SetHPBar", RpcTarget.All);
     }
-
+    [PunRPC]
+    public void SetHPBar()
+    {
+        HPBar.fillAmount = _currentHp / _maxHp;
+    }
 
     #region ChangeMethod
 
