@@ -59,8 +59,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - LobbyScene
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c925e7eec90e4854bb12f8829fc8cc24
+    m_Address: Enemy.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 350ad818349ebee4c93e2763cf9d828f
     m_Address: Machine.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 681441fcf30e56f41bb817754bdf87aa
+    m_Address: Boss.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
@@ -70,26 +82,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5ec4412c311102249a875b54546fb7fe
-    m_Address: NavMesh.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5a6358cfc5b51514a9a3c7075be98bbf
-    m_Address: Boss.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    - GameScene
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fb6ee39a4c9a3fd4b9c80c750a57a6fa
-    m_Address: Enemy.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    - GameScene
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9cf467bac39a6ab4995e973c50c05635, type: 2}

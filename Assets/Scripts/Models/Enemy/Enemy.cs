@@ -1,4 +1,3 @@
-using Photon.Pun;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -85,11 +84,9 @@ public class Enemy : MonoBehaviour
         _agent.updateUpAxis = false;
     }
 
-    [PunRPC]
     public void SetInfo(string key)
     {
         Initialize();
-        _agent = GetComponent<NavMeshAgent>();
         _key = key;
         EnemyData enemy = Main.DataManager.Enemies.FirstOrDefault(e => e.Key == key).Value;
         _enemySpriteRenderer.sprite = Main.ResourceManager.GetResource<Sprite>($"{key}.sprite");
@@ -127,11 +124,10 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (target != null && _agent != null)
+        if (target != null)
         {
-            Debug.Log(_agent);
             _agent.SetDestination(target.position);
-
+            
             bool isTargetOnLeft = target.position.x < transform.position.x;
             _enemySpriteRenderer.flipX = isTargetOnLeft;
         }

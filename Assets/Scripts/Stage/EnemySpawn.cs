@@ -104,23 +104,7 @@ public class EnemySpawn : MonoBehaviour
     private Vector3Int GetRandomTilePosition()
     {
         BoundsInt bounds = tilemap.cellBounds;
-
-        while (true)
-        {
-            Vector3Int randomPosition = new Vector3Int(
-                Random.Range(bounds.x, bounds.x + bounds.size.x),
-                Random.Range(bounds.y, bounds.y + bounds.size.y),
-                0
-            );
-
-            // 해당 위치의 타일을 가져옵니다.
-            TileBase tile = tilemap.GetTile(randomPosition);
-
-            // 빈 공간이 아니면 해당 위치를 반환합니다.
-            if (tile != null)
-            {
-                return randomPosition;
-            }
-        }
+        Vector3Int randomPosition = new Vector3Int(Random.Range(bounds.x, bounds.x + bounds.size.x), Random.Range(bounds.y, bounds.y + bounds.size.y), 0);
+        return randomPosition;
     }
 }

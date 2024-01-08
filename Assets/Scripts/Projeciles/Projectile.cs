@@ -1,4 +1,3 @@
-using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -72,7 +71,6 @@ public class Projectile : MonoBehaviour
         Range = range;
     }
 
-    [PunRPC]
     public void SetInfo(string key, int damage)
     {
         Initialize();
