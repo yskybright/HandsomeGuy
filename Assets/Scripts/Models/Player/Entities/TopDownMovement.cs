@@ -37,10 +37,10 @@ public class TopDownMovement : MonoBehaviour
 
     private void ApplyMovent(Vector2 direction)
     {
-        if (pv.IsMine)
-        {
+        //if (pv.IsMine)
+        //{
             direction *= player._moveSpeed; //Main.ObjectManager.Player._moveSpeed;
             _rigidbody.velocity = direction;
-        }
+        //}
     }
 }

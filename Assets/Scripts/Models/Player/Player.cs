@@ -1,3 +1,5 @@
+using Cinemachine;
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Collider2D _collider;
     //protected Animator _animator;
+ 
 
     #endregion
 
@@ -40,14 +43,13 @@ public class Player : MonoBehaviour
         //_animator = GetComponent<Animator>();
     }
 
-    public void SetInfo(string key)
+    public void SetInfo()
     {
         Initialize();
-        _id = key;
         playerData = Main.DataManager.Player;
         //_weaponSprite.sprite = Main.ResourceManager.GetResource<Sprite>($"{_weaponSprite.sprite.name}.sprite");
         //_animator.runtimeAnimatorController = Main.ResourceManager.GetResource<RuntimeAnimatorController>($"{key}.animController");
-        _id = playerData.id;
+        //_id = playerData.id;
         _currentHp = playerData.currrentHp;
         _maxHp = playerData.maxHp;
         _moveSpeed = playerData.moveSpeed;
@@ -65,19 +67,6 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    #region MonoBehaviour
-
-    private void Start()
-    {
-
-    }
-
-    private void Update()
-    {
-
-    }
-
-    #endregion
 
     #region ChangeMethod
 

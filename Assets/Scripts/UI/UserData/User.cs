@@ -1,11 +1,13 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Services.Vivox;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class User : MonoBehaviour
+public class User : MonoBehaviourPunCallbacks , IPunObservable
 {
     public VivoxParticipant Participant;
     private GameData _gameData = new();
@@ -14,12 +16,23 @@ public class User : MonoBehaviour
     [SerializeField] Image User_Img;
     [SerializeField] TMP_Text user_name;
     [SerializeField] TMP_Text skill_name;
+    public TMP_Text SpriteName;
+    private PhotonView pv;
     public GameObject ready;
+    private void Awake()
+    {
+        gameObject.transform.SetParent(GameObject.FindWithTag("Users").transform);
+    }
+    private void Start()
+    {
+        pv = GetComponent<PhotonView>();
+    }
     public void SetupItem(VivoxParticipant participant /*,string skill*/)
     {
         Participant = participant;
         user_name.text = "닉네임 : " + participant.DisplayName;
-        //skill_name.text = skill;
+        skill_name.text = "스킬 : " + Main.GameManager.SkillType;
+        SpriteName.text = Main.GameManager.CharacterType;
     }
     public void ToggleReady()
     {
@@ -31,6 +44,26 @@ public class User : MonoBehaviour
 
     public void SetImage()
     {
-        User_Img.sprite = Main.ResourceManager.GetResource<Sprite>($"{Main.GameManager.CharacterType}.sprite");
+        User_Img.sprite = Main.ResourceManager.GetResource<Sprite>($"{SpriteName.text}.sprite");
     }
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(user_name.text);
+            stream.SendNext(skill_name.text);
+            stream.SendNext(SpriteName.text);
+            stream.SendNext(ready.activeSelf);
+        }
+        else
+        {
+            user_name.text = (string)stream.ReceiveNext();
+            skill_name.text = (string)stream.ReceiveNext();
+            SpriteName.text = (string)stream.ReceiveNext();
+            ready.SetActive((bool)stream.ReceiveNext());
+            SetImage();
+        }
+    }
+    [ContextMenu("ㅁㅁ")]
+    public void blabla() => user_name.text = "blabla";
 }

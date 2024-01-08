@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -19,10 +20,13 @@ public class ObjectManager
             GameObject obj = PhotonNetwork.Instantiate("Prefabs/Player", position, Quaternion.identity);
             Debug.Log(PhotonNetwork.CurrentRoom.Players.Count);
 
+            //GameObject obj = Main.ResourceManager.Instantiate("SeongGyuPlayer");
+            //obj.transform.position = position;
+            
             Player player = obj.GetOrAddComponent<Player>();
             PhotonView pv = player.GetComponent<PhotonView>();
-           
-            player.SetInfo(key);
+
+            player.SetInfo();
 
             if (pv.IsMine)
             {
@@ -58,19 +62,24 @@ public class ObjectManager
             return enemy as T;
         }
 
+
+        else if (type == typeof(Projectile))
+        {
+            GameObject obj = Main.ResourceManager.Instantiate($"Gunbullet.prefab", pooling: true);
+            obj.transform.position = position;
+
+            Projectile projectile = obj.GetOrAddComponent<Projectile>();
+            Projectiles.Add(projectile);
+
+            return projectile as T;
+        }
+        
         return null;
     }
 
+
     public void Despawn<T>(T obj) where T : MonoBehaviour
     {
-        //if (!obj.gameObject.IsValid()) return;
-       
-        if (obj is Projectile projectile)
-        {
-            Projectiles.Remove(projectile);
-        }
-
-        Main.ResourceManager.Destroy(obj.gameObject);
         System.Type type = typeof(T);
 
         if (type == typeof(Enemy))
@@ -78,5 +87,18 @@ public class ObjectManager
             Enemies.Remove(obj as Enemy);
             Main.ResourceManager.Destroy(obj.gameObject);
         }
+
+        if (type == typeof(Boss))
+        {
+            Enemies.Remove(obj as Boss);
+            Main.ResourceManager.Destroy(obj.gameObject);
+        }
+
+        if (type == typeof(Projectile))
+        {
+            Projectiles.Remove(obj as Projectile);
+            Main.ResourceManager.Destroy(obj.gameObject);
+        }
+  
     }
 }

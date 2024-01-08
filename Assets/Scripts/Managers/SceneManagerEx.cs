@@ -9,6 +9,8 @@ public class SceneManagerEx
     public BaseScene CurrentScene { get { return GameObject.FindObjectOfType<BaseScene>(); } }
     public void LoadScene(Define.Scene type)
     {
+        Debug.Log(CurrentScene);
+        Debug.Log(type);
         CurrentScene.Clear();
         SceneManager.LoadScene(GetSceneName(type));
     }
