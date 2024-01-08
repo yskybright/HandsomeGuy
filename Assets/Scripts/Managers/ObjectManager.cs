@@ -72,11 +72,12 @@ public class ObjectManager: MonoBehaviourPunCallbacks
             //GameObject obj = PhotonNetwork.Instantiate("Prefabs/GunBullet", position, Quaternion.identity);
             //Debug.Log(PhotonNetwork.CurrentRoom.Players.Count);
             //GameObject obj = Main.ResourceManager.Instantiate($"Gunbullet.prefab", pooling: true);
-            //obj.transform.position = position;
+            
 
             GameObject obj = Main.ResourceManager.GetResource<GameObject>("Gunbullet.prefab");
             GameObject go = Main.PoolManager.Pop(obj.gameObject);
 
+            go.transform.position = position;
 
             Projectile projectile = go.GetOrAddComponent<Projectile>();
             Projectiles.Add(projectile);

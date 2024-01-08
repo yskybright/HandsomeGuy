@@ -20,6 +20,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void Connect()
     {
+        PhotonNetwork.Disconnect();
         if (PhotonNetwork.IsConnected)
         {
             PhotonNetwork.JoinLobby();
@@ -57,7 +58,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        PhotonNetwork.JoinRandomRoom();
+        //PhotonNetwork.JoinRandomRoom();
+        PhotonNetwork.CreateRoom("test", new RoomOptions { MaxPlayers = maxPlayersPerRoom });
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
