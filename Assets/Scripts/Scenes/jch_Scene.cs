@@ -17,9 +17,10 @@ public class TestScene : BaseScene
         {
             if (count >= totalCount)
             {
-                InitialAfterLoad();
+                
             }
         });
+        InitialAfterLoad();
 
         return true;
     }
