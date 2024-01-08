@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class Spawn :BaseScene
 {
+    private EnemySpawn enemySpawn;
+
     private CinemachineVirtualCamera _virtualCamera;
     private PhotonView _pv;
     private Player _player;
@@ -23,6 +25,9 @@ public class Spawn :BaseScene
         if (!base.Initialize()) return false;
         SceneType = Define.Scene.Game;
 
+        if (enemySpawn == null) enemySpawn = this.gameObject.GetOrAddComponent<EnemySpawn>();
+
+        SpawnMachine(6);
         Main.ResourceManager.LoadAllAsync<UnityEngine.Object>("GameScene", (key, count, totalCount) =>
         {
             if (count >= totalCount)
@@ -31,6 +36,9 @@ public class Spawn :BaseScene
                 SpawnMachine(6);
             }
         });
+        InitialAfterLoad();
+        Main.ResourceManager.Instantiate($"NavMesh.prefab");
+        StartWave();
 
         return true;
     }
@@ -71,5 +79,10 @@ public class Spawn :BaseScene
         _player.gameObject.AddComponent(skill.type);
         _pv = _player.GetComponent<PhotonView>();
         _virtualCamera = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
+    }
+
+    private void StartWave()
+    {
+        enemySpawn.StartSpawn();
     }
 }

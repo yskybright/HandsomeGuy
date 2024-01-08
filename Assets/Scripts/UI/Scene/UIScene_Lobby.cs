@@ -106,6 +106,7 @@ public class UIScene_Lobby : UIScene, IChatable
         {
             if (PhotonNetwork.IsMasterClient)
             {
+                Main.Clear();
                 PhotonNetwork.LoadLevel("TaehaMap");
             }
             else
