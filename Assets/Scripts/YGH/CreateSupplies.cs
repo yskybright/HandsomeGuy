@@ -18,7 +18,7 @@ public class CreateSupplies : MonoBehaviour
     IEnumerator SuppliesSpawn()
     {
         CreateBox();
-        yield return new WaitForSecondsRealtime(5.0f);
+        yield return new WaitForSecondsRealtime(20.0f);
     }
     void CreateBox()
     {
